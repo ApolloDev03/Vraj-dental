@@ -20,7 +20,20 @@
 }
 
 body {
-  background: var(--background);
+  background: #ffff;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 12s linear infinite;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
