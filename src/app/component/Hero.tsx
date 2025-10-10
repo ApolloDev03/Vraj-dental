@@ -1,133 +1,119 @@
-// "use client"
-// import { useState } from "react";
-// import Image from "next/image";
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-// // Replace with your Next.js public image paths if possible for static files
-// const heroSlides = [
-//   {
-//     src: require("../../asserts/hero1.jpg"),
-//     alt: "Hero Slide 1",
-//     showBanner: true, // Only first slide shows content overlay below
-//   },
-//   {
-//     src: require("../../asserts/hero2.png"),
-//     alt: "Hero Slide 2",
-//     showBanner: false,
-//   },
-//   {
-//     src: require("../../asserts/hero3.png"),
-//     alt: "Hero Slide 3",
-//     showBanner: false,
-//   },
-// ];
-
-// export default function HeroSection() {
-//   const [current, setCurrent] = useState(0);
-
-//   const prev = () => setCurrent(current === 0 ? heroSlides.length - 1 : current - 1);
-//   const next = () => setCurrent(current === heroSlides.length - 1 ? 0 : current + 1);
-
-//   return (
-//     <section className="relative w-full bg-white mt-[-120px]">
-//       <div className="relative flex items-center justify-center min-h-[400px]">
-//         {/* Image Slider */}
-//         <button
-//           aria-label="Previous"
-//           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow-lg z-10"
-//           onClick={prev}
-//         >
-//           <FaChevronLeft className="text-2xl text-blue-900" />
-//         </button>
-//         <Image
-//           src={heroSlides[current].src}
-//           alt={heroSlides[current].alt}
-//           className="object-cover w-full h-[450px]"
-//           priority
-//         />
-//         <button
-//           aria-label="Next"
-//           className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow-lg z-10"
-//           onClick={next}
-//         >
-//           <FaChevronRight className="text-2xl text-blue-900" />
-//         </button>     
-//       </div>
-//     </section>
-//   );
-// }
-
-
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-// Your slide images and alt text
+import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import Image from "next/image";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
 const heroSlides = [
     {
         src: require("../../asserts/hero1.jpg"),
         alt: "Hero Slide 1",
-        showBanner: true,
     },
     {
         src: require("../../asserts/hero2.png"),
         alt: "Hero Slide 2",
-        showBanner: false,
     },
     {
-        src: require("../../asserts/hero3.png"),
+        src: require("../../asserts/hero3.jpg"),
         alt: "Hero Slide 3",
-        showBanner: false,
     },
 ];
 
 export default function HeroSection() {
-    const [current, setCurrent] = useState(0);
-
-    const prev = () =>
-        setCurrent(current === 0 ? heroSlides.length - 1 : current - 1);
-    const next = () =>
-        setCurrent(current === heroSlides.length - 1 ? 0 : current + 1);
+    const prevRef = useRef<HTMLButtonElement>(null);
+    const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <section className="relative w-full bg-white mt-[-120px]">
-            <div className="relative flex items-center justify-center min-h-[400px]">
-                {/* Left Arrow */}
-                <button
-                    aria-label="Previous"
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10
-                     bg-white w-[48px] h-[48px] flex items-center justify-center
-                     border border-gray-200 shadow hover:bg-gray-100 transition"
-                    style={{ outline: "none" }}
-                    onClick={prev}
-                >
-                    <FaChevronLeft className="text-2xl text-gray-700" />
-                </button>
+        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat mt-[-120px] overflow-hidden group">
+            {/* <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                autoplay={{ delay: 5000 }}
+                pagination={{ clickable: true }}
+                loop={true}
+                navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                    if (
+                        swiper.params.navigation &&
+                        typeof swiper.params.navigation === "object"
+                    ) {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                    }
+                }}
+                className="w-full h-full"
+            >
+                {heroSlides.map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="object-cover w-full h-full"
+                            priority
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper> */}
+            <Swiper
+                modules={[Navigation, Autoplay]} // ← Removed Pagination module
+                autoplay={{ delay: 5000 }}
+                loop={true}
+                navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                    if (
+                        swiper.params.navigation &&
+                        typeof swiper.params.navigation === "object"
+                    ) {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                    }
+                }}
+                className="w-full h-[570px]"
 
-                {/* Slide Image */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
-                        src={heroSlides[current].src}
-                        alt={heroSlides[current].alt}
-                        className="object-cover w-full h-[450px]"
-                        priority
-                    />
-                </div>
+            >
+                {heroSlides.map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="object-cover w-full h-full"
+                            priority
 
-                {/* Right Arrow */}
-                <button
-                    aria-label="Next"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10
-                     bg-white w-[48px] h-[48px] flex items-center justify-center
-                     border border-gray-200 shadow hover:bg-gray-100 transition"
-                    style={{ outline: "none" }}
-                    onClick={next}
-                >
-                    <FaChevronRight className="text-2xl text-gray-700" />
-                </button>
-            </div>
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            {/* Custom Arrows */}
+            <button
+                ref={prevRef}
+                className="cursor-pointer custom-prev absolute top-1/2 left-5 z-10 transform -translate-y-1/2
+    bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
+    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+                aria-label="Previous"
+            >
+                <BsChevronLeft className="text-2xl" />
+            </button>
+
+            <button
+                ref={nextRef}
+                className="cursor-pointer custom-next absolute top-1/2 right-5 z-10 transform -translate-y-1/2
+    bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
+    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+                aria-label="Next"
+            >
+                <BsChevronRight className="text-2xl" />
+            </button>
         </section>
     );
 }
-

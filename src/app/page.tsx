@@ -3,6 +3,7 @@ import Header from "./component/Header";
 import HeroSection from "./component/Hero";
 import Footer from "./component/footer";
 import VideoPopup from "./component/VideoPopup";
+import AppointmentSection from "./component/checkup";
 
 export default function Home() {
   return (
@@ -10,7 +11,8 @@ export default function Home() {
       {/* <VideoPopup /> */}
       <Header />
       <HeroSection />
-      <Footer/>
+      <AppointmentSection />
+      <Footer />
     </>
   );
 }

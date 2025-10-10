@@ -29,27 +29,27 @@ const VideoTestimonials: React.FC = () => {
     const [videos, setVideos] = useState<VideoData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const res = await axios.post(apiUrl);
-    //             const data = res.data;
-    //             if (data.status && Array.isArray(data.data)) {
-    //                 setVideos(data.data);
-    //             } else {
-    //                 setVideos([]);
-    //             }
-    //         } catch (e) {
-    //             console.error("Error fetching video testimonials:", e);
-    //             setVideos([]);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     })();
-    // }, []);
-
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await axios.post(`${apiUrl}/testimonial-video`);
+                console.log(res.data.data, "responce======")
+                if (res?.data?.status && Array.isArray(res.data.data)) {
+                    setVideos(res.data.data);
+                } else {
+                    setVideos([]);
+                }
+            } catch (e) {
+                console.error("Error fetching video testimonials:", e);
+                setVideos([]);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+console.log(videos,"videosvideosvideosvideosvideosvideos")
     return (
-        <section className="py-10 bg-[#15507c] border-l-8 border-r-8 border-[#bed43b]">
+        <section className="py-10 bg-[#15507c]  border-l-8 border-r-8 border-[#bed43b]">
             <div className="max-w-6xl mx-auto px-3 md:px-0 text-center">
                 <h4 className="text-white text-lg font-semibold mb-1">FEEDBACK</h4>
                 <h2 className="text-3xl md:text-4xl text-white font-light mb-10">What Customer Saying About us</h2>
@@ -59,7 +59,7 @@ const VideoTestimonials: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center">
                         {videos.map((item: VideoData) => (
                             <div key={item.id} className="flex flex-col items-center">
-                                <div className="w-full md:w-[350px] h-[200px] md:h-[200px] shadow-lg bg-white overflow-hidden rounded-lg">
+                                <div className="w-full md:w-[450px] h-[200px] md:h-[200px] shadow-lg bg-white overflow-hidden rounded-lg">
                                     <iframe
                                         width="100%"
                                         height="100%"

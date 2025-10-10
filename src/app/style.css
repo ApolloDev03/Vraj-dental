@@ -7783,3 +7783,7 @@ Go Top CSS
 .footersocial:hover a {
   color: #005d98;
 }
+.swiper-slide {
+  height: 600px !important;
+  overflow: hidden !important;
+}
