@@ -4,8 +4,6 @@ import axios from "axios";
 import { apiUrl } from "@/config";
 import { LuUserRound } from "react-icons/lu";
 import { PiPhoneCall } from "react-icons/pi";
-import { FaHeadset } from "react-icons/fa";
-import { BsHouseDoorFill, BsPersonVcardFill } from "react-icons/bs";
 import { IoIosGitBranch } from "react-icons/io";
 
 interface Branch {
