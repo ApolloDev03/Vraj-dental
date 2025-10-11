@@ -1,52 +1,119 @@
-"use client"
-import { useState } from "react";
-import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import vrajLogo from "../../asserts/hero2.png";
+"use client";
 
-// Slide images: update with your filenames
-const heroImages = [
-    require("../../asserts/hero1.jpg"),
-    require("../../asserts/hero2.png"),
-    require("../../asserts/hero3.png"),
+import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import Image from "next/image";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
+const heroSlides = [
+    {
+        src: require("../../asserts/hero1.jpg"),
+        alt: "Hero Slide 1",
+    },
+    {
+        src: require("../../asserts/hero2.png"),
+        alt: "Hero Slide 2",
+    },
+    {
+        src: require("../../asserts/hero3.jpg"),
+        alt: "Hero Slide 3",
+    },
 ];
 
 export default function HeroSection() {
-    const [current, setCurrent] = useState(0);
-
-    const prev = () => setCurrent(current === 0 ? heroImages.length - 1 : current - 1);
-    const next = () => setCurrent(current === heroImages.length - 1 ? 0 : current + 1);
+    const prevRef = useRef<HTMLButtonElement>(null);
+    const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <section className="relative w-full bg-white">
-            <div className=" flex flex-col md:flex-row items-center justify-between gap-6">
-                {/* Left Side: Slider */}
-                <div className="w-full relative flex items-center justify-center">
-                    <button
-                        aria-label="Previous"
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow-lg z-10"
-                        onClick={prev}
-                    >
-                        <FaChevronLeft className="text-2xl text-blue-900" />
-                    </button>
-                    <Image
-                        src={heroImages[current]}
-                        alt={`Hero Slide ${current + 1}`}
+        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat mt-[-120px] overflow-hidden group">
+            {/* <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                autoplay={{ delay: 5000 }}
+                pagination={{ clickable: true }}
+                loop={true}
+                navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                    if (
+                        swiper.params.navigation &&
+                        typeof swiper.params.navigation === "object"
+                    ) {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                    }
+                }}
+                className="w-full h-full"
+            >
+                {heroSlides.map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="object-cover w-full h-full"
+                            priority
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper> */}
+            <Swiper
+                modules={[Navigation, Autoplay]} // ← Removed Pagination module
+                autoplay={{ delay: 5000 }}
+                loop={true}
+                navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                    if (
+                        swiper.params.navigation &&
+                        typeof swiper.params.navigation === "object"
+                    ) {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                    }
+                }}
+                className="w-full h-[570px]"
 
-                        className="object-contain w-full h-full"
-                        priority
-                    />
-                    <button
-                        aria-label="Next"
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 p-2 rounded-full shadow-lg z-10"
-                        onClick={next}
-                    >
-                        <FaChevronRight className="text-2xl text-blue-900" />
-                    </button>
-                </div>
+            >
+                {heroSlides.map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="object-cover w-full h-full"
+                            priority
 
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
 
-            </div>
+            {/* Custom Arrows */}
+            <button
+                ref={prevRef}
+                className="cursor-pointer custom-prev absolute top-1/2 left-5 z-10 transform -translate-y-1/2
+    bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
+    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+                aria-label="Previous"
+            >
+                <BsChevronLeft className="text-2xl" />
+            </button>
+
+            <button
+                ref={nextRef}
+                className="cursor-pointer custom-next absolute top-1/2 right-5 z-10 transform -translate-y-1/2
+    bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
+    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+                aria-label="Next"
+            >
+                <BsChevronRight className="text-2xl" />
+            </button>
         </section>
     );
 }
