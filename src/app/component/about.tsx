@@ -23,7 +23,7 @@ export default function AboutMissionVisionSection() {
                     <h1 className="text-3xl md:text-4xl font-bold mb-4">
                         Experienced & Specialized Dental Surgeon
                     </h1>
-                    <p className="text-base md:text-lg leading-relaxed" style={{ marginBottom: 0, color: "#ffffff", lineHeight: 1.3, fontSize: " 42px", fontWeight: 400 }}>
+                    <p className="text-base md:text-lg leading-relaxed" style={{ marginBottom: 0, color: "#000", lineHeight: 1.3, fontSize: " 16px", fontWeight: 400 }}>
                         Vraj Group of Dental Clinics (VGDC) was founded by Dr. Ujas Shah (MDS, Director of Vraj Dental Clinics Pvt. Ltd.), who began his practice in 2012. With over a decade of experience, he envisioned providing affordable dental services to society without compromising on quality. Through well-structured systems and processes, VGDC has grown into a successful chain of clinics, introducing the concept of “System-Based Dentistry” – ensuring standardized, reliable, and patient-centric care across all branches. Our team of expert dentists has been earning the trust of patients for more than 13 years.
                     </p>
                 </div>
