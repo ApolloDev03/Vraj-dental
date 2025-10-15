@@ -3,21 +3,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { TbDental, TbMapPin, TbUsersGroup, TbBadge, TbTools, TbCurrencyRupee } from "react-icons/tb";
+import { FaProjectDiagram, FaMapMarkerAlt, FaUsers, FaPiggyBank, FaBriefcaseMedical, FaMicroscope } from "react-icons/fa";
 import { useRef, useState } from "react";
+
 
 type Feature = { id: string; title: string; text: string; icon: React.JSX.Element };
 
 const features: Feature[] = [
-  { id: "system", title: "SYSTEM BASED DENTISTRY", text: "Structured and evidence‑based dental care approach.", icon: <TbDental className="h-6 w-6" /> },
-  { id: "locations", title: "MULTIPLE LOCATIONS", text: "Conveniently accessible clinics at different places.", icon: <TbMapPin className="h-6 w-6" /> },
-  { id: "group", title: "GROUP OF DOCTORS", text: "A team of expert dentists collaborating for your care.", icon: <TbUsersGroup className="h-6 w-6" /> },
-  { id: "experience", title: "14 YEARS OF EXPERIENCE", text: "Trusted expertise built over more than a decade.", icon: <TbBadge className="h-6 w-6" /> },
-  { id: "equipment", title: "LATEST EQUIPMENT & TECHNOLOGY", text: "Advanced tools and modern techniques for better outcomes.", icon: <TbTools className="h-6 w-6" /> },
-  { id: "pricing", title: "AFFORDABLE PRICING", text: "High‑quality treatments at fair and transparent rates.", icon: <TbCurrencyRupee className="h-6 w-6" /> },
+  { id: "system", title: "SYSTEM BASED DENTISTRY", text: "Structured and evidence‑based dental care approach.", icon: <FaProjectDiagram className="h-6 w-6" /> },
+  { id: "locations", title: "MULTIPLE LOCATIONS", text: "Conveniently accessible clinics at different places.", icon: <FaMapMarkerAlt className="h-6 w-6" /> },
+  { id: "group", title: "GROUP OF DOCTORS", text: "A team of expert dentists collaborating for your care.", icon: <FaUsers className="h-6 w-6" /> },
+  { id: "experience", title: "14 YEARS OF EXPERIENCE", text: "Trusted expertise built over more than a decade.", icon: <FaBriefcaseMedical className="h-6 w-6" /> },
+  { id: "equipment", title: "LATEST EQUIPMENT & TECHNOLOGY", text: "Advanced tools and modern techniques for better outcomes.", icon: <FaMicroscope className="h-6 w-6" /> },
+  { id: "pricing", title: "AFFORDABLE PRICING", text: "High‑quality treatments at fair and transparent rates.", icon: <FaPiggyBank className="h-6 w-6" /> },
 ];
 
 const slides = [
-  "/images/clinic-1.jpg",
+  "../../asserts/why-choose-img2.jpg",
   "/images/clinic-2.jpg",
   "/images/clinic-3.jpg",
 ];
@@ -33,7 +35,7 @@ export default function WhyChooseUsSwiper() {
       <div className="relative mx-auto max-w-7xl bg-white border-[15px]" style={{ borderColor: "#b5d535" }}>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* LEFT PANEL */}
-          <div className="relative bg-[#043d72] px-6 py-10 sm:px-10 md:px-12 md:py-14 text-white overflow-hidden">
+          <div className="relative bg-[#043d72] px-6 py-10 sm:px-10 md:px-7 md:py-25 text-white overflow-hidden">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-15"
@@ -50,8 +52,8 @@ export default function WhyChooseUsSwiper() {
 
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {features.map((f) => (
-                  <div key={f.id} className=" gap-4">
-                    <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10">
+                  <div key={f.id} className="group gap-4">
+                    <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full border border-white/30 bg-white text-[#005d98] group-hover:bg-[#005d98] group-hover:text-white">
                       {f.icon}
                     </div>
                     <div>
