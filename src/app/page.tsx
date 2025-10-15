@@ -6,6 +6,7 @@ import AboutMissionVisionSection from "./component/about";
 import ClinicFacts from "./component/ClinicFacts";
 import ServicesSection from "./component/servies";
 import WhyChooseUsSwiper from "./component/whyYou";
+import FounderSection from "./component/founders";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ClinicFacts/>
       <ServicesSection />
       <WhyChooseUsSwiper />
+      <FounderSection />
     </>
   );
 }
