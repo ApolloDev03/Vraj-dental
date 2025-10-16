@@ -7,6 +7,8 @@ import ClinicFacts from "./component/ClinicFacts";
 import ServicesSection from "./component/servies";
 import WhyChooseUsSwiper from "./component/whyYou";
 import FounderSection from "./component/founders";
+import FeedbackVideoSlider from "./component/feedback";
+import Branches from "./component/branch";
 
 export default function Home() {
   return (
@@ -19,6 +21,8 @@ export default function Home() {
       <ServicesSection />
       <WhyChooseUsSwiper />
       <FounderSection />
+      <FeedbackVideoSlider />
+      <Branches />
     </>
   );
 }

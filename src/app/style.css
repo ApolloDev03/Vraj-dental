@@ -7784,6 +7784,6 @@ Go Top CSS
   color: #005d98;
 }
 .swiper-slide {
-  height: 600px !important;
+  /* height: 600px !important; */
   overflow: hidden !important;
 }
