@@ -298,14 +298,14 @@ export default function HeroWithWhyChoose() {
               <button
                 ref={prevRef}
                 aria-label="Previous"
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-[#0d4272] shadow hover:bg-white transition"
+                className="absolute left-5 -top-[450px] -translate-y-1/2 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-[#0d4272] shadow hover:bg-white transition"
               >
                 <BsChevronLeft className="h-5 w-5" />
               </button>
               <button
                 ref={nextRef}
                 aria-label="Next"
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-[#0d4272] shadow hover:bg-white transition"
+                className="absolute right-5 -top-[445px] -translate-y-1/2 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-[#0d4272] shadow hover:bg-white transition"
               >
                 <BsChevronRight className="h-5 w-5" />
               </button>

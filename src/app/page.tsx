@@ -9,6 +9,9 @@ import WhyChooseUsSwiper from "./component/whyYou";
 import FounderSection from "./component/founders";
 import FeedbackVideoSlider from "./component/feedback";
 import Branches from "./component/branch";
+import EmpanelledCentres from "./component/center";
+import BlogSection from "./component/blogHome";
+import BreadcrumbHero from "./component/breadcrumb";
 
 export default function Home() {
   return (
@@ -23,6 +26,9 @@ export default function Home() {
       <FounderSection />
       <FeedbackVideoSlider />
       <Branches />
+      <EmpanelledCentres />
+      <BlogSection />
+      
     </>
   );
 }

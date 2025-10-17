@@ -5,7 +5,7 @@ export default function ClinicFacts() {
     return (
         <section className="py-12">
             <div
-                className="px-2 md:px-8 py-8 md:py-12 border-[10px] md:border-[13px] mx-auto"
+                className=" py-8 md:py-[100px] border-[10px] md:border-[13px] mx-auto"
                 style={{
                     borderColor: "#c2d14e",
                     background: "#0d4272",
@@ -14,11 +14,11 @@ export default function ClinicFacts() {
             >
                 <div className="text-white max-w-6xl mx-auto flex  flex-col md:flex-row md:justify-between md:items-center">
                     {/* LEFT SIDE: Headline */}
-                    <div className="md:w-1/3 mb-8 md:mb-0">
-                        <h3 className="uppercase text-base font-semibold tracking-wide mb-6" style={{ color: "white" }}>
+                    <div className="md:w-2/4 mb-8 md:mb-0">
+                        <h3 className="uppercase text-center md:text-start font-semibold tracking-wide mb-2" style={{ color: "white" }}>
                             Our Facts
                         </h3>
-                        <h2 className="text-2xl md:text-4xl font-light leading-relaxed mb-0" style={{ color: "white" }}>
+                        <h2 className="text-2xl md:text-[42px] font-normal text-center md:text-start  mb-0" style={{ color: "white" }}>
                             Discover the milestones that define <br />
                             the journey of Vraj Group of Dental Clinics (VGDC)
                         </h2>
@@ -29,7 +29,7 @@ export default function ClinicFacts() {
                         <div className="flex flex-col items-center w-full md:w-1/3">
                             <div className="text-4xl font-normal mb-1">
                                 <CountUp end={5000} duration={2.5} separator="," />
-                                <span className="text-3xl align-text-top">+</span>
+                                <sup className="ml-2 text-3xl leading-none">+</sup>
                             </div>
                             <div className="text-sm md:text-base font-light text-center">
                                 Dental Implants successfully completed
