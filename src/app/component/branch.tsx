@@ -60,7 +60,7 @@ const branches: Branch[] = [
 export default function Branches() {
     return (
         <section className="bg-white">
-            <div className="mx-auto max-w-6xl px-4 py-20">
+            <div className="mx-auto max-w-6xl px-4 pt-20">
                 <p className="text-center uppercase mb-2 text-[14px] font-black" style={{ color: "#b6c651" }}>
                     OUR BRANCHES
                 </p>
