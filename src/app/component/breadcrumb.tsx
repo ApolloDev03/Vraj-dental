@@ -50,7 +50,7 @@ export default function BreadcrumbHero({
         }}
       />
 
-      <div className="relative z-[1] mx-auto max-w-6xl h-full px-4 flex flex-col justify-center">
+      <div className="relative z-[1] mx-auto max-w-6xl h-full px-4 flex flex-col mt-[100px] justify-center">
         <h1 className="text-3xl md:text-[42px] font-semibold " style={{color:"#ffffff"}}>
           {title}
         </h1>
