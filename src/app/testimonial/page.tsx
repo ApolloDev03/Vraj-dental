@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../config";
+import BreadcrumbHero from "../component/breadcrumb";
+import bg from "../../asserts/feedback-bg.jpg";
 
 interface VideoData {
     id: number;
@@ -33,7 +35,7 @@ const VideoTestimonials: React.FC = () => {
         (async () => {
             try {
                 const res = await axios.post(`${apiUrl}/testimonial-video`);
-                console.log(res.data.data, "responce======")
+                // console.log(res.data.data, "responce======")
                 if (res?.data?.status && Array.isArray(res.data.data)) {
                     setVideos(res.data.data);
                 } else {
@@ -47,36 +49,51 @@ const VideoTestimonials: React.FC = () => {
             }
         })();
     }, []);
-console.log(videos,"videosvideosvideosvideosvideosvideos")
+    // console.log(videos, "videosvideosvideosvideosvideosvideos")
+
+    const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
     return (
-        <section className="py-10 bg-[#15507c]  border-l-8 border-r-8 border-[#bed43b]">
-            <div className="max-w-6xl mx-auto px-3 md:px-0 text-center">
-                <h4 className="text-white text-lg font-semibold mb-1">FEEDBACK</h4>
-                <h2 className="text-3xl md:text-4xl text-white font-light mb-10">What Customer Saying About us</h2>
-                {loading ? (
-                    <p className="text-white text-lg">Loading...</p>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center">
-                        {videos.map((item: VideoData) => (
-                            <div key={item.id} className="flex flex-col items-center">
-                                <div className="w-full md:w-[450px] h-[200px] md:h-[200px] shadow-lg bg-white overflow-hidden rounded-lg">
-                                    <iframe
-                                        width="100%"
-                                        height="100%"
-                                        src={cleanYoutubeUrl(item.videoUrl)}
-                                        title={item.metaTitle || "Testimonial Video"}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="w-full h-full"
-                                    />
+        <div>
+            <BreadcrumbHero
+                title="TESTIMONIAL"
+                crumbs={[{ label: "Home", href: "/" }, { label: "Testimonial" }]}
+            />
+            <section className="py-25 bg-[#15507c]  border-[15px] border-[#bed43b]"
+                style={{
+                    backgroundImage: `url(${bgUrl})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+
+                }}>
+                <div className="max-w-6xl mx-auto px-3 md:px-0 text-center">
+                    <h4 className="!text-white text-[14px] font-extrabold mb-1">FEEDBACK</h4>
+                    <h2 className="text-3xl md:text-[42px] !text-white font-light mb-[55px]">What Customer Saying About us</h2>
+                    {loading ? (
+                        <p className="text-white text-lg">Loading...</p>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center">
+                            {videos.map((item: VideoData) => (
+                                <div key={item.id} className="flex flex-col  items-center">
+                                    <div className="w-full md:w-[350px] h-[200px] md:h-[200px] shadow-lg bg-white overflow-hidden ">
+                                        <iframe
+                                            width="100%"
+                                            height="100%"
+                                            src={cleanYoutubeUrl(item.videoUrl)}
+                                            title={item.metaTitle || "Testimonial Video"}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            className="w-full h-full"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </section>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+        </div>
     );
 };
 

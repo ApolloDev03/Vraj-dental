@@ -82,7 +82,53 @@ const Header: React.FC = () => {
                     <Link href="/about" className="hover:text-[#005d98]">ABOUT</Link>
                     <Link href="/branches" className="hover:text-[#005d98]">OUR BRANCHES</Link>
                     <Link href="/services" className="hover:text-[#005d98]">OUR SERVICES</Link>
-                    <Link href="/gallery" className="hover:text-[#005d98]">GALLERY</Link>
+                    {/* Gallery dropdown: parent not clickable */}
+                    <div className="relative inline-block group">
+                        {/* Non-clickable parent trigger */}
+                        <span
+                            className="inline-flex items-center gap-1 cursor-pointer  text-black select-none"
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="gallery-menu"
+                        >
+                            GALLERY
+                            <svg
+                                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
+                            </svg>
+                        </span>
+
+                        {/* Dropdown panel */}
+                        <div
+                            id="gallery-menu"
+                            role="menu"
+                            className="absolute left-0 top-full z-20 mt-2 min-w-[200px] rounded-md border border-gray-200 bg-white shadow-lg opacity-0 scale-95 origin-top
+                 pointer-events-none transition-all duration-150 ease-out
+                 group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
+                        >
+                            <div className="py-2">
+                                <Link
+                                    href="/gallery"
+                                    role="menuitem"
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
+                                >
+                                    Gallery
+                                </Link>
+                                <Link
+                                    href="/video-gallery"
+                                    role="menuitem"
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
+                                >
+                                    Video Gallery
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
                     <Link href="/blog" className="hover:text-[#005d98]">BLOG</Link>
                     <Link href="/testimonial" className="hover:text-[#005d98]">TESTIMONIAL</Link>
                     <Link href="/contact" className="hover:text-[#005d98]">CONTACT</Link>

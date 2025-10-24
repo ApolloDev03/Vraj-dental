@@ -15,7 +15,7 @@ import BreadcrumbHero from "./component/breadcrumb";
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-hidden">
       {/* <VideoPopup /> */}
       <HeroSection />
       <AppointmentSection />
@@ -29,6 +29,6 @@ export default function Home() {
       <EmpanelledCentres />
       <BlogSection />
       
-    </>
+    </div>
   );
 }
