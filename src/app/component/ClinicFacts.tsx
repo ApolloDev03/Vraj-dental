@@ -1,7 +1,14 @@
 "use client"
 import CountUp from 'react-countup';
- 
-export default function ClinicFacts() {
+
+type OurFact = {
+  title: string;
+  value: number | string;
+};
+
+export default function ClinicFacts({ facts }: any) {    
+    if(!facts) return null;
+
     return (
         <section className="py-12">
             <div
@@ -19,8 +26,7 @@ export default function ClinicFacts() {
                             Our Facts
                         </h3>
                         <h2 className="text-2xl md:text-[42px] font-normal text-center md:text-start  mb-0" style={{ color: "white" }}>
-                            Discover the milestones that define <br />
-                            the journey of Vraj Group of Dental Clinics (VGDC)
+                            {facts[0]?.title}
                         </h2>
                     </div>
                     {/* RIGHT SIDE: Stats */}
@@ -28,7 +34,7 @@ export default function ClinicFacts() {
                         {/* FACT 1 */}
                         <div className="flex flex-col items-center w-full md:w-1/3">
                             <div className="text-4xl font-normal mb-1">
-                                <CountUp end={5000} duration={2.5} separator="," />
+                                <CountUp end={facts[0]?.count_1} duration={2.5} separator="," />
                                 <sup className="ml-2 text-3xl leading-none">+</sup>
                             </div>
                             <div className="text-sm md:text-base font-light text-center">
@@ -38,7 +44,7 @@ export default function ClinicFacts() {
                         {/* FACT 2 */}
                         <div className="flex flex-col items-center w-full md:w-1/3">
                             <div className="text-4xl font-normal mb-1">
-                                <CountUp end={15000} duration={2.5} separator="," />
+                                <CountUp end={facts[0]?.count_2} duration={2.5} separator="," />
                                 <span className="text-3xl align-top">+</span>
                             </div>
                             <div className="text-sm md:text-base font-light text-center">
@@ -48,7 +54,7 @@ export default function ClinicFacts() {
                         {/* FACT 3 */}
                         <div className="flex flex-col items-center w-full md:w-1/3">
                             <div className="text-4xl font-normal mb-1">
-                                <CountUp end={15} duration={2.5} />
+                                <CountUp end={facts[0]?.count_3} duration={2.5} />
                                 <span className="text-3xl align-top">+</span>
                             </div>
                             <div className="text-sm md:text-base font-light text-center">

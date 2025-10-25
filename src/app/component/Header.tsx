@@ -107,7 +107,7 @@ const Header: React.FC = () => {
                             id="gallery-menu"
                             role="menu"
                             className="absolute left-0 top-full z-20 mt-2 min-w-[200px] rounded-md border border-gray-200 bg-white shadow-lg opacity-0 scale-95 origin-top
-                 pointer-events-none transition-all duration-150 ease-out
+                 pointer-events-none transition-all duration-1000 ease-out
                  group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
                         >
                             <div className="py-2">
