@@ -146,6 +146,7 @@ import {
   FaMicroscope,
   FaPiggyBank,
 } from "react-icons/fa";
+import bg from "../../asserts/feedback-bg.jpg";
 
 type Feature = { id: string; title: string; text: string; icon: React.ReactNode };
 type Slide = { src: any; alt: string };
@@ -200,8 +201,16 @@ export default function HeroWithWhyChoose() {
   const nextRef = useRef<HTMLButtonElement >(null);
   const [active, setActive] = useState(0);
 
+    const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
+
   return (
-    <section className="relative">
+    <section className="relative"
+    style={{
+        backgroundImage: `url(${bgUrl})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}>
       <div
         className="relative mx-auto max-w-7xl bg-white border-[15px]"
         style={{ borderColor: "#b5d535" }}

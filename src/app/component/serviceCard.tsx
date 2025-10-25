@@ -2,17 +2,37 @@
 import { Service } from "@/types/type";
 import Link from "next/link";
 import { TbDental } from "react-icons/tb";
+import Image from "next/image";
+import { apiUrl } from "@/config";
 
-export default function ServiceCard({ service }: { service: Service }) {
+interface ServiceCardProps {
+  service: {
+    title: string;
+    blurb: string;
+    href: string;
+    icon?: string | null;
+  };
+}
+
+export default function ServiceCard({ service }:ServiceCardProps) {
 //   const Icon = service.icon;
-  return (
-    
 
+  return (
     
     <div className="group relative">
       {/* badge — reacts to group hover */}
       <div className="absolute -top-10 left-6 z-10 p-5 flex h-20 w-20 items-center justify-center rounded-full border border-[#3a4f9d] bg-white text-indigo-900 shadow-sm transition-all duration-200 group-hover:translate-y-[-10px]  group-hover:border-[#2f4290]">
-        <TbDental className="h-8 w-8 transition-transform duration-200 group-hover:scale-105" />
+        {service.icon ? (
+          <Image
+            src={service.icon}
+            alt={service.title}
+            width={40}
+            height={40}
+            className="object-contain"
+          />
+        ) : (
+          <TbDental className="h-8 w-8 transition-transform duration-200 group-hover:scale-105" />
+        )}
       </div>
 
       {/* card — reacts to the same group hover */}
@@ -22,7 +42,9 @@ export default function ServiceCard({ service }: { service: Service }) {
           {service.title}
         </h3>
         <p className="mt-2 text-[16px] leading-7 text-slate-500" style={{ color: "#6d7a8c" }}>
-          {service.blurb}
+          {service.blurb.length > 40
+            ? service.blurb.slice(0, 40) + "..."
+            : service.blurb}
         </p>
         <Link
           href={service.href}
