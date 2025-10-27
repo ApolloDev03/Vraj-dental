@@ -12,56 +12,108 @@ import aboutImg1 from '@/asserts/why-choose-img1.jpg'
 import aboutImg2 from '@/asserts/why-choose-img2.jpg'
 import aboutImg3 from '@/asserts/why-choose-img3.jpg'
 import { FaUserMd, FaFlask, FaBaby } from "react-icons/fa";
+import { RiToothFill } from 'react-icons/ri';
+import bg from "../../asserts/feedback-bg.jpg";
+import doc1 from '@/asserts/doc1.jpg'
+import doc2 from '@/asserts/doc2.jpg'
+import doc3 from '@/asserts/doc3.jpg'
+import doc4 from '@/asserts/doc4.jpg'
+import doc5 from '@/asserts/doc5.jpg'
+import doc6 from '@/asserts/doc6.jpg'
+import BlogSection from '../component/blogHome';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { apiUrl } from "@/config";
 
 interface Doctor {
     id: number;
     name: string;
     specialty: string;
     image: string;
-    facebook: string;
-    linkedin: string;
+
 }
 
 interface Testimonial {
     id: number;
     name: string;
     text: string;
-    rating: number;
+    // rating: number;
+}
+
+type Blog = {
+    blogImage: string;
+  created_at: string;
+  blogTitle: string;
+  blogDescription: string;
+  urlParameter: string;
+}
+
+type HomeData = {
+    latest_blogs: Blog[];
 }
 
 export default function AboutUsPage() {
+    const [homeData, setHomeData] = useState<HomeData | null>(null);
+      const [loading, setLoading] = useState(true);
+
+      useEffect(() => {
+    const fetchHomeData = async () => {
+      try {
+        const res = await axios.post(`${apiUrl}/home`);
+        if (res.data.success) {
+          console.log(res.data.data);
+
+          setHomeData(res.data.data);
+        }
+      } catch (err) {
+        console.error("Error Fetching home data", err);
+      } finally {
+        setLoading(false)
+      }
+    };
+
+    fetchHomeData();
+  }, [])
+
+    const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
+
     const doctors: Doctor[] = [
         {
             id: 1,
             name: 'Dr. V.R.A.J',
             specialty: 'Dental Specialist',
-            image: '/images/doctor-1.jpg',
-            facebook: '#',
-            linkedin: '#'
+            image: doc1.src
+
         },
         {
             id: 2,
             name: 'Dr. V.R.A.J',
             specialty: 'Dental Specialist',
-            image: '/images/doctor-2.jpg',
-            facebook: '#',
-            linkedin: '#'
+            image: doc2.src
         },
         {
             id: 3,
             name: 'Dr. V.R.A.J',
             specialty: 'Dental Specialist',
-            image: '/images/doctor-3.jpg',
-            facebook: '#',
-            linkedin: '#'
+            image: doc3.src
         },
         {
             id: 4,
             name: 'Dr. V.R.A.J',
             specialty: 'Dental Specialist',
-            image: '/images/doctor-4.jpg',
-            facebook: '#',
-            linkedin: '#'
+            image: doc4.src
+        },
+        {
+            id: 5,
+            name: 'Dr. V.R.A.J',
+            specialty: 'Dental Specialist',
+            image: doc5.src
+        },
+        {
+            id: 6,
+            name: 'Dr. V.R.A.J',
+            specialty: 'Dental Specialist',
+            image: doc6.src
         }
     ];
 
@@ -69,20 +121,20 @@ export default function AboutUsPage() {
         {
             id: 1,
             name: 'RESHMA SHAH',
-            text: '"I have undergone implant treatment, feel good, pleased humble behavior, Rolex and being good. They provided full satisfaction towards their implant patients but and my visit was easy to Dr Pooja Shah and Dr BJ Ajga Shah."',
-            rating: 5
+            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
+            // rating: 5
         },
         {
             id: 2,
-            name: 'JOHN DOE',
-            text: '"Excellent service and professional staff. The treatment was painless and the results exceeded my expectations. Highly recommend to everyone!"',
-            rating: 5
+            name: 'RESHMA SHAH',
+            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
+            // rating: 5
         },
         {
             id: 3,
-            name: 'JANE SMITH',
-            text: '"Best dental clinic in the city. The doctors are very experienced and caring. They made my dental experience comfortable and stress-free."',
-            rating: 5
+            name: 'RESHMA SHAH',
+            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
+            // rating: 5
         }
     ];
 
@@ -90,12 +142,12 @@ export default function AboutUsPage() {
         {
             icon: <FaUserMd />,
             title: 'PROFESSIONAL STAFF',
-            description: 'Our Staff team are well trained, courteous and an approachable.'
+            description: 'Our Staff team are well trained, polite and co-operative.'
         },
         {
             icon: <FaFlask />,
             title: 'EXCELLENCE GUARANTEED',
-            description: 'Our passion is to deliver dental Results, we will think bigger.'
+            description: 'Our passion is to deliver Great Results, not just false hopes.'
         },
         {
             icon: <FaBaby />,
@@ -103,7 +155,7 @@ export default function AboutUsPage() {
             description: 'We use Painless Technology & Highly Sterile Equipments.'
         },
         {
-            icon: '💰',
+            icon: <RiToothFill />,
             title: 'AFFORDABLE PRICING',
             description: 'Fixed rates and honest competitive pricing.'
         }
@@ -234,16 +286,16 @@ export default function AboutUsPage() {
                             </p>
 
                             {/* Features Grid */}
-                            <div className="grid grid-cols-2 gap-8 pt-4">
+                            <div className="grid grid-cols-2 gap-8 pt-4 group">
                                 {features.map((feature, index) => (
                                     <div key={index} className="flex flex-col items-start space-y-3">
-                                        <div className="w-[50px] h-[50px] bg-white rounded-full flex items-center justify-center text-[#004170] text-2xl shadow-lg">
+                                        <div className="w-[50px] h-[50px] group-hover:bg-[#005d98] group-hover:!text-white bg-white rounded-full flex items-center justify-center text-[#005d98] text-2xl shadow-lg">
                                             {feature.icon}
                                         </div>
-                                        <h3 className="font-bold !text-white text-base uppercase tracking-wide">
+                                        <h3 className="font-extrabold mt-[16px] mb-[7px] !text-white text-base uppercase ">
                                             {feature.title}
                                         </h3>
-                                        <p className="!text-white text-sm leading-relaxed">
+                                        <p className="!text-white text-sm ">
                                             {feature.description}
                                         </p>
                                     </div>
@@ -305,29 +357,29 @@ export default function AboutUsPage() {
 
 
             {/* ========== OUR DOCTORS SECTION ========== */}
-            <section className="py-16 bg-gray-50">
+            <section className="max-w-6xl mx-auto pt-25 py-[70px] ">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">
-                        <p className="text-[#005d98] font-medium mb-2">OUR DOCTORS</p>
-                        <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
+                        <p className="!text-[#b6c651] font-extrabold text-[14px] mb-2">OUR DOCTORS</p>
+                        <h2 className="text-3xl md:text-[42px] font-normal text-[#005d98]">
                             Meet Our Qualified Doctors To Get Support
                         </h2>
-                        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                        <p className="text-gray-600 mt-[10px] text-center max-w-2xl mx-auto">
                             Qualified dental doctors are essential for maintaining and improving oral health, which is a crucial aspect of overall well-being.
                         </p>
                     </div>
 
                     <Swiper
-                        modules={[Navigation, Pagination, Autoplay]}
+                        modules={[Pagination]}
                         spaceBetween={30}
                         slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        autoplay={{
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        }}
-                        loop={true}
+                        // navigation={true}
+                        pagination={{ clickable: true, el: ".doctors-pagination", }}
+                        // autoplay={{
+                        //     delay: 3000,
+                        //     disableOnInteraction: false,
+                        // }}
+                        // loop={true}
                         breakpoints={{
                             640: {
                                 slidesPerView: 2,
@@ -343,104 +395,127 @@ export default function AboutUsPage() {
                     >
                         {doctors.map((doctor) => (
                             <SwiperSlide key={doctor.id}>
-                                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                                    <div className="relative h-80">
+                                <div className="bg-white  border-[#b6c651] border-1 overflow-hidden shadow-lg  transition-shadow duration-300 h-[150px]">
+                                    <div className="relative h-[150px]">
                                         <Image
                                             src={doctor.image}
                                             alt={doctor.name}
                                             fill
-                                            className="object-cover"
+                                            className="object-cover "
                                         />
-                                        {/* Social Icons Overlay */}
-                                        <div className="absolute top-4 left-4 flex gap-2">
-                                            <a
-                                                href={doctor.facebook}
-                                                className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                                                </svg>
-                                            </a>
-                                            <a
-                                                href={doctor.linkedin}
-                                                className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white hover:bg-blue-800 transition-colors"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                                </svg>
-                                            </a>
-                                        </div>
+
                                     </div>
-                                    <div className="p-4 text-center">
+                                    {/* <div className="p-4 text-center">
                                         <h3 className="text-xl font-bold text-blue-900 mb-1">{doctor.name}</h3>
                                         <p className="text-gray-600">{doctor.specialty}</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                    <div className="doctors-pagination flex mt-5 justify-center"></div>
                 </div>
             </section>
+            <style jsx global>{`
+                /* --- OUR DOCTORS SWIPER PAGINATION ONLY --- */
+                .doctors-pagination .swiper-pagination-bullet {
+                    background-color: #005d98;
+                    opacity: 1;
+                    width: 10px;
+                    height: 10px;
+                    margin: 0 6px !important;
+                    transition: all 0.3s ease;
+                }
+                .doctors-pagination .swiper-pagination-bullet-active {
+                    background-color: #b6c651 !important; /* your brand green */
+                    width: 12px;
+                    height: 12px;
+                    transform: scale(1.1);
+                }
+                `}</style>
 
             {/* ========== TESTIMONIALS SECTION ========== */}
-            <section className="py-16 bg-blue-900 text-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <p className="text-yellow-400 font-medium mb-2">FEEDBACK</p>
-                        <h2 className="text-3xl md:text-4xl font-bold">
-                            What Customer Saying About us
-                        </h2>
-                    </div>
+            <section className="relative"
+                style={{
+                    backgroundImage: `url(${bgUrl})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                }} >
+                <div className="py-25  text-white border-[15px]" style={{ borderColor: "#b5d535" }}>
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-12">
+                            <p className="text-center !text-white uppercase tracking-widest font-black text-[14px]">FEEDBACK</p>
+                            <h2 className="mt-2 text-center text-4xl md:text-[42px] !text-white">
+                                What Customer Saying About us
+                            </h2>
+                        </div>
 
-                    <div className="max-w-4xl mx-auto">
-                        <Swiper
-                            modules={[Pagination, Autoplay]}
-                            spaceBetween={30}
-                            slidesPerView={1}
-                            pagination={{ clickable: true }}
-                            autoplay={{
-                                delay: 5000,
-                                disableOnInteraction: false,
-                            }}
-                            loop={true}
-                            className="pb-12 testimonials-swiper"
-                        >
-                            {testimonials.map((testimonial) => (
-                                <SwiperSlide key={testimonial.id}>
-                                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 md:p-12">
-                                        <div className="flex justify-center mb-6">
-                                            {[...Array(testimonial.rating)].map((_, index) => (
-                                                <svg
-                                                    key={index}
-                                                    className="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                >
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                </svg>
-                                            ))}
+                        <div className="w-full max-w-[720px] mx-auto border border-white pt-3">
+                            <Swiper
+                                modules={[Pagination]}
+                                spaceBetween={30}
+                                slidesPerView={1}
+                                pagination={{ clickable: true, el: ".feedback-pagination" }}
+                                // autoplay={{
+                                //     delay: 5000,
+                                //     disableOnInteraction: false,
+                                // }}
+                                // loop={true}
+                                className="pb-12 testimonials-swiper"
+                            >
+                                {testimonials.map((testimonial) => (
+                                    <SwiperSlide key={testimonial.id}>
+                                        <div className=" ">
+                                            {/* <div className="flex justify-center mb-6">
+                                                {[...Array(testimonial.rating)].map((_, index) => (
+                                                    <svg
+                                                        key={index}
+                                                        className="w-6 h-6 text-yellow-400"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
+                                                    >
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div> */}
+                                            <p className="text-[20px] !mb-0 !text-white text-center  italic">
+                                                {testimonial.text}
+                                            </p>
+                                            <p className="text-center mt-[30px] font-bold !text-white">
+                                                - {testimonial.name}
+                                            </p>
                                         </div>
-                                        <p className="text-lg md:text-xl text-center mb-6 italic">
-                                            {testimonial.text}
-                                        </p>
-                                        <p className="text-center font-bold text-yellow-400">
-                                            - {testimonial.name}
-                                        </p>
-                                    </div>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </div>
                     </div>
+                    <div className="feedback-pagination flex mt-5 justify-center"></div>
                 </div>
             </section>
+
+            <style jsx global>{`
+                /* --- OUR DOCTORS SWIPER PAGINATION ONLY --- */
+                .feedback-pagination .swiper-pagination-bullet {
+                    background-color: #fff;
+                    opacity: 1;
+                    width: 10px;
+                    height: 10px;
+                    margin: 0 6px !important;
+                    transition: all 0.3s ease;
+                }
+                .feedback-pagination .swiper-pagination-bullet-active {
+                    background-color: #005d98 !important; /* your brand green */
+                    width: 12px;
+                    height: 12px;
+                    transform: scale(1.1);
+                }
+                `}</style>
 
             {/* Your Latest Blog Component Here */}
 
-            <style jsx global>{`
+            {/* <style jsx global>{`
         .swiper-button-next,
         .swiper-button-prev {
           color: white;
@@ -478,7 +553,9 @@ export default function AboutUsPage() {
         .doctors-swiper .swiper-pagination-bullet-active {
           background: #22c55e;
         }
-      `}</style>
+      `}</style> */}
+
+      {homeData?.latest_blogs && <BlogSection blogs = {homeData.latest_blogs} />}
         </main>
     );
 }

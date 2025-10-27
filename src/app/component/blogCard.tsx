@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 // import CalendarIcon from './icons/Calendar';
 import { FaRegCalendarDays } from "react-icons/fa6";
 
@@ -10,10 +11,17 @@ export type BlogCardProps = {
   dateText: string;        // e.g., "Posted On Jun 15 2023"
   title: string;
   excerpt: string;
+  slug: string
 };
 
+
+
 export default function BlogCard(props: BlogCardProps) {
-  const { href, imageSrc, imageAlt, dateText, title, excerpt } = props;
+  const { href, imageSrc, imageAlt, dateText, title, excerpt, slug } = props;
+  const route = useRouter()
+  const  handleDetail = (slug:any) => {
+    route.push(`/blogdetail/${slug}`)
+  }
 
   return (
     <article
@@ -67,6 +75,7 @@ export default function BlogCard(props: BlogCardProps) {
         <div className="mt-auto pt-2">
           <Link
             href={href}
+            onClick={() => handleDetail(slug)}
             className="inline-flex items-center gap-2 text-[13px] font-semibold !text-[#005d98] "
           >
             READ MORE

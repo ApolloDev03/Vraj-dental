@@ -1,23 +1,35 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'https',
-  //       hostname: 'vrajdentalclinic.com',
-  //     },
-  //   ],
-  // },
+// const nextConfig: NextConfig = {
+//   /* config options here */
+//   // images: {
+//   //   remotePatterns: [
+//   //     {
+//   //       protocol: 'https',
+//   //       hostname: 'vrajdentalclinic.com',
+//   //     },
+//   //   ],
+//   // },
   
 
-  output: "export",
+//   output: "export",
  
+//   images: { unoptimized: true },
+//   eslint: { ignoreDuringBuilds: true },
+//   typescript: { ignoreBuildErrors: true },
+  
+// };
+
+// export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export",           // <-- Required for static build in /out
   images: { unoptimized: true },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  
+  env: {
+    NEXT_PUBLIC_API_URL: "https://vrajdentalclinic.com/new_vraj/api",
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
