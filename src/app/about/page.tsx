@@ -61,7 +61,7 @@ export default function AboutUsPage() {
       try {
         const res = await axios.post(`${apiUrl}/home`);
         if (res.data.success) {
-          console.log(res.data.data);
+        //   console.log(res.data.data);
 
           setHomeData(res.data.data);
         }

@@ -1,14 +1,43 @@
-// components/Header.js
+
 "use client"
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaPhoneAlt, FaClock, FaMapMarkerAlt, FaPaperPlane, FaRegPaperPlane } from 'react-icons/fa';
 import logo from "../../asserts/logo.png"
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
 import { MdAccessTime } from 'react-icons/md';
+import axios from 'axios';
+import { apiUrl } from '@/config';
 const Header: React.FC = () => {
     const [galleryOpen, setGalleryOpen] = useState(false);
+    const [categories, setCategories] = useState<{ id: number; categoryName: string; slug: string }[]>([]);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
+
+
+    // const services = [
+    //     { name: "Root Canal Treatment", href: "/services/root-canal" },
+    //     { name: "Dental Implants", href: "/services/dental-implants" },
+    //     { name: "Teeth Whitening", href: "/services/teeth-whitening" },
+    //     { name: "Braces & Aligners", href: "/services/braces-aligners" },
+    //     { name: "Wisdom Tooth Removal", href: "/services/wisdom-tooth" },
+    // ];
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await axios.post(`${apiUrl}/categories`);
+                if (res.data.success && Array.isArray(res.data.data)) {
+                    const sorted = res.data.data.sort((a: any, b: any) => a.sequance - b.sequance);
+                    setCategories(sorted);
+                }
+            } catch (error) {
+                console.error("Error fetching categories", error);
+            }
+        };
+        fetchCategories()
+    }, [])
+
     return (
         <header className="bg-white shadow">
             {/* Top Bar - Social Links */}
@@ -66,6 +95,9 @@ const Header: React.FC = () => {
                 {/* Main Nav */}
                 {/* Logo and Brand */}
                 <div className="flex items-center space-x-3">
+                    <Link
+                    href="/"
+                    >
                     <Image
                         src={logo}
                         alt="Mubryx Logo"
@@ -73,6 +105,7 @@ const Header: React.FC = () => {
                         height={100}
                         className="rounded-full"
                     />
+                    </Link>
 
                 </div>
                 {/* Navigation */}
@@ -81,7 +114,60 @@ const Header: React.FC = () => {
                     <Link href="/" className="hover:text-[#005d98]">HOME</Link>
                     <Link href="/about" className="hover:text-[#005d98]">ABOUT</Link>
                     <Link href="/branches" className="hover:text-[#005d98]">OUR BRANCHES</Link>
-                    <Link href="/services" className="hover:text-[#005d98]">OUR SERVICES</Link>
+
+                    {/* 🔹 OUR SERVICES Dropdown */}
+                    <div className="relative inline-block " onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => {
+    // Small delay before closing (smooth UX)
+    setTimeout(() => setIsServicesOpen(false), 2000);
+  }}>
+                        <span
+                            className="inline-flex items-center gap-1 cursor-pointer text-black select-none"
+                            aria-haspopup="menu"
+                        >
+                            OUR SERVICES
+                            <svg
+                                className={`h-3.5 w-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
+                            </svg>
+                        </span>
+
+                        {/* Dropdown Panel */}
+                        {
+                            isServicesOpen && (
+                                <div
+                                    role="menu"
+                                    onMouseEnter={() => setIsServicesOpen(true)} // keep open while hovering
+    onMouseLeave={() => setIsServicesOpen(false)} // close after leaving
+                                    className={`absolute left-0 top-full z-20 mt-2 min-w-[330px] rounded-md border border-gray-200 bg-white shadow-lg origin-top transition-all duration-300 ease-out
+      ${isServicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
+    `}
+                                >
+                                    <div className="py-2">
+                                        { categories.length > 0 ? (
+                                            categories.map((service:any) => (
+                                                <Link
+                                                key={service.id}
+                                                href={`/services/${service.slug}`}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
+                                                role="menuitem"
+                                            >
+                                                {service.categoryName}
+                                            </Link>
+                                            ))
+                                        ) : (
+                                            <div className="px-4 py-2 text-sm text-gray-400">Loading...</div>
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                        }
+
+                    </div>
+
+
                     {/* Gallery dropdown: parent not clickable */}
                     <div className="relative inline-block group">
                         {/* Non-clickable parent trigger */}

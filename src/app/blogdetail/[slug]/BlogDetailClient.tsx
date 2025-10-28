@@ -59,7 +59,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
     const [message, setMessage] = useState<string | null>(null);
 
 
-    console.log(slug, "sluggggg");
+    // console.log(slug, "sluggggg");
 
     useEffect(() => {
         if (!slug) return;
@@ -91,7 +91,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    console.log(blog?.id,"blogidcomment");
+    // console.log(blog?.id,"blogidcomment");
     
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -104,7 +104,6 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
         setSubmitting(true);
         setMessage(null);
 
-        
 
         try {
             const response = await axios.post(`${apiUrl}/blog/comment`, {
@@ -125,6 +124,10 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
             setMessage("⚠️ Something went wrong. Please try again later.");
         } finally {
             setSubmitting(false);
+
+            setTimeout(() => {
+                setMessage(null);
+            },5000)
         }
     };
 
@@ -219,14 +222,14 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
             <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12 ">
                 {/* Left Content */}
                 <div className="lg:col-span-2">
-                    <div className="bg-white shadow rounded-lg p-6">
+                    <div className="bg-white shadow  rounded-lg p-6">
                         <Image
                             src={blog.blogImage}
                             alt={blog.blogTitle}
                             width={0}
                             height={0}
                             style={{ width: "100%", height: "250px" }}
-                            className="rounded-md object-contain mb-6"
+                            className="rounded-md  object-contain mb-6"
                         />
                         <div className="flex items-center text-gray-500 gap-2 mb-2">
                             {/* <Calendar className="w-4 h-4" /> */}
@@ -311,6 +314,9 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                         <ul className="space-y-5">
                             {latest.map((post) => (
                                 <li key={post.id} className="flex gap-3 items-start">
+                                    <Link 
+                                    href={`${post.urlParameter}`}
+                                    className="flex gap-3 items-start">
                                     <div className="relative w-16 h-16 flex-shrink-0">
                                         <Image
                                             src={post.blogImage}
@@ -326,6 +332,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                                             {post.blogTitle}
                                         </p>
                                     </div>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -347,12 +354,12 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
                     {/* Tags */}
                     <div className="">
-                        <h3 className="text-lg font-semibold mb-4 border-b pb-2">Tags</h3>
+                        <h3 className="text-[20px] font-bold mb-4 border-b pb-2">Tags</h3>
                         <div className="flex flex-wrap gap-2">
                             {tags.map((tag, i) => (
                                 <span
                                     key={i}
-                                    className="px-3 py-1 border border-dashed border-gray-200  text-sm text-gray-600"
+                                    className="px-3 text-[#130947] py-1 border border-dashed hover:border-transparent border-gray-200 !font-semibold hover:bg-[#005d98] hover:!text-white  text-sm transition-all duration-500 ease-in-out cursor-pointer"
                                 >
                                     {tag}
                                 </span>
