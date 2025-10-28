@@ -1,7 +1,6 @@
 "use client"
-// app/gallery/page.tsx
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadcrumbHero from "../component/breadcrumb";

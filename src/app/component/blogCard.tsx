@@ -38,8 +38,9 @@ export default function BlogCard(props: BlogCardProps) {
           alt={imageAlt}
           fill
           sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-          className="object-contain transition-transform duration-500 group-hover:scale-[1.3] group-hover:rotate-[4deg]"
+          className="object-contain transition-transform duration-500 group-hover:scale-[1.3] group-hover:rotate-[4deg] group-hover:cursor-pointer"
           priority
+          onClick={() => handleDetail(slug)}
         />
 
         <div
@@ -64,7 +65,7 @@ export default function BlogCard(props: BlogCardProps) {
           <span>Posted On {dateText}</span>
         </div> */}
 
-        <h3 className="text-[20px] font-semibold !text-black  hover:!text-[#005d98]">
+        <h3 className="text-[20px] font-semibold !text-black hover:cursor-pointer  hover:!text-[#005d98]" onClick={() => handleDetail(slug)}>
           {title}
         </h3>
 
