@@ -119,6 +119,7 @@
 import Image from "next/image";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import vrajLogo from "../../asserts/logo.png"; // Adjust path
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -228,10 +229,10 @@ export default function Footer() {
                     <p>© 2024 - vrajdentalclinic.com, All rights reserved</p>
                     <ul className="flex">
                         <li>
-                            <a href="#">Privacy Policy</a>
+                            <Link href="/privacy-policy" className="hover:!text-[#000]">Privacy Policy</Link>
                         </li>
                         <li>
-                            <a href="#">Terms &amp; Conditions</a>
+                            <Link href="/terms-conditions" className="hover:!text-[#000]">Terms &amp; Conditions</Link>
                         </li>
                     </ul>
                 </div>

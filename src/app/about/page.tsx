@@ -13,7 +13,7 @@ import aboutImg2 from '@/asserts/why-choose-img2.jpg'
 import aboutImg3 from '@/asserts/why-choose-img3.jpg'
 import { FaUserMd, FaFlask, FaBaby } from "react-icons/fa";
 import { RiToothFill } from 'react-icons/ri';
-import bg from "../../asserts/feedback-bg.jpg";
+import bg from "../../asserts/bg-black.jpg";
 import doc1 from '@/asserts/doc1.jpg'
 import doc2 from '@/asserts/doc2.jpg'
 import doc3 from '@/asserts/doc3.jpg'
@@ -24,6 +24,7 @@ import BlogSection from '../component/blogHome';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/config";
+import FeedbackVideoSlider from '../component/feedback';
 
 interface Doctor {
     id: number;
@@ -33,110 +34,56 @@ interface Doctor {
 
 }
 
-interface Testimonial {
+
+type TestimonialVideos = {
     id: number;
-    name: string;
-    text: string;
-    // rating: number;
-}
+    video_url: string;
+    title?: string;
+    thumbnail?: string;
+};
+
 
 type Blog = {
     blogImage: string;
-  created_at: string;
-  blogTitle: string;
-  blogDescription: string;
-  urlParameter: string;
+    created_at: string;
+    blogTitle: string;
+    blogDescription: string;
+    urlParameter: string;
 }
 
 type HomeData = {
     latest_blogs: Blog[];
+    testimonial_videos: TestimonialVideos[];
 }
 
 export default function AboutUsPage() {
     const [homeData, setHomeData] = useState<HomeData | null>(null);
-      const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-      useEffect(() => {
-    const fetchHomeData = async () => {
-      try {
-        const res = await axios.post(`${apiUrl}/home`);
-        if (res.data.success) {
-        //   console.log(res.data.data);
+    useEffect(() => {
+        const fetchHomeData = async () => {
+            try {
+                const res = await axios.post(`${apiUrl}/home`);
+                if (res.data.success) {
+                    //   console.log(res.data.data);
 
-          setHomeData(res.data.data);
-        }
-      } catch (err) {
-        console.error("Error Fetching home data", err);
-      } finally {
-        setLoading(false)
-      }
-    };
+                    setHomeData(res.data.data);
+                }
+            } catch (err) {
+                console.error("Error Fetching home data", err);
+            } finally {
+                setLoading(false)
+            }
+        };
 
-    fetchHomeData();
-  }, [])
+        fetchHomeData();
+    }, [])
 
     const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
 
-    const doctors: Doctor[] = [
-        {
-            id: 1,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc1.src
 
-        },
-        {
-            id: 2,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc2.src
-        },
-        {
-            id: 3,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc3.src
-        },
-        {
-            id: 4,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc4.src
-        },
-        {
-            id: 5,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc5.src
-        },
-        {
-            id: 6,
-            name: 'Dr. V.R.A.J',
-            specialty: 'Dental Specialist',
-            image: doc6.src
-        }
-    ];
 
-    const testimonials: Testimonial[] = [
-        {
-            id: 1,
-            name: 'RESHMA SHAH',
-            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
-            // rating: 5
-        },
-        {
-            id: 2,
-            name: 'RESHMA SHAH',
-            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
-            // rating: 5
-        },
-        {
-            id: 3,
-            name: 'RESHMA SHAH',
-            text: '"I have undergone implant treatment, feel good, nice and humble behavior makes me feeling good. They provided Full satisfaction towards their Implant process to me and my wife.thaks lots to Dr Prachi Shah and Dr Ujas Shah."',
-            // rating: 5
-        }
-    ];
+
 
     const features = [
         {
@@ -268,13 +215,19 @@ export default function AboutUsPage() {
             </section>
 
             {/* ========== WHY CHOOSE US SECTION ========== */}
-            <section className="border-[15px] border-[#b3c83f] bg-[#004170] text-white relative overflow-hidden">
+            <section className="border-[15px] border-[#b5d535] bg-[#004170] text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#004170] via-[#003a63] to-[#002f52]"></div>
 
                 <div className="relative z-10">
                     <div className="grid md:grid-cols-2 gap-0 items-stretch min-h-[600px]">
                         {/* Left side - Content */}
-                        <div className="space-y-6 py-25 px-8 flex flex-col justify-center container mx-auto">
+                        <div className="space-y-6 py-25 px-8 flex flex-col justify-center container mx-auto"
+                            style={{
+                                backgroundImage: `url(${bgUrl})`,
+                                backgroundSize: "cover",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                            }}>
                             <p className="!text-white text-[14px] font-semibold uppercase mb-2">
                                 WHY YOU CHOOSE US
                             </p>
@@ -356,206 +309,16 @@ export default function AboutUsPage() {
 
 
 
-            {/* ========== OUR DOCTORS SECTION ========== */}
-            <section className="max-w-6xl mx-auto pt-25 py-[70px] ">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <p className="!text-[#b6c651] font-extrabold text-[14px] mb-2">OUR DOCTORS</p>
-                        <h2 className="text-3xl md:text-[42px] font-normal text-[#005d98]">
-                            Meet Our Qualified Doctors To Get Support
-                        </h2>
-                        <p className="text-gray-600 mt-[10px] text-center max-w-2xl mx-auto">
-                            Qualified dental doctors are essential for maintaining and improving oral health, which is a crucial aspect of overall well-being.
-                        </p>
-                    </div>
 
-                    <Swiper
-                        modules={[Pagination]}
-                        spaceBetween={30}
-                        slidesPerView={1}
-                        // navigation={true}
-                        pagination={{ clickable: true, el: ".doctors-pagination", }}
-                        // autoplay={{
-                        //     delay: 3000,
-                        //     disableOnInteraction: false,
-                        // }}
-                        // loop={true}
-                        breakpoints={{
-                            640: {
-                                slidesPerView: 2,
-                            },
-                            768: {
-                                slidesPerView: 3,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                            },
-                        }}
-                        className="pb-12 doctors-swiper"
-                    >
-                        {doctors.map((doctor) => (
-                            <SwiperSlide key={doctor.id}>
-                                <div className="bg-white  border-[#b6c651] border-1 overflow-hidden shadow-lg  transition-shadow duration-300 h-[150px]">
-                                    <div className="relative h-[150px]">
-                                        <Image
-                                            src={doctor.image}
-                                            alt={doctor.name}
-                                            fill
-                                            className="object-cover "
-                                        />
-
-                                    </div>
-                                    {/* <div className="p-4 text-center">
-                                        <h3 className="text-xl font-bold text-blue-900 mb-1">{doctor.name}</h3>
-                                        <p className="text-gray-600">{doctor.specialty}</p>
-                                    </div> */}
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                    <div className="doctors-pagination flex mt-5 justify-center"></div>
-                </div>
-            </section>
-            <style jsx global>{`
-                /* --- OUR DOCTORS SWIPER PAGINATION ONLY --- */
-                .doctors-pagination .swiper-pagination-bullet {
-                    background-color: #005d98;
-                    opacity: 1;
-                    width: 10px;
-                    height: 10px;
-                    margin: 0 6px !important;
-                    transition: all 0.3s ease;
-                }
-                .doctors-pagination .swiper-pagination-bullet-active {
-                    background-color: #b6c651 !important; /* your brand green */
-                    width: 12px;
-                    height: 12px;
-                    transform: scale(1.1);
-                }
-                `}</style>
 
             {/* ========== TESTIMONIALS SECTION ========== */}
-            <section className="relative"
-                style={{
-                    backgroundImage: `url(${bgUrl})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                }} >
-                <div className="py-25  text-white border-[15px]" style={{ borderColor: "#b5d535" }}>
-                    <div className="container mx-auto px-4">
-                        <div className="text-center mb-12">
-                            <p className="text-center !text-white uppercase tracking-widest font-black text-[14px]">FEEDBACK</p>
-                            <h2 className="mt-2 text-center text-4xl md:text-[42px] !text-white">
-                                What Customer Saying About us
-                            </h2>
-                        </div>
 
-                        <div className="w-full max-w-[720px] mx-auto border border-white pt-3">
-                            <Swiper
-                                modules={[Pagination]}
-                                spaceBetween={30}
-                                slidesPerView={1}
-                                pagination={{ clickable: true, el: ".feedback-pagination" }}
-                                // autoplay={{
-                                //     delay: 5000,
-                                //     disableOnInteraction: false,
-                                // }}
-                                // loop={true}
-                                className="pb-12 testimonials-swiper"
-                            >
-                                {testimonials.map((testimonial) => (
-                                    <SwiperSlide key={testimonial.id}>
-                                        <div className=" ">
-                                            {/* <div className="flex justify-center mb-6">
-                                                {[...Array(testimonial.rating)].map((_, index) => (
-                                                    <svg
-                                                        key={index}
-                                                        className="w-6 h-6 text-yellow-400"
-                                                        fill="currentColor"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                    </svg>
-                                                ))}
-                                            </div> */}
-                                            <p className="text-[20px] !mb-0 !text-white text-center  italic">
-                                                {testimonial.text}
-                                            </p>
-                                            <p className="text-center mt-[30px] font-bold !text-white">
-                                                - {testimonial.name}
-                                            </p>
-                                        </div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </div>
-                    </div>
-                    <div className="feedback-pagination flex mt-5 justify-center"></div>
-                </div>
-            </section>
-
-            <style jsx global>{`
-                /* --- OUR DOCTORS SWIPER PAGINATION ONLY --- */
-                .feedback-pagination .swiper-pagination-bullet {
-                    background-color: #fff;
-                    opacity: 1;
-                    width: 10px;
-                    height: 10px;
-                    margin: 0 6px !important;
-                    transition: all 0.3s ease;
-                }
-                .feedback-pagination .swiper-pagination-bullet-active {
-                    background-color: #005d98 !important; /* your brand green */
-                    width: 12px;
-                    height: 12px;
-                    transform: scale(1.1);
-                }
-                `}</style>
 
             {/* Your Latest Blog Component Here */}
 
-            {/* <style jsx global>{`
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: white;
-        //   background: rgba(0, 0, 0, 0.3);
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-        }
-        
-        .swiper-button-next:after,
-        .swiper-button-prev:after {
-          font-size: 20px;
-        }
+            {homeData?.testimonial_videos && <FeedbackVideoSlider videos={homeData.testimonial_videos} />}
 
-        .swiper-pagination-bullet {
-          background: white;
-          opacity: 0.5;
-        }
-        
-        .swiper-pagination-bullet-active {
-          background: #fbbf24;
-          opacity: 1;
-        }
-
-        .doctors-swiper .swiper-button-next,
-        .doctors-swiper .swiper-button-prev {
-          color: #1e3a8a;
-          background: white;
-        }
-
-        .doctors-swiper .swiper-pagination-bullet {
-          background: #1e3a8a;
-        }
-
-        .doctors-swiper .swiper-pagination-bullet-active {
-          background: #22c55e;
-        }
-      `}</style> */}
-
-      {homeData?.latest_blogs && <BlogSection blogs = {homeData.latest_blogs} />}
+            {homeData?.latest_blogs && <BlogSection blogs={homeData.latest_blogs} />}
         </main>
     );
 }

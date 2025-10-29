@@ -29,7 +29,7 @@ export default function HeroSection() {
     const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat mt-[-120px] overflow-hidden group">
+        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[0px] overflow-hidden group">
             {/* <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 autoplay={{ delay: 5000 }}
@@ -78,7 +78,7 @@ export default function HeroSection() {
                         swiper.params.navigation.nextEl = nextRef.current;
                     }
                 }}
-                className="w-full h-[570px]"
+                className="w-full h-[160px] md:h-[570px]"
 
             >
                 {heroSlides.map((slide, index) => (

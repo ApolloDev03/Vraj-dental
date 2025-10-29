@@ -28,7 +28,7 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   env: {
-    NEXT_PUBLIC_API_URL: "https://vrajdentalclinic.com/new_vraj/api",
+    NEXT_PUBLIC_API_URL: "https://vrajadmin.vrajdentalclinic.com/api",
   },
 };
 

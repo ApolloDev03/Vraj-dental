@@ -9,10 +9,13 @@ import { FaLocationCrosshairs } from 'react-icons/fa6';
 import { MdAccessTime } from 'react-icons/md';
 import axios from 'axios';
 import { apiUrl } from '@/config';
+import { usePathname } from "next/navigation";
 const Header: React.FC = () => {
+    const pathname = usePathname();
     const [galleryOpen, setGalleryOpen] = useState(false);
     const [categories, setCategories] = useState<{ id: number; categoryName: string; slug: string }[]>([]);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);
 
 
     // const services = [
@@ -37,6 +40,22 @@ const Header: React.FC = () => {
         };
         fetchCategories()
     }, [])
+
+    // 👇 Handle scroll for sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+    const isActive = (path: string) =>
+        pathname === path ? "!text-[#005d98] font-semibold" : "text-gray-700";
 
     return (
         <header className="bg-white shadow">
@@ -91,37 +110,46 @@ const Header: React.FC = () => {
 
             </div>
 
+            <div
+        className={`transition-all duration-300 bg-white z-50 w-full ${
+          isSticky ? "fixed top-0 left-0 shadow-md animate-slideDown" : "relative"
+        }`}
+      >
             <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-6">
                 {/* Main Nav */}
                 {/* Logo and Brand */}
                 <div className="flex items-center space-x-3">
                     <Link
-                    href="/"
+                        href="/"
                     >
-                    <Image
-                        src={logo}
-                        alt="Mubryx Logo"
-                        width={200}
-                        height={100}
-                        className="rounded-full"
-                    />
+                        <Image
+                            src={logo}
+                            alt="Mubryx Logo"
+                            width={200}
+                            height={100}
+                            className="rounded-full"
+                        />
                     </Link>
 
                 </div>
                 {/* Navigation */}
 
-                <nav className="space-x-8 block  text-gray-700">
-                    <Link href="/" className="hover:text-[#005d98]">HOME</Link>
-                    <Link href="/about" className="hover:text-[#005d98]">ABOUT</Link>
-                    <Link href="/branches" className="hover:text-[#005d98]">OUR BRANCHES</Link>
+                <nav className="space-x-8 block font-semibold  !text-black">
+                    <Link href="/" className={`${isActive("/")} hover:text-[#005d98]`}>HOME</Link>
+                    <Link href="/about" className={`${isActive("/about")} hover:text-[#005d98]`}>ABOUT</Link>
+                    <Link href="/branches" className={`${isActive("/branches")} hover:text-[#005d98]`}>OUR BRANCHES</Link>
 
                     {/* 🔹 OUR SERVICES Dropdown */}
                     <div className="relative inline-block " onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => {
-    // Small delay before closing (smooth UX)
-    setTimeout(() => setIsServicesOpen(false), 2000);
-  }}>
+                        // Small delay before closing (smooth UX)
+                        setTimeout(() => setIsServicesOpen(false), 2000);
+                    }}>
                         <span
-                            className="inline-flex items-center gap-1 cursor-pointer text-black select-none"
+                            className={`inline-flex items-center gap-1 cursor-pointer text-black select-none
+                            ${pathname.startsWith("/services")
+                                    ? "text-[#005d98] font-semibold"
+                                    : "text-black"
+                                }`}
                             aria-haspopup="menu"
                         >
                             OUR SERVICES
@@ -140,22 +168,25 @@ const Header: React.FC = () => {
                                 <div
                                     role="menu"
                                     onMouseEnter={() => setIsServicesOpen(true)} // keep open while hovering
-    onMouseLeave={() => setIsServicesOpen(false)} // close after leaving
+                                    onMouseLeave={() => setIsServicesOpen(false)} // close after leaving
                                     className={`absolute left-0 top-full z-20 mt-2 min-w-[330px] rounded-md border border-gray-200 bg-white shadow-lg origin-top transition-all duration-300 ease-out
       ${isServicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
     `}
                                 >
                                     <div className="py-2">
-                                        { categories.length > 0 ? (
-                                            categories.map((service:any) => (
+                                        {categories.length > 0 ? (
+                                            categories.map((service: any) => (
                                                 <Link
-                                                key={service.id}
-                                                href={`/services/${service.slug}`}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
-                                                role="menuitem"
-                                            >
-                                                {service.categoryName}
-                                            </Link>
+                                                    key={service.id}
+                                                    href={`/services/${service.slug}`}
+                                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${pathname === `/services/${service.slug}`
+                                                        ? "text-[#005d98] font-semibold"
+                                                        : "text-gray-700"
+                                                        }`}
+                                                    role="menuitem"
+                                                >
+                                                    {service.categoryName}
+                                                </Link>
                                             ))
                                         ) : (
                                             <div className="px-4 py-2 text-sm text-gray-400">Loading...</div>
@@ -172,7 +203,10 @@ const Header: React.FC = () => {
                     <div className="relative inline-block group">
                         {/* Non-clickable parent trigger */}
                         <span
-                            className="inline-flex items-center gap-1 cursor-pointer  text-black select-none"
+                            className={`inline-flex items-center gap-1 cursor-pointer select-none ${pathname.startsWith("/gallery") || pathname === "/video-gallery"
+                                ? "text-[#005d98] font-semibold"
+                                : "text-black"
+                                }`}
                             aria-haspopup="menu"
                             aria-expanded="false"
                             aria-controls="gallery-menu"
@@ -200,14 +234,21 @@ const Header: React.FC = () => {
                                 <Link
                                     href="/gallery"
                                     role="menuitem"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
+                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${pathname === "/gallery"
+                                            ? "text-[#005d98] font-semibold"
+                                            : "text-gray-700"
+                                        }`}
                                 >
                                     Gallery
                                 </Link>
                                 <Link
                                     href="/video-gallery"
                                     role="menuitem"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#005d98]"
+                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${
+                    pathname === "/video-gallery"
+                      ? "text-[#005d98] font-semibold"
+                      : "text-gray-700"
+                  }`}
                                 >
                                     Video Gallery
                                 </Link>
@@ -215,12 +256,12 @@ const Header: React.FC = () => {
                         </div>
                     </div>
 
-                    <Link href="/blog" className="hover:text-[#005d98]">BLOG</Link>
-                    <Link href="/testimonial" className="hover:text-[#005d98]">TESTIMONIAL</Link>
-                    <Link href="/contact" className="hover:text-[#005d98]">CONTACT</Link>
+                    <Link href="/blog" className={`${isActive("/blog")} hover:text-[#005d98]`}>BLOG</Link>
+                    <Link href="/testimonial" className={`${isActive("/testimonial")} hover:text-[#005d98]`}>TESTIMONIAL</Link>
+                    <Link href="/contact" className={`${isActive("/contact")} hover:text-[#005d98]`}>CONTACT</Link>
                 </nav>
             </div>
-
+                  </div>
 
 
 
@@ -229,7 +270,7 @@ const Header: React.FC = () => {
             >
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4">
                     {/* Location */}
-                    <div className="flex items-start px-4 py-3 border-r border-white md:border-r md:border-white">
+                    <div className="flex items-start px-4 py-3 border-r border-b md:border-b-0 border-white md:border-r md:border-white">
                         <FaLocationCrosshairs className="text-3xl flex-shrink-0 text-white" />
                         <div className="ml-3 flex-1 min-w-0">
                             <div className="font-medium whitespace-normal break-words">
@@ -248,7 +289,7 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* Phone */}
-                    <div className="flex items-start px-4 py-3 border-r border-white  flex-1 min-w-0 text-white">
+                    <div className="flex items-start px-4 py-3 border-r border-b md:border-b-0 border-white  flex-1 min-w-0 text-white">
                         <FaPhoneAlt className="text-3xl flex-shrink-0" />
                         <div className="ml-3 min-w-0">
                             <div className="font-medium ">Call us</div>
@@ -256,7 +297,7 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                     {/* Email */}
-                    <div className="flex items-start px-4 py-3 border-r border-white  flex-1 min-w-0 text-white">
+                    <div className="flex items-start px-4 py-3 border-r border-b md:border-b-0 border-white  flex-1 min-w-0 text-white">
                         <FaRegPaperPlane className="text-3xl flex-shrink-0" />
                         <div className="ml-3 min-w-0">
                             <div className="font-medium">Email us</div>
@@ -274,7 +315,7 @@ const Header: React.FC = () => {
 
                     </div>
                     {/* Hours */}
-                    <div className="flex items-start px-4 py-3 border-r border-white flex-1 min-w-0 text-white">
+                    <div className="flex items-start px-4 py-3 border-r border-b md:border-b-0 border-white flex-1 min-w-0 text-white">
                         <MdAccessTime className="text-3xl flex-shrink-0" />
                         <div className="ml-3 flex-1 min-w-0">
                             <div className="font-medium  whitespace-normal break-words">
