@@ -62,13 +62,22 @@ export default function AppointmentSection() {
                 }
             );
             if (response.data.success) {
-                setMessage("Inquiry submitted successfully!");
                 setForm({ name: "", mobile: "", clinic: "" });
+                setMessage("Inquiry submitted successfully!");
+                setTimeout(() => {
+                    setMessage("");
+                },4000)
             } else {
                 setMessage("Submission failed, please try again.");
+                setTimeout(() => {
+                    setMessage("");
+                },4000)
             }
         } catch {
             setMessage("Network error, please try again.");
+            setTimeout(() => {
+                    setMessage("");
+                },4000)
         }
         setLoading(false);
     };

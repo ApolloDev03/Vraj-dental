@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadcrumbHero from "../component/breadcrumb";
-import img1 from '../../asserts/1680696890.png';
-import img2 from '../../asserts/1684924885.jpg'
 import axios from "axios";
 import { apiUrl } from "@/config";
 import { useEffect, useState } from "react";
@@ -18,21 +16,6 @@ type GalleryItem = {
   imageTitle: string;
 };
 
-// Demo data: replace with your CMS/API
-// const ALL_ITEMS: GalleryItem[] = [
-//   { id: "mold-wall", src: img1.src, alt: "Mold on white wall near socket", width: 1200, height: 900, caption: "Cavities from mold" },
-//   { id: "foods-damage", src: img2.src, alt: "Foods that damage teeth infographic", width: 1200, height: 1200, caption: "Foods that damage teeth" },
-//   { id: "child-caries", src: "/images/gallery/child-caries.jpg", alt: "Child showing severe dental caries", width: 1200, height: 900, caption: "Severe caries" },
-//   { id: "tooth-shedding", src: "/images/gallery/tooth-shedding.png", alt: "Baby tooth shedding chart", width: 1200, height: 1200, caption: "Shedding chart" },
-//   { id: "denture-pain", src: "/images/gallery/denture-pain.jpg", alt: "Dentures with gum irritation model", width: 1200, height: 900, caption: "Denture issues" },
-//   { id: "hand-floss", src: "/images/gallery/hand-floss.png", alt: "Hands showing correct floss technique", width: 1200, height: 900, caption: "Manual flossing" },
-//   { id: "floss-pick", src: "/images/gallery/floss-pick.jpg", alt: "Woman using floss pick near mirror", width: 1200, height: 900, caption: "Floss picks" },
-//   { id: "close-floss", src: "/images/gallery/close-floss.jpg", alt: "Closeup flossing between teeth", width: 1200, height: 900, caption: "Interdental care" },
-//   { id: "probe", src: "/images/gallery/probe.png", alt: "Dental periodontal probe tool", width: 1200, height: 900, caption: "Perio probe" },
-//   { id: "gum-steps-1", src: "/images/gallery/gum-steps-1.png", alt: "Gum treatment step diagram", width: 1200, height: 900, caption: "Gum steps" },
-//   { id: "wisdom-problems", src: "/images/gallery/wisdom-problems.png", alt: "Wisdom teeth problems infographic", width: 1200, height: 1200, caption: "Wisdom teeth" },
-//   // add more as needed
-// ];
 
 const PAGE_SIZE = 27;
 
