@@ -15,6 +15,8 @@ import BreadcrumbHero from "./component/breadcrumb";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/config";
+import Head from "next/head";
+import { log } from "console";
 
 type OurFact = {
   title: string;
@@ -50,12 +52,19 @@ type Service = {
   slug: string;
 };
 
+type MetaData = {
+  metaTitle: string;
+  metaKeyword: string;
+  metaDescription: string;
+}
+
 type HomeData = {
   our_facts: OurFact[];
   testimonial_videos: TestimonialVideos[];
   our_branches: Branch[];
   latest_blogs: Blog[];
   our_services: Service[];
+  meta_data: MetaData;
 }
 
 export default function Home() {
@@ -83,8 +92,26 @@ export default function Home() {
 
   if (loading) return <div>Loading...</div>;
 
+
   return (
     <div className="overflow-hidden">
+      <Head>
+        <title>{homeData?.meta_data?.metaTitle || null}</title>
+        {homeData?.meta_data?.metaDescription && (
+          <meta 
+            name="description" 
+            content={homeData.meta_data.metaDescription} 
+          />
+        )}
+        {homeData?.meta_data?.metaKeyword && (
+          <meta 
+            name="keywords" 
+            content={homeData.meta_data.metaKeyword} 
+          />
+        )}
+        
+      </Head>
+
       {/* <VideoPopup /> */}
       <HeroSection />
       <AppointmentSection />

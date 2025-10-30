@@ -54,6 +54,7 @@ export default function BlogSection({blogs}:any) {
           return (
             <BlogCard
               key={index}
+              slug={blog.urlParameter}
               href={`/blog/${blog.urlParameter}`}
               imageSrc={imageUrl}
               imageAlt={blog.blogTitle}

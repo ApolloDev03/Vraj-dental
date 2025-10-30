@@ -5,6 +5,7 @@ import axios from "axios";
 import { apiUrl } from '@/config';
 import BlogCard from '../component/blogCard';
 import BreadcrumbHero from '../component/breadcrumb';
+import Head from 'next/head';
 
 interface Blog {
   id: number;
@@ -23,10 +24,24 @@ interface Blog {
   created_at?: string;
 }
 
+interface MetaData {
+  metaTitle: string;
+  metaKeyword: string;
+  metaDescription: string;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  data: Blog[];
+  meta_data: MetaData;
+}
+
 export default function BlogSection() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, SetLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+   const [metaData, setMetaData] = useState<MetaData | null>(null);
 
   // ✅ Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +53,9 @@ export default function BlogSection() {
         const response = await axios.post(`${apiUrl}/blogs`);
         if (response.data?.success === true && Array.isArray(response.data.data)) {
           setBlogs(response.data.data);
+          setMetaData(response.data.meta_data);
+          // console.log(response.data.meta_data,"metadataaaaaaaa");
+          
         } else {
           setError("No Blog Found.");
         }
@@ -64,8 +82,21 @@ export default function BlogSection() {
     }
   };
 
+
   return (
     <div>
+      <Head>
+        <title>{metaData?.metaTitle }</title>
+        <meta 
+          name="description" 
+          content={metaData?.metaDescription } 
+        />
+        <meta 
+          name="keywords" 
+          content={metaData?.metaKeyword} 
+        />
+      </Head>
+
       <BreadcrumbHero
         title="BLOG"
         crumbs={[{ label: "Home", href: "/" }, { label: "BLOG" }]}

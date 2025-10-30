@@ -239,9 +239,9 @@ export default function AboutUsPage() {
                             </p>
 
                             {/* Features Grid */}
-                            <div className="grid grid-cols-2 gap-8 pt-4 group">
+                            <div className="grid grid-cols-2 gap-8 pt-4 ">
                                 {features.map((feature, index) => (
-                                    <div key={index} className="flex flex-col items-start space-y-3">
+                                    <div key={index} className="flex flex-col items-start space-y-3 group">
                                         <div className="w-[50px] h-[50px] group-hover:bg-[#005d98] group-hover:!text-white bg-white rounded-full flex items-center justify-center text-[#005d98] text-2xl shadow-lg">
                                             {feature.icon}
                                         </div>
