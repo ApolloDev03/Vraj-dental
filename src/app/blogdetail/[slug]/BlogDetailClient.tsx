@@ -10,6 +10,8 @@ import img1 from '@/asserts/1680696890.png'
 import Link from "next/link";
 import { apiUrl } from "@/config";
 import axios from "axios";
+import Head from "next/head";
+
 
 type BlogDetail = {
     id: number;
@@ -18,6 +20,9 @@ type BlogDetail = {
     blogImage: string;
     publishDate: string;
     tags: string;
+    metaTitle?: string;
+    metaKeyword?: string;
+    metaDescription?: string;
 };
 
 type LatestPost = {
@@ -92,7 +97,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
     };
 
     // console.log(blog?.id,"blogidcomment");
-    
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -127,7 +132,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
             setTimeout(() => {
                 setMessage(null);
-            },5000)
+            }, 5000)
         }
     };
 
@@ -137,84 +142,32 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
     const tags = blog.tags ? blog.tags.split(",") : [];
 
-
-
-    // useEffect(() => {
-    //     const mockBlog: Blog = {
-    //         id: 1,
-    //         title: "Loose Tooth",
-    //         date: "Apr 05 2023",
-    //         image: img1.src, 
-    //         content: `
-    //   <p>It is quite common for your child to have a loose tooth that isn’t falling out. The urge to just pull it out is also common. However, dentists do not recommend this. Any way of removing the tooth, such as tying a thread and pulling it out, is not advised.</p>
-    //   <p>Here is why you shouldn’t:</p>
-    //   <ol>
-    //     <li>The method does not ensure a sterile environment.</li>
-    //     <li>It is painful and can cause excessive bleeding.</li>
-    //     <li>The tooth is not falling out because it is not ready to fall.</li>
-    //   </ol>
-    //   <p>The process of baby teeth being exchanged for adult teeth is quite simple...</p>
-    //   <ol>
-    //     <li>When the adult tooth is completely developed...</li>
-    //     <li>After sometime the entire baby tooth is absorbed and loosens up.</li>
-    //     <li>The tooth is pushed upwards until only the gums are holding it in place.</li>
-    //     <li>This is when the tooth is ready to fall.</li>
-    //   </ol>
-    //   <p>If the tooth still doesn’t fall, here are the acceptable tricks:</p>
-    //   <ol>
-    //     <li>Have your child eat an apple.</li>
-    //     <li>Brush the tooth to increase its mobility.</li>
-    //   </ol>
-    //   <p>If you have any more questions regarding your child’s teeth, please contact us...</p>
-    //   `,
-    //     };
-    //     setBlog(mockBlog);
-    // }, [slug]);
-
-    // const popularPosts = [
-    //     {
-    //         title: "THE POTENTIAL RISK OF CAVITIES FROM BLACK MOLD",
-    //         date: "Jun 15 2023",
-    //         image: "/images/blog1.jpg",
-    //     },
-    //     {
-    //         title: "HOW DOES SUGAR AFFECTS YOUR TEETH?",
-    //         date: "May 24 2023",
-    //         image: img1.src,
-    //     },
-    //     {
-    //         title: "Partial dentures",
-    //         date: "Mar 23 2023",
-    //         image: "/images/blog3.jpg",
-    //     },
-    //     {
-    //         title: "DO YOU FLOSS CORRECTLY?",
-    //         date: "Mar 16 2023",
-    //         image: "/images/blog4.jpg",
-    //     },
-    // ];
-
-    // const services = [
-    //     "Smile Design",
-    //     "Dental Implants",
-    //     "Gum Surgery",
-    //     "Crown and Bridges",
-    //     "Root Canal Treatment",
-    //     "Full Mouth Rehabilitation",
-    //     "Orthodontic",
-    //     "Pediatric Dentistry",
-    //     "Teeth Whitening",
-    //     "Cosmetic Dentistry",
-    //     "Laser Dentistry",
-    //     "Denture",
-    // ];
-
-    // const tags = ["#babyteeth", "#adulttooth"];
-
-    // if (!blog) return <div className="text-center py-20">Loading...</div>;
+    
+    
 
     return (
         <section>
+            <Head>
+                <title>{blog.metaTitle || null}</title>
+                {
+                    blog.metaDescription && (
+                        <meta
+                            name="description"
+                            content={blog.metaDescription}
+                        />
+                    )
+                }
+                
+                {
+                    blog.metaKeyword && (
+                        <meta
+                    name="keywords"
+                    content={blog.metaKeyword}
+                />
+                    )
+                }
+            </Head>
+
             <BreadcrumbHero
                 title="BLOD DETAILS"
                 crumbs={[{ label: "Home", href: "/" }, { label: "Blog Details" }]}
@@ -266,7 +219,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                                 />
                                 <input
                                     type="email"
-                                     name="email"
+                                    name="email"
                                     placeholder="Email *"
                                     value={formData.email}
                                     onChange={handleChange}
@@ -275,7 +228,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                                 />
                             </div>
                             <textarea
-                            name="comment"
+                                name="comment"
                                 placeholder="Comment"
                                 value={formData.comment}
                                 onChange={handleChange}
@@ -285,23 +238,21 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className={`${
-                  submitting ? "opacity-60 cursor-not-allowed" : "hover:bg-[#b3c83f]"
-                } bg-[#005d98] text-white font-medium px-[35px] py-[12px] rounded-md transition-colors`}
+                                className={`${submitting ? "opacity-60 cursor-not-allowed" : "hover:bg-[#b3c83f]"
+                                    } bg-[#005d98] text-white font-medium px-[35px] py-[12px] rounded-md transition-colors`}
                             >
                                 {submitting ? "Posting..." : "POST COMMENT"}
                             </button>
                             {message && (
-                <p
-                  className={`mt-3 text-sm ${
-                    message.includes("successfully")
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {message}
-                </p>
-              )}
+                                <p
+                                    className={`mt-3 text-sm ${message.includes("successfully")
+                                            ? "text-green-600"
+                                            : "text-red-600"
+                                        }`}
+                                >
+                                    {message}
+                                </p>
+                            )}
                         </form>
                     </div>
                 </div>
@@ -314,24 +265,24 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                         <ul className="space-y-5">
                             {latest.map((post) => (
                                 <li key={post.id} className="flex gap-3 items-start">
-                                    <Link 
-                                    href={`${post.urlParameter}`}
-                                    className="flex gap-3 items-start">
-                                    <div className="relative w-16 h-16 flex-shrink-0">
-                                        <Image
-                                            src={post.blogImage}
-                                            alt={post.blogTitle}
-                                            fill
-                                            className="object-cover rounded-md"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col justify-center">
-                                        <span className="text-xs text-gray-500">{new Date(post.publishDate).toDateString()}</span>
+                                    <Link
+                                        href={`${post.urlParameter}`}
+                                        className="flex gap-3 items-start">
+                                        <div className="relative w-16 h-16 flex-shrink-0">
+                                            <Image
+                                                src={post.blogImage}
+                                                alt={post.blogTitle}
+                                                fill
+                                                className="object-cover rounded-md"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col justify-center">
+                                            <span className="text-xs text-gray-500">{new Date(post.publishDate).toDateString()}</span>
 
-                                        <p className="text-[16px] font-medium !text-black hover:!text-[#005d98]  cursor-pointer leading-snug">
-                                            {post.blogTitle}
-                                        </p>
-                                    </div>
+                                            <p className="text-[16px] font-medium !text-black hover:!text-[#005d98]  cursor-pointer leading-snug">
+                                                {post.blogTitle}
+                                            </p>
+                                        </div>
                                     </Link>
                                 </li>
                             ))}

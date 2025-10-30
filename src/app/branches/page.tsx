@@ -1,4 +1,4 @@
-// app/our-branches/sections/BranchesMainSection.tsx
+
 'use client';
 import { useEffect, useState } from 'react';
 import axios from "axios"
@@ -23,82 +23,7 @@ type CityGroup = {
     branches: Branch[];
 };
 
-// const groups: CityGroup[] = [
-//     {
-//         city: 'Vadodara',
-//         branches: [
-//             {
-//                 title: 'VRAJ GROUP OF DENTAL CLINICS AJWA ROAD BRANCH',
-//                 address:
-//                     'FF, DIVYA plaza complex, Above Jigar provision store, Besides Atul bakery, Vadodara, Gujarat.',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'VRAJ DENTAL CLINIC IN VADODARA-HARNI ROAD',
-//                 address:
-//                     '18/GF, Red Coral, Opp Gada Circle, Harni Road, Vadodara, Gujarat',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'VRAJ DENTAL CLINIC IN VADODARA-SAMA-SAVLI',
-//                 address:
-//                     '2nd Floor, Shukan Hub, Opp Shivam Party Plot, Sama–Savli Main Road, Vadodara, Gujarat.',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'VRAJ DENTAL CLINIC & IMPLANT CENTER RAOPURA',
-//                 address:
-//                     '1st Floor, Ashok House 2, Inside Santhavasahat Gate, Raopura, Vadodara, Gujarat.',
-//                 phone: '+91 99049 63090',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'Vraj Group of Dental Clinics - Vasna Bhayli',
-//                 address:
-//                     'GF/6 AKSHAR pavilion, Road 4, Vasna–Bhayli Main Rd, Opp. Rosedale Heights, Vadodara 391410',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'Vraj Group of Dental Clinics - SUN PHARMA',
-//                 address:
-//                     'TOWER-C/FF-SHOP NO, 05 SUNRISE HEIGHTS, VADODARA, Gujarat 390012',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'Vraj Group of Dental Clinics - Manjalpur',
-//                 address:
-//                     '2/ 2nd floor, Brookfields Vinayaa Hub, near tulshidham char rasta, Manjalpur, Vadodara 390011',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//             {
-//                 title: 'Vraj Group of Dental Clinic - Gotri - Sevasi Branch',
-//                 address:
-//                     '149 phase 2, prince villa, BEHIND SHIVAY HOSPITAL, behind collabera, gotri sevasi road, Vadodara 390021',
-//                 phone: '+91 94277 84433',
-//                 mapHref: '#',
-//             },
-//         ],
-//     },
-//     {
-//         city: 'Surat',
-//         branches: [
-//             {
-//                 title: 'VRAJ GROUP OF DENTAL CLINICS Ugat Branch Surat',
-//                 address: '88 / GF, Raj Harmony, Palanpur, Surat.',
-//                 phone: '+91 96240 68069',
-//                 mapHref: '#',
-//             },
-//         ],
-//     },
-// ];
 
-// Utility function to group branches by city
 
 function groupByCity(branches: Branch[]): CityGroup[] {
     const grouped: Record<string, Branch[]> = {}

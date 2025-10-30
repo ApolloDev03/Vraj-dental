@@ -130,7 +130,7 @@ export default function HeroWithWhyChoose() {
           </div>
 
           {/* Right side - Swiper */}
-          <div className="relative h-full min-h-[308px] md:min-h-[600px]">
+          <div className="relative h-full min-h-[308px] md:min-h-[600px] group">
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               spaceBetween={0}
@@ -138,12 +138,12 @@ export default function HeroWithWhyChoose() {
               navigation
               pagination={{ clickable: true }}
               onBeforeInit={(swiper) => {
-  const prev = swiper.el.querySelector('.swiper-button-prev') as HTMLElement | null;
-  const next = swiper.el.querySelector('.swiper-button-next') as HTMLElement | null;
+                const prev = swiper.el.querySelector('.swiper-button-prev') as HTMLElement | null;
+                const next = swiper.el.querySelector('.swiper-button-next') as HTMLElement | null;
 
-  if (prev) prev.style.color = 'white';
-  if (next) next.style.color = 'white';
-}}
+                if (prev) prev.style.color = 'white';
+                if (next) next.style.color = 'white';
+              }}
 
               // autoplay={{
               //   delay: 3000,
@@ -183,6 +183,48 @@ export default function HeroWithWhyChoose() {
                 </div>
               </SwiperSlide>
             </Swiper>
+            {/* Custom styles for Swiper buttons */}
+            <style jsx global>{`
+    /* ✅ Hide buttons by default */
+    .why-choose-swiper .swiper-button-prev,
+    .why-choose-swiper .swiper-button-next {
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    /* ✅ Show on hover over parent */
+    .group:hover .why-choose-swiper .swiper-button-prev,
+    .group:hover .why-choose-swiper .swiper-button-next {
+      opacity: 1;
+    }
+
+    /* ✅ Button design */
+    .why-choose-swiper .swiper-button-prev,
+    .why-choose-swiper .swiper-button-next {
+      color: white;
+      // background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ✅ Hover color change */
+    .why-choose-swiper .swiper-button-prev:hover,
+    .why-choose-swiper .swiper-button-next:hover {
+      // background-color: #ffffff;
+      color: #005d98 !important;
+    }
+
+    /* ✅ Adjust arrow size */
+    .why-choose-swiper .swiper-button-prev::after,
+    .why-choose-swiper .swiper-button-next::after {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  `}</style>
           </div>
         </div>
       </div>
