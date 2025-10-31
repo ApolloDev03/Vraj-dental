@@ -1,8 +1,8 @@
 "use client";
 
-import vmc from "@/asserts/vmc-logo.png"
-import hwb from "@/asserts/hwb-logo.png"
-import cghs from "@/asserts/cghs-logo.png"
+import vmc from "@/asserts/vmc-logo.webp"
+import hwb from "@/asserts/hwb-logo.webp"
+import cghs from "@/asserts/cghs-logo.webp"
 
 type Centre = { id: number; img: string; alt: string };
 

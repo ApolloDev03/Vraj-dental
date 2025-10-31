@@ -10,6 +10,7 @@ import { MdAccessTime } from 'react-icons/md';
 import axios from 'axios';
 import { apiUrl } from '@/config';
 import { usePathname } from "next/navigation";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 const Header: React.FC = () => {
     const pathname = usePathname();
     const [galleryOpen, setGalleryOpen] = useState(false);
@@ -42,17 +43,17 @@ const Header: React.FC = () => {
     }, [])
 
     // 👇 Handle scroll for sticky header
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 150) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 150) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const isActive = (path: string) =>
         pathname === path ? "!text-[#005d98] font-semibold" : "text-gray-700";
@@ -77,6 +78,8 @@ const Header: React.FC = () => {
                             aria-label="Facebook"
                             className='bg-[#FFFFFF33] p-2 rounded-full transition-all hover:bg-transparent hover:-translate-y-1 duration-500'
                             style={{ display: 'inline-flex', alignItems: 'center', color: 'white' }}
+                            target='_blank'
+                            rel='noopener noreferrer'
                         >
                             <FaFacebookF />
                         </Link>
@@ -85,6 +88,8 @@ const Header: React.FC = () => {
                             aria-label="Twitter"
                             className='bg-[#FFFFFF33] p-2 rounded-full transition-all hover:bg-transparent hover:-translate-y-1 duration-500'
                             style={{ display: 'inline-flex', alignItems: 'center', color: "white" }}
+                            target='_blank'
+                            rel='noopener noreferrer'
                         >
                             <FaTwitter />
                         </Link>
@@ -93,6 +98,8 @@ const Header: React.FC = () => {
                             aria-label="LinkedIn"
                             className='bg-[#FFFFFF33] p-2 rounded-full transition-all hover:bg-transparent hover:-translate-y-1 duration-500'
                             style={{ display: 'inline-flex', alignItems: 'center', color: "white" }}
+                            target='_blank'
+                            rel='noopener noreferrer'
                         >
                             <FaLinkedinIn />
                         </Link>
@@ -101,6 +108,8 @@ const Header: React.FC = () => {
                             aria-label="Instagram"
                             className='bg-[#FFFFFF33] p-2 rounded-full transition-all hover:bg-transparent hover:-translate-y-1 duration-500'
                             style={{ display: 'inline-flex', alignItems: 'center', color: "white" }}
+                            target='_blank'
+                            rel='noopener noreferrer'
                         >
                             <FaInstagram />
                         </Link>
@@ -111,14 +120,13 @@ const Header: React.FC = () => {
             </div>
 
             <div
-        className={`transition-all duration-300 bg-white z-50 w-full ${
-          isSticky ? "fixed top-0 left-0 shadow-md animate-slideDown" : "relative"
-        }`}
-      >
-            <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-6">
-                {/* Main Nav */}
-                {/* Logo and Brand */}
-                <div className="flex items-center space-x-3">
+                className={`transition-all duration-300 bg-white z-50 w-full ${isSticky ? "fixed top-0 left-0 shadow-md animate-slideDown" : "relative"
+                    }`}
+            >
+                <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-6">
+                    {/* Main Nav */}
+                    {/* Logo and Brand */}
+                    {/* <div className="flex items-center space-x-3"> */}
                     <Link
                         href="/"
                     >
@@ -131,137 +139,149 @@ const Header: React.FC = () => {
                         />
                     </Link>
 
-                </div>
-                {/* Navigation */}
 
-                <nav className="space-x-8 block font-semibold  !text-black">
-                    <Link href="/" className={`${isActive("/")} hover:text-[#005d98]`}>HOME</Link>
-                    <Link href="/about" className={`${isActive("/about")} hover:text-[#005d98]`}>ABOUT</Link>
-                    <Link href="/branches" className={`${isActive("/branches")} hover:text-[#005d98]`}>OUR BRANCHES</Link>
 
-                    {/* 🔹 OUR SERVICES Dropdown */}
-                    <div className="relative inline-block " onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => {
-                        // Small delay before closing (smooth UX)
-                        setTimeout(() => setIsServicesOpen(false), 2000);
-                    }}>
-                        <span
-                            className={`inline-flex items-center gap-1 cursor-pointer text-black select-none
+                    {/* </div> */}
+                    {/* Navigation */}
+
+                    <nav className="space-x-8 block font-semibold  !text-black">
+                        <Link href="/" className={`${isActive("/")} hover:text-[#005d98]`}>HOME</Link>
+                        <Link href="/about" className={`${isActive("/about")} hover:text-[#005d98]`}>ABOUT</Link>
+                        <Link href="/branches" className={`${isActive("/branches")} hover:text-[#005d98]`}>OUR BRANCHES</Link>
+
+                        {/* 🔹 OUR SERVICES Dropdown */}
+                        <div className="relative inline-block " onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => {
+                            // Small delay before closing (smooth UX)
+                            setTimeout(() => setIsServicesOpen(false), 2000);
+                        }}>
+                            <span
+                                className={`inline-flex items-center gap-1 cursor-pointer text-black select-none
                             ${pathname.startsWith("/services")
-                                    ? "text-[#005d98] font-semibold"
-                                    : "text-black"
-                                }`}
-                            aria-haspopup="menu"
-                        >
-                            OUR SERVICES
-                            <svg
-                                className={`h-3.5 w-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
+                                        ? "text-[#005d98] font-semibold"
+                                        : "text-black"
+                                    }`}
+                                aria-haspopup="menu"
                             >
-                                <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
-                            </svg>
-                        </span>
+                                OUR SERVICES
+                                <svg
+                                    className={`h-3.5 w-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
+                                </svg>
+                            </span>
 
-                        {/* Dropdown Panel */}
-                        {
-                            isServicesOpen && (
-                                <div
-                                    role="menu"
-                                    onMouseEnter={() => setIsServicesOpen(true)} // keep open while hovering
-                                    onMouseLeave={() => setIsServicesOpen(false)} // close after leaving
-                                    className={`absolute left-0 top-full z-20 mt-2 min-w-[330px] rounded-md border border-gray-200 bg-white shadow-lg origin-top transition-all duration-300 ease-out
+                            {/* Dropdown Panel */}
+                            {
+                                isServicesOpen && (
+                                    <div
+                                        role="menu"
+                                        onMouseEnter={() => setIsServicesOpen(true)} // keep open while hovering
+                                        onMouseLeave={() => setIsServicesOpen(false)} // close after leaving
+                                        className={`absolute left-0 top-full z-20 mt-2 min-w-[330px] rounded-md border border-gray-200 bg-white shadow-lg origin-top transition-all duration-300 ease-out
       ${isServicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
     `}
+                                    >
+                                        <div className="py-2">
+                                            {categories.length > 0 ? (
+                                                categories.map((service: any) => (
+                                                    <Link
+                                                        key={service.id}
+                                                        href={`/services/${service.slug}`}
+                                                        className={`block px-4 py-2 text-[16px] !text-[#130947] font-semibold hover:bg-[#005d98] hover:!text-[#fff]  border-b border-dashed border-[#e5e5e5] ${pathname === `/services/${service.slug}`
+                                                            ? "text-[#005d98] font-semibold"
+                                                            : "text-gray-700"
+                                                            }`}
+                                                        role="menuitem"
+                                                    >
+                                                        {service.categoryName}
+                                                    </Link>
+                                                ))
+                                            ) : (
+                                                <div className="px-4 py-2 text-sm text-gray-400">Loading...</div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )
+                            }
+
+                        </div>
+
+
+                        <div
+                            className="relative inline-block" // Removed 'group'
+                            onMouseEnter={() => setGalleryOpen(true)} // Added
+                            onMouseLeave={() => { // Added
+                                // Small delay before closing (smooth UX)
+                                setTimeout(() => setGalleryOpen(false), 2000);
+                            }}
+                        >
+                            {/* Non-clickable parent trigger */}
+                            <span
+                                className={`inline-flex items-center gap-1 cursor-pointer select-none ${pathname.startsWith("/gallery") || pathname === "/video-gallery"
+                                    ? "text-[#005d98] font-semibold"
+                                    : "text-black"
+                                    }`}
+                                aria-haspopup="menu"
+                                aria-expanded={galleryOpen} // Changed
+                                aria-controls="gallery-menu"
+                            >
+                                GALLERY
+                                <svg
+                                    className={`h-3.5 w-3.5 transition-transform duration-200 ${galleryOpen ? "rotate-180" : ""}`} // Changed
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
                                 >
-                                    <div className="py-2">
-                                        {categories.length > 0 ? (
-                                            categories.map((service: any) => (
-                                                <Link
-                                                    key={service.id}
-                                                    href={`/services/${service.slug}`}
-                                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${pathname === `/services/${service.slug}`
-                                                        ? "text-[#005d98] font-semibold"
-                                                        : "text-gray-700"
-                                                        }`}
-                                                    role="menuitem"
-                                                >
-                                                    {service.categoryName}
-                                                </Link>
-                                            ))
-                                        ) : (
-                                            <div className="px-4 py-2 text-sm text-gray-400">Loading...</div>
-                                        )}
+                                    <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
+                                </svg>
+                            </span>
+
+                            {/* Dropdown panel */}
+                            {galleryOpen && ( // Added conditional render
+                                <div
+                                    id="gallery-menu"
+                                    role="menu"
+                                    onMouseEnter={() => setGalleryOpen(true)} // Added
+                                    onMouseLeave={() => setGalleryOpen(false)} // Added
+                                    className={`absolute left-0 top-full z-20 mt-2 min-w-[200px]  rounded-md border border-gray-200 bg-white shadow-lg origin-top
+                 transition-all duration-300 ease-out // Changed duration from 1000 to 300
+                 ${galleryOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
+                `} // Removed group-hover classes
+                                >
+                                    <div className="">
+                                        <Link
+                                            href="/gallery"
+                                            role="menuitem"
+                                            className={`block px-4 py-2 text-[16px] !text-[#130947] font-semibold hover:bg-[#005d98] hover:!text-[#fff]  border-b border-dashed border-[#e5e5e5] ${pathname === "/gallery"
+                                                ? "!text-[#130947] font-semibold"
+                                                : "text-gray-700"
+                                                }`}
+                                        >
+                                            Gallery
+                                        </Link>
+                                        <Link
+                                            href="/video-gallery"
+                                            role="menuitem"
+                                            className={`block px-4 py-2 text-[16px] !text-[#130947] font-semibold hover:bg-[#005d98] hover:!text-[#fff]  border-b border-dashed border-[#e5e5e5] ${pathname === "/video-gallery"
+                                                ? "text-[#005d98] font-semibold"
+                                                : "text-gray-700"
+                                                }`}
+                                        >
+                                            Video Gallery
+                                        </Link>
                                     </div>
                                 </div>
-                            )
-                        }
-
-                    </div>
-
-
-                    {/* Gallery dropdown: parent not clickable */}
-                    <div className="relative inline-block group">
-                        {/* Non-clickable parent trigger */}
-                        <span
-                            className={`inline-flex items-center gap-1 cursor-pointer select-none ${pathname.startsWith("/gallery") || pathname === "/video-gallery"
-                                ? "text-[#005d98] font-semibold"
-                                : "text-black"
-                                }`}
-                            aria-haspopup="menu"
-                            aria-expanded="false"
-                            aria-controls="gallery-menu"
-                        >
-                            GALLERY
-                            <svg
-                                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.086l3.71-3.856a.75.75 0 111.08 1.04l-4.24 4.41a.75.75 0 01-1.08 0l-4.24-4.41a.75.75 0 01.02-1.06z" />
-                            </svg>
-                        </span>
-
-                        {/* Dropdown panel */}
-                        <div
-                            id="gallery-menu"
-                            role="menu"
-                            className="absolute left-0 top-full z-20 mt-2 min-w-[200px] rounded-md border border-gray-200 bg-white shadow-lg opacity-0 scale-95 origin-top
-                 pointer-events-none transition-all duration-1000 ease-out
-                 group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
-                        >
-                            <div className="py-2">
-                                <Link
-                                    href="/gallery"
-                                    role="menuitem"
-                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${pathname === "/gallery"
-                                            ? "text-[#005d98] font-semibold"
-                                            : "text-gray-700"
-                                        }`}
-                                >
-                                    Gallery
-                                </Link>
-                                <Link
-                                    href="/video-gallery"
-                                    role="menuitem"
-                                    className={`block px-4 py-2 text-sm hover:bg-gray-50 hover:text-[#005d98] ${
-                    pathname === "/video-gallery"
-                      ? "text-[#005d98] font-semibold"
-                      : "text-gray-700"
-                  }`}
-                                >
-                                    Video Gallery
-                                </Link>
-                            </div>
+                            )}
                         </div>
-                    </div>
 
-                    <Link href="/blog" className={`${isActive("/blog")} hover:text-[#005d98]`}>BLOG</Link>
-                    <Link href="/testimonial" className={`${isActive("/testimonial")} hover:text-[#005d98]`}>TESTIMONIAL</Link>
-                    <Link href="/contact" className={`${isActive("/contact")} hover:text-[#005d98]`}>CONTACT</Link>
-                </nav>
+                        <Link href="/blog" className={`${isActive("/blog")} hover:text-[#005d98]`}>BLOG</Link>
+                        <Link href="/testimonial" className={`${isActive("/testimonial")} hover:text-[#005d98]`}>TESTIMONIAL</Link>
+                        <Link href="/contact" className={`${isActive("/contact")} hover:text-[#005d98]`}>CONTACT</Link>
+                    </nav>
+                </div>
             </div>
-                  </div>
 
 
 
@@ -293,7 +313,10 @@ const Header: React.FC = () => {
                         <FaPhoneAlt className="text-3xl flex-shrink-0" />
                         <div className="ml-3 min-w-0">
                             <div className="font-medium ">Call us</div>
-                            <div className="font-semibold truncate md:text-base">+91 6354 734 441</div>
+                            <div className="font-semibold truncate md:text-base">
+                                <a href='tel:+91 6354734441' className='!text-white'>
+                                    +91 6354 734 441</a>
+                            </div>
                         </div>
                     </div>
                     {/* Email */}

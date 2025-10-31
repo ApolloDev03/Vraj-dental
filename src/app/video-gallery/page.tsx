@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import BreadcrumbHero from "../component/breadcrumb"
 import axios from "axios"
 import { apiUrl } from "@/config"
+import Head from "next/head";
 
 // app/components/VideoGallery.tsx
 type Video = {
@@ -11,6 +12,20 @@ type Video = {
     videoUrl: string
     videoTitle: string | null
 }
+
+type MetaData = {
+    metaTitle: string,
+    metaKeyword: string;
+    metaDescription: string;
+}
+
+type ApiResponse = {
+    status: boolean,
+    message: string,
+    data: Video[],
+    meta_data: MetaData
+}
+
 // const videosRow: Video[] = [
 //     { id: "j3b93qcissA" }, 
 //     { id: "dQw4w9WgXcQ" },
@@ -24,13 +39,16 @@ export default function VideoGallery() {
     const [videos, setVideos] = useState<Video[]>([])
     const [loading, SetLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const [metaData, setMetaData] = useState<MetaData | null>(null)
 
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.post(`${apiUrl}/video-gallery`)
+                const response = await axios.post<ApiResponse>(`${apiUrl}/video-gallery`)
                 if (response.data.status && response.data.data) {
-                    setVideos(response.data.data)
+                    setVideos(response.data.data);
+                    setMetaData(response.data.meta_data);
+                    
                 } else {
                     setError("No videos found")
                 }
@@ -43,9 +61,32 @@ export default function VideoGallery() {
         }
         fetchVideos()
     }, [])
+    
 
     return (
         <div>
+                <Head>
+                    <title>{metaData?.metaTitle || null}</title>
+                    {
+                        metaData?.metaDescription && (
+                            <meta
+                                name="description"
+                                content={metaData?.metaDescription}
+                            />
+                        )
+                    }
+
+                    {
+                        metaData?.metaKeyword && (
+                            <meta
+                                name="keywords"
+                                content={metaData?.metaKeyword }
+                            />
+                        )
+                    }
+
+                </Head>
+
             <BreadcrumbHero
                 title="OUR VIDEOS "
                 crumbs={[{ label: "Home", href: "/" }, { label: "Our Videos" }]}

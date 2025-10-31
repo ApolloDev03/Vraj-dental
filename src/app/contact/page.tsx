@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     FaMapMarkerAlt,
     FaPhoneAlt,
@@ -13,13 +13,29 @@ import {
 import BreadcrumbHero from '../component/breadcrumb';
 import { FaScrewdriverWrench, FaPhoneVolume } from "react-icons/fa6";
 import Link from 'next/link';
+import Head from "next/head";
+import axios from 'axios';
+import { apiUrl } from '@/config';
+
 type FormValues = {
     name: string;
     email: string;
-    phone: string;
-    subject: string;
-    message: string;
+    mobile: string;
+    strSubject: string;
+    strMessage: string;
 };
+
+type MetaData = {
+    metaTitle: string;
+    metaKeyword: string;
+    metaDescription: string;
+}
+
+type ContactApiResponse = {
+    success: boolean,
+    message: string,
+    meta_Data: MetaData;
+}
 
 const branches = [
     {
@@ -56,23 +72,84 @@ export default function ContactPage() {
     const [form, setForm] = useState<FormValues>({
         name: '',
         email: '',
-        phone: '',
-        subject: '',
-        message: '',
+        mobile: '',
+        strSubject: '',
+        strMessage: '',
     });
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+    const [metaData, setMetaData] = useState<MetaData | null>(null);
+
+    useEffect(() => {
+        const fetchContactData = async () => {
+            try{
+                const response = await axios.post(`${apiUrl}/contact`);
+                if(response.data.success) {
+                    setMetaData(response.data.meta_data);
+                }
+            } catch (error) {
+                console.error("Error fetching contact SEO data:", error);
+            }
+        }
+        fetchContactData()
+    },[])
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Contact form:', form);
-        setForm({ name: '', email: '', phone: '', subject: '', message: '' });
+        setLoading(true);
+        setMessage(null);
+
+        try{
+            const response = await axios.post(`${apiUrl}/visitor-inquiry-submit`,{
+                 name: form.name,
+                mobile: form.mobile,
+                email: form.email,
+                strSubject: form.strSubject,
+                strMessage: form.strMessage
+            })
+
+            if(response.data.success){
+                setMessage({ type: 'success', text: response.data.message });
+                 setForm({ name: '', email: '', mobile: '', strSubject: '', strMessage: '' });
+            } else {
+                setMessage({ type: 'error', text: 'Failed to submit inquiry. Please try again.' });
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <main className="bg-[#f6f9fc]">
+            <Head>
+                <title>{metaData?.metaTitle || null}</title>
+                {
+                    metaData?.metaDescription && (
+                        <meta
+                            name="description"
+                            content={metaData?.metaDescription}
+                        />
+                    )
+                }
+
+                {
+                    metaData?.metaKeyword && (
+                        <meta
+                            name="keywords"
+                            content={metaData?.metaKeyword }
+                        />
+                    )
+                }
+
+            </Head>
+
             <BreadcrumbHero
                 title="CONTACT"
                 crumbs={[{ label: "Home", href: "/" }, { label: "Contact " }]}
@@ -114,6 +191,12 @@ export default function ContactPage() {
                             Drop us Message for any Query
                         </h2>
 
+                        {message && (
+                            <div className={`mt-4 p-3 rounded ${message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                {message.text}
+                            </div>
+                        )}
+
                         <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <InputWithIcon
@@ -123,6 +206,7 @@ export default function ContactPage() {
                                     placeholder="YOUR NAME"
                                     icon={<FaUser className="h-4 w-4" />}
                                     className='bg-[#f4f4f4]'
+                                    required
                                 />
                                 <InputWithIcon
                                     name="email"
@@ -131,20 +215,23 @@ export default function ContactPage() {
                                     onChange={handleChange}
                                     placeholder="YOUR EMAIL"
                                     icon={<FaRegEnvelope className="h-4 w-4" />}
+                                    required
                                 />
                                 <InputWithIcon
-                                    name="phone"
-                                    value={form.phone}
+                                    name="mobile"
+                                    value={form.mobile}
                                     onChange={handleChange}
                                     placeholder="YOUR PHONE"
                                     icon={<FaPhoneAlt className="h-4 w-4" />}
+                                    required
                                 />
                                 <InputWithIcon
-                                    name="subject"
-                                    value={form.subject}
+                                    name="strSubject"
+                                    value={form.strSubject}
                                     onChange={handleChange}
                                     placeholder="YOUR SUBJECT"
                                     icon={<FaScrewdriverWrench className="h-4 w-4" />}
+                                    required
                                 />
                             </div>
 
@@ -154,12 +241,13 @@ export default function ContactPage() {
                                         <FaRegCommentDots className="h-5 w-5" />
                                     </div>
                                     <textarea
-                                        name="message"
+                                        name="strMessage"
                                         rows={5}
                                         placeholder="YOUR MESSAGE"
-                                        value={form.message}
+                                        value={form.strMessage}
                                         onChange={handleChange}
                                         className="w-full resize-none border-0 p-3 outline-none placeholder:tracking-wider"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -167,9 +255,10 @@ export default function ContactPage() {
                             <div>
                                 <button
                                     type="submit"
+                                    disabled={loading}
                                     className="group inline-flex items-center gap-3 rounded-full bg-[#005d98] hover:bg-[#bace3d] px-4 py-3 text-white transition hover:opacity-90"
                                 >
-                                    SEND MESSAGE
+                                    {loading ? 'SENDING' :'SEND MESSAGE'}
                                     <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#0f63a9] group-hover:text-[#130947] shadow-[0_3px_10px_rgba(0,0,0,0.15)]">
                                         <FaPaperPlane className="h-4 w-4 rotate-5 c z-100" />
                                     </span>

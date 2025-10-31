@@ -7,6 +7,7 @@ import BreadcrumbHero from "../component/breadcrumb";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 type GalleryItem = {
   id: number;
@@ -15,6 +16,19 @@ type GalleryItem = {
   imageAlt: string;
   imageTitle: string;
 };
+
+type MetaData = {
+  metaTitle: string,
+  metaKeyword: string;
+  metaDescription: string;
+}
+
+type ApiResponse = {
+  success: boolean,
+  message: string,
+  data: GalleryItem[],
+  meta_data: MetaData
+}
 
 const PAGE_SIZE = 27;
 
@@ -25,13 +39,15 @@ export default function GalleryClient() {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [metaData, setMetaData] = useState<MetaData | null>(null)
 
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const res = await axios.post(`${apiUrl}/gallery`);
+        const res = await axios.post<ApiResponse>(`${apiUrl}/gallery`);
         if (res.data.success && res.data.data) {
           setItems(res.data.data);
+          setMetaData(res.data.meta_data);
         } else {
           setError("No gallery data found.");
         }
@@ -57,8 +73,33 @@ export default function GalleryClient() {
   const start = (page - 1) * PAGE_SIZE;
   const paginatedItems = items.slice(start, start + PAGE_SIZE);
 
+  
+  
+
   return (
     <div>
+      <Head>
+        <title>{metaData?.metaTitle || null}</title>
+        {
+          metaData?.metaDescription && (
+            <meta
+              name="description"
+              content={metaData?.metaDescription}
+            />
+          )
+        }
+
+        {
+          metaData?.metaKeyword && (
+            <meta
+              name="keywords"
+              content={metaData?.metaKeyword}
+            />
+          )
+        }
+
+      </Head>
+
       <BreadcrumbHero title="GALLERY" crumbs={[{ label: "Home", href: "/" }, { label: "Gallery" }]} />
       <main className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8 py-10">
         <div className="text-center mb-14">
