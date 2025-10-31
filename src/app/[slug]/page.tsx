@@ -52,7 +52,7 @@ export default async function CMSPage({
                 title={cmsData.strTitle}
                 crumbs={[{ label: "Home", href: "/" }, { label: cmsData.strTitle }]}
             />
-            <div className="max-w-6xl mx-auto py-10 text-black">
+            <div className="max-w-6xl mx-auto py-10 px-4 text-black">
                 <h2 className="text-[42px] text-center font-bold mb-4">{cmsData.strTitle}</h2>
                 <div
                     className="prose max-w-6xl text-justify"

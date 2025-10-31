@@ -11,15 +11,15 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const heroSlides = [
     {
-        src: require("../../asserts/hero1.jpg"),
+        src: require("../../asserts/hero1.webp"),
         alt: "Hero Slide 1",
     },
     {
-        src: require("../../asserts/hero2.png"),
+        src: require("../../asserts/hero2.webp"),
         alt: "Hero Slide 2",
     },
     {
-        src: require("../../asserts/hero3.jpg"),
+        src: require("../../asserts/hero3.webp"),
         alt: "Hero Slide 3",
     },
 ];

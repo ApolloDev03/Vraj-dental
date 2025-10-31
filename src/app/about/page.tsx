@@ -14,17 +14,12 @@ import aboutImg3 from '@/asserts/why-choose-img3.jpg'
 import { FaUserMd, FaFlask, FaBaby } from "react-icons/fa";
 import { RiToothFill } from 'react-icons/ri';
 import bg from "../../asserts/bg-black.jpg";
-import doc1 from '@/asserts/doc1.jpg'
-import doc2 from '@/asserts/doc2.jpg'
-import doc3 from '@/asserts/doc3.jpg'
-import doc4 from '@/asserts/doc4.jpg'
-import doc5 from '@/asserts/doc5.jpg'
-import doc6 from '@/asserts/doc6.jpg'
 import BlogSection from '../component/blogHome';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import FeedbackVideoSlider from '../component/feedback';
+import Head from "next/head";
 
 interface Doctor {
     id: number;
@@ -33,7 +28,6 @@ interface Doctor {
     image: string;
 
 }
-
 
 type TestimonialVideos = {
     id: number;
@@ -56,9 +50,16 @@ type HomeData = {
     testimonial_videos: TestimonialVideos[];
 }
 
+type MetaData = {
+    metaTitle: string;
+    metaKeyword: string;
+    metaDescription: string;
+}
+
 export default function AboutUsPage() {
     const [homeData, setHomeData] = useState<HomeData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [metaData, setMetaData] = useState<MetaData | null>(null);
 
     useEffect(() => {
         const fetchHomeData = async () => {
@@ -79,10 +80,27 @@ export default function AboutUsPage() {
         fetchHomeData();
     }, [])
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.post(`${apiUrl}/about`);
+                if (res.data.success) {
+                      
+
+                    setMetaData(res.data.meta_data);
+                }
+            } catch (err) {
+                console.error("Error Fetching home data", err);
+            } finally {
+                setLoading(false)
+            }
+        };
+
+        fetchData();
+    }, [])
+
     const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
-
-
-
 
 
     const features = [
@@ -107,9 +125,33 @@ export default function AboutUsPage() {
             description: 'Fixed rates and honest competitive pricing.'
         }
     ];
+    
+    
 
     return (
         <main>
+            <Head>
+                <title>{metaData?.metaTitle || null}</title>
+                {
+                    metaData?.metaDescription && (
+                        <meta
+                            name="description"
+                            content={metaData?.metaDescription}
+                        />
+                    )
+                }
+
+                {
+                    metaData?.metaKeyword && (
+                        <meta
+                            name="keywords"
+                            content={metaData?.metaKeyword }
+                        />
+                    )
+                }
+
+            </Head>
+
             {/* Your Breadcrumb Component Here */}
             <BreadcrumbHero
                 title="ABOUT US"

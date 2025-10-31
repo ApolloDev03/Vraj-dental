@@ -14,10 +14,10 @@ import {
   FaMicroscope,
   FaPiggyBank,
 } from "react-icons/fa";
-import bg from "../../asserts/bg-black.jpg";
-import aboutImg1 from '@/asserts/why-choose-img1.jpg'
-import aboutImg2 from '@/asserts/why-choose-img2.jpg'
-import aboutImg3 from '@/asserts/why-choose-img3.jpg'
+import bg from "../../asserts/bg-black.webp";
+import aboutImg1 from '@/asserts/why-choose-img1.webp'
+import aboutImg2 from '@/asserts/why-choose-img2.webp'
+import aboutImg3 from '@/asserts/why-choose-img3.webp'
 
 type Feature = { id: string; title: string; text: string; icon: React.ReactNode };
 type Slide = { src: any; alt: string };

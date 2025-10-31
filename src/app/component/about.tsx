@@ -1,6 +1,6 @@
 import Image from "next/image";
-import toothImg from "../../asserts/tooth-mission.jpg"; // real path
-import visionImg from "../../asserts/tooth-vision.jpg"; // real path
+import toothImg from "../../asserts/tooth-mission.webp"; // real path
+import visionImg from "../../asserts/tooth-vision.webp"; // real path
 
 export default function AboutMissionVisionSection() {
     return (

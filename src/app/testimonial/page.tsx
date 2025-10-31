@@ -5,6 +5,7 @@ import axios from "axios";
 import { apiUrl } from "../../config";
 import BreadcrumbHero from "../component/breadcrumb";
 import bg from "../../asserts/feedback-bg.jpg";
+import Head from "next/head";
 
 interface VideoData {
     id: number;
@@ -19,6 +20,19 @@ interface VideoData {
     imageUrl: string;
 }
 
+type MetaData = {
+    metaTitle: string,
+    metaKeyword: string;
+    metaDescription: string;
+}
+
+type ApiResponse = {
+    status: boolean,
+    message: string,
+    data: VideoData[],
+    meta_data: MetaData
+}
+
 const cleanYoutubeUrl = (url: string): string => {
     let cleanUrl = url;
     if (cleanUrl.includes('"')) cleanUrl = cleanUrl.split('"')[0];
@@ -30,14 +44,16 @@ const cleanYoutubeUrl = (url: string): string => {
 const VideoTestimonials: React.FC = () => {
     const [videos, setVideos] = useState<VideoData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [metaData, setMetaData] = useState<MetaData | null>(null)
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.post(`${apiUrl}/testimonial-video`);
+                const res = await axios.post<ApiResponse>(`${apiUrl}/testimonial-video`);
                 // console.log(res.data.data, "responce======")
                 if (res?.data?.status && Array.isArray(res.data.data)) {
                     setVideos(res.data.data);
+                    setMetaData(res.data.meta_data);
                 } else {
                     setVideos([]);
                 }
@@ -51,9 +67,34 @@ const VideoTestimonials: React.FC = () => {
     }, []);
     // console.log(videos, "videosvideosvideosvideosvideosvideos")
 
+    
+    
+
     const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
     return (
         <div>
+            <Head>
+                <title>{metaData?.metaTitle || null}</title>
+                {
+                    metaData?.metaDescription && (
+                        <meta
+                            name="description"
+                            content={metaData?.metaDescription}
+                        />
+                    )
+                }
+
+                {
+                    metaData?.metaKeyword && (
+                        <meta
+                            name="keywords"
+                            content={metaData?.metaKeyword }
+                        />
+                    )
+                }
+
+            </Head>
+
             <BreadcrumbHero
                 title="TESTIMONIAL"
                 crumbs={[{ label: "Home", href: "/" }, { label: "Testimonial" }]}
