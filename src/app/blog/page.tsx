@@ -101,12 +101,12 @@ export default function BlogSection() {
         title="BLOG"
         crumbs={[{ label: "Home", href: "/" }, { label: "BLOG" }]}
       />
-      <section className="mx-auto max-w-6xl px-4 py-[100px]">
+      <section className="mx-auto max-w-6xl px-4 py-[60px] md:py-[100px]">
         <div className="text-center mb-[55px]">
           <div className="text-[14px] font-bold uppercase mb-2 " style={{ color: "#b6c651", fontWeight: 900 }}>
             Our Blog
           </div>
-          <h2 className=" text-[42px] font-normal leading-tight" style={{ color: "#005d98" }}>
+          <h2 className="text-[25px] md:text-[42px] font-normal leading-tight" style={{ color: "#005d98" }}>
             Read Our Latest Blog
           </h2>
         </div>

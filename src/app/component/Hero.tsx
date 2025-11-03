@@ -30,45 +30,12 @@ export default function HeroSection() {
 
     return (
         <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[0px] overflow-hidden group">
-            {/* <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                autoplay={{ delay: 5000 }}
-                pagination={{ clickable: true }}
-                loop={true}
-                navigation={{
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
-                }}
-                onBeforeInit={(swiper) => {
-                    if (
-                        swiper.params.navigation &&
-                        typeof swiper.params.navigation === "object"
-                    ) {
-                        swiper.params.navigation.prevEl = prevRef.current;
-                        swiper.params.navigation.nextEl = nextRef.current;
-                    }
-                }}
-                className="w-full h-full"
-            >
-                {heroSlides.map((slide, index) => (
-                    <SwiperSlide key={index}>
-                        <Image
-                            src={slide.src}
-                            alt={slide.alt}
-                            className="object-cover w-full h-full"
-                            priority
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper> */}
+            
             <Swiper
                 modules={[Navigation, Autoplay]} // ← Removed Pagination module
                 autoplay={{ delay: 5000 }}
                 loop={true}
-                navigation={{
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
-                }}
+                
                 onBeforeInit={(swiper) => {
                     if (
                         swiper.params.navigation &&
@@ -77,6 +44,10 @@ export default function HeroSection() {
                         swiper.params.navigation.prevEl = prevRef.current;
                         swiper.params.navigation.nextEl = nextRef.current;
                     }
+                }}
+                navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
                 }}
                 className="w-full h-[160px] md:h-[570px]"
 
@@ -88,7 +59,8 @@ export default function HeroSection() {
                             alt={slide.alt}
                             className="object-cover w-full h-full"
                             priority
-
+                            width={0}
+                            height={0}
                         />
                     </SwiperSlide>
                 ))}

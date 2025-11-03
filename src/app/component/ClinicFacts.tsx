@@ -10,9 +10,9 @@ export default function ClinicFacts({ facts }: any) {
     if(!facts) return null;
 
     return (
-        <section className="py-12">
+        <section className="py-2 md:py-12">
             <div
-                className=" py-8 md:py-[100px] border-[10px] md:border-[13px] mx-auto"
+                className=" py-8 md:py-[100px] border-[12px] md:border-[13px] mx-auto"
                 style={{
                     borderColor: "#c2d14e",
                     background: "#0d4272",
@@ -25,7 +25,7 @@ export default function ClinicFacts({ facts }: any) {
                         <h3 className="uppercase text-center md:text-start font-semibold tracking-wide mb-2" style={{ color: "white" }}>
                             Our Facts
                         </h3>
-                        <h2 className="text-2xl md:text-[42px] font-normal text-center md:text-start  mb-0" style={{ color: "white" }}>
+                        <h2 className="!text-2xl md:!text-[42px] font-normal text-center md:text-start  mb-0" style={{ color: "white" }}>
                             {facts[0]?.title}
                         </h2>
                     </div>
@@ -37,7 +37,7 @@ export default function ClinicFacts({ facts }: any) {
                                 <CountUp end={facts[0]?.count_1} duration={2.5} separator="," />
                                 <sup className="ml-2 text-3xl leading-none">+</sup>
                             </div>
-                            <div className="text-sm md:text-base font-light text-center">
+                            <div className="text-sm md:text-base font-normal text-center">
                                 Dental Implants successfully completed
                             </div>
                         </div>
@@ -47,7 +47,7 @@ export default function ClinicFacts({ facts }: any) {
                                 <CountUp end={facts[0]?.count_2} duration={2.5} separator="," />
                                 <span className="text-3xl align-top">+</span>
                             </div>
-                            <div className="text-sm md:text-base font-light text-center">
+                            <div className="text-sm md:text-base font-normal text-center">
                                 Happy Patients spreading smiles
                             </div>
                         </div>
@@ -57,7 +57,7 @@ export default function ClinicFacts({ facts }: any) {
                                 <CountUp end={facts[0]?.count_3} duration={2.5} />
                                 <span className="text-3xl align-top">+</span>
                             </div>
-                            <div className="text-sm md:text-base font-light text-center">
+                            <div className="text-sm md:text-base font-normal text-center">
                                 Expert Dentists dedicated to quality care
                             </div>
                         </div>

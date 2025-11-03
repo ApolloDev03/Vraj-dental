@@ -3,6 +3,7 @@
 import vmc from "@/asserts/vmc-logo.webp"
 import hwb from "@/asserts/hwb-logo.webp"
 import cghs from "@/asserts/cghs-logo.webp"
+import Image from "next/image";
 
 type Centre = { id: number; img: string; alt: string };
 
@@ -24,7 +25,7 @@ export default function EmpanelledCentres() {
       {/* top white strip like screenshot */}
       <div className="absolute inset-x-0 top-0 h-4 bg-white/100"></div>
 
-      <div className="mx-auto max-w-6xl  py-16  mt-12" >
+      <div className="mx-auto max-w-6xl py-12 md:py-16  mt-12" >
         <h2 className="text-center font-bold text-[28px] md:text-[28px] leading-tight" style={{color:"#ffffff"}}>
           Empanelled Centres For
         </h2>
@@ -42,11 +43,14 @@ export default function EmpanelledCentres() {
                          flex items-center justify-center"
             >
               {/* logo image */}
-              <img
+              <Image
                 src={c.img}
                 alt={c.alt}
-                className="h-[82px] w-[82px] md:h-[92px] md:w-[92px]  object-contain"
-                loading="lazy"
+                width={92}
+                height={92}
+                className="object-contain h-[82px] w-[82px] md:h-[92px] md:w-[92px]"
+               
+                priority
               />
             </div>
           ))}

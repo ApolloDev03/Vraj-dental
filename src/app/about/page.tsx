@@ -160,12 +160,12 @@ export default function AboutUsPage() {
 
 
             {/* ========== WHO WE ARE SECTION ========== */}
-            <section className="max-w-6xl mx-auto py-25 bg-white">
+            <section className="max-w-6xl mx-auto py-15 md:py-25 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         {/* Left side - Image */}
                         <div className=" flex-1">
-                            <div className="relative w-full h-[526px]">
+                            <div className="relative w-[350px] md:w-full h-[400px] md:h-[526px]">
                                 <Image
                                     src={aboutImg.src}
                                     alt="Dental Treatment Before After"
@@ -183,68 +183,68 @@ export default function AboutUsPage() {
 
                         {/* Right side - Content */}
                         <div className='flex-1'>
-                            <p className="!text-[#b6c651] text-[14px] font-extrabold mb-2">WHO WE ARE</p>
-                            <h2 className="text-3xl md:text-[42px] font-normal text-[005d98] mb-[14px]">
+                            <p className="!text-[#b6c651] text-center md:text-start !text-[14px] font-extrabold mb-2">WHO WE ARE</p>
+                            <h2 className="text-[25px] md:text-[42px] font-normal text-center md:text-start text-[005d98] mb-[14px]">
                                 Experienced & Specialized<br />Dental Surgeon
                             </h2>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] !text-[14px] md:!text-[16px] text-justify mb-4 leading-[1.8]">
                                 Vraj Group of Dental Clinics (VGDC), managed by Vraj Dental Clinics Pvt. Ltd., is one of the most trusted names in dentistry across Vadodara and Surat. With multiple branches, VGDC is committed to delivering affordable, advanced, and patient-friendly dental care under one roof.
                             </p>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8] !text-[14px] md:!text-[16px]">
                                 Our team of highly skilled dentists and specialists ensures that every treatment – from routine cleanings to complex surgeries – is performed with utmost precision and care. Over the years, VGDC has successfully completed 5000+ dental implants, bringing back confidence and smiles to thousands of patients.
                             </p>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] !text-[14px] md:!text-[16px] text-justify mb-4 leading-[1.8]">
                                 VGDC is also an empanelled dental clinic with VAC, Happy Water, and Gartic, making dental care more accessible for eligible patients.
                             </p>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] !text-[14px] md:!text-[16px] text-justify mb-4 leading-[1.8]">
                                 At VGDC, we believe dentistry is not just about teeth – it's about people. We focus on pain-free treatments, long term relationships, and personalized care that puts your comfort first.
                             </p>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] !text-[14px] md:!text-[16px] text-justify mb-4 leading-[1.8]">
                                 Whether it's your routine dental checkup, smile makeover, or advanced dental treatment, VGDC is here to serve you with excellence.
                             </p>
 
-                            <p className="text-[#6d7a8c] text-justify mb-4 leading-[1.8]">
+                            <p className="text-[#6d7a8c] !text-[14px] md:!text-[16px] text-justify mb-4 leading-[1.8]">
                                 Motto: "We care for your healthy smile no matter where you are."
                             </p>
 
                             {/* Features Grid */}
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="text-[#6d7a8c]">Complete Crown</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="text-[#6d7a8c]">Cosmetic Filling</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="text-[#6d7a8c]">Dental Implants</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="text-[#6d7a8c]">Dental Crown</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="text-[#6d7a8c]">Dental X-Ray</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 !text-[14px] md:!text-[16px]">
                                     <svg className="w-5 h-5 text-[#005d98]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
@@ -261,30 +261,30 @@ export default function AboutUsPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#004170] via-[#003a63] to-[#002f52]"></div>
 
                 <div className="relative z-10">
-                    <div className="grid md:grid-cols-2 gap-0 items-stretch min-h-[600px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch min-h-[600px]">
                         {/* Left side - Content */}
-                        <div className="space-y-6 py-25 px-8 flex flex-col justify-center container mx-auto"
+                        <div className="space-y-6 py-15 md:py-25 px-8 flex flex-col justify-center container mx-auto"
                             style={{
                                 backgroundImage: `url(${bgUrl})`,
                                 backgroundSize: "cover",
                                 backgroundRepeat: "no-repeat",
                                 backgroundPosition: "center",
                             }}>
-                            <p className="!text-white text-[14px] font-semibold uppercase mb-2">
+                            <p className="!text-white !text-[14px] text-center md:text-start font-semibold uppercase mb-2">
                                 WHY YOU CHOOSE US
                             </p>
-                            <h2 className="!text-white text-4xl md:text-[42px] font-normal mb-[14px]">
+                            <h2 className="!text-white text-[25px] md:text-[42px] text-center md:text-start font-normal mb-[14px]">
                                 Perfect Smile,<br />Excellence Defined
                             </h2>
-                            <p className="!text-white font-normal">
+                            <p className="!text-white text-center !text-[14px] md:!text-[16px] font-normal">
                                 Teeth whitening is one of the quickest ways to improve your smile. Many patients are amazed that one trip to DentiCare can change their teeth dramatically.
                             </p>
 
                             {/* Features Grid */}
-                            <div className="grid grid-cols-2 gap-8 pt-4 ">
+                            <div className="grid  grid-cols-1 md:grid-cols-2 gap-8 pt-4 ">
                                 {features.map((feature, index) => (
                                     <div key={index} className="flex flex-col items-start space-y-3 group">
-                                        <div className="w-[50px] h-[50px] group-hover:bg-[#005d98] group-hover:!text-white bg-white rounded-full flex items-center justify-center text-[#005d98] text-2xl shadow-lg">
+                                        <div className="w-[50px] h-[50px] group-hover:bg-[#005d98] group-hover:!text-white bg-white rounded-full flex items-center justify-center text-[#005d98] text-2xl shadow-lg ">
                                             {feature.icon}
                                         </div>
                                         <h3 className="font-extrabold mt-[16px] mb-[7px] !text-white text-base uppercase ">
@@ -299,7 +299,7 @@ export default function AboutUsPage() {
                         </div>
 
                         {/* Right side - Swiper */}
-                        <div className="relative h-full min-h-[600px]">
+                        <div className="relative h-full min-h-[308px] md:min-h-[600px]">
                             <Swiper
                                 modules={[Navigation, Pagination, Autoplay]}
                                 spaceBetween={0}

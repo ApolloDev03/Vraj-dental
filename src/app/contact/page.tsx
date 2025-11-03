@@ -186,8 +186,8 @@ export default function ContactPage() {
                 <div className="grid  md:grid-cols-12">
                     {/* Form Card */}
                     <div className="md:col-span-7  bg-white p-[30px] shadow-[0_10px_30px_rgba(0,0,0,0.07)]">
-                        <p className="text-[12px] !mb-[10px] font-bold !text-[#005d98]">MESSAGE US</p>
-                        <h2 className="mt-1 text-[40px] font-light text-[#005d98]">
+                        <p className="!text-[14px] !mb-[10px] font-bold !text-[#005d98]">MESSAGE US</p>
+                        <h2 className="mt-1 !text-[25px] md:!text-[40px] font-normal text-[#005d98]">
                             Drop us Message for any Query
                         </h2>
 
@@ -292,10 +292,10 @@ export default function ContactPage() {
                             key={b.title}
                             className=" border border-[#b0cb1f] bg-white p-5 shadow-[10px_10px_10px_#ccc]"
                         >
-                            <h4 className="text-2xl font-semibold tracking-wide text-[#005d98] mb-2">
+                            <h4 className="!text-[21px] md:!text-2xl font-semibold tracking-wide text-[#005d98] mb-2">
                                 {b.title}
                             </h4>
-                            <p className="text-[16px] leading-6 text-[#4a5a6b]">{b.address}</p>
+                            <p className="!text-[14px] md:!text-[16px] leading-6 text-[#4a5a6b]">{b.address}</p>
 
                             <div className="mt-3 space-y-2 text-[15px] text-[#4a5a6b]">
                                 <div className="flex items-center gap-2">
@@ -303,7 +303,7 @@ export default function ContactPage() {
                                     {/* <span>{b.phone}</span> */}
                                     <Link
                                      href={`tel:${b.phone.replace(/[^+\d]/g, '')}`}
-                                     className='text-[16px]'
+                                     className='!text-[14px] md:!text-[16px]'
                                      >{b.phone}</Link>
                                 </div>
                                 <div className="flex items-center gap-2">
@@ -311,7 +311,7 @@ export default function ContactPage() {
                                     {/* <span>{b.email}</span> */}
                                     <Link 
                                         href={`mailto:${b.email}`}
-                                        className='text-[16px] font-normal' 
+                                        className='!text-[14px] md:!text-[16px] font-normal' 
                                         >
                                             {b.email}
                                         </Link>

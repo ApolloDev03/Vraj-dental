@@ -99,7 +99,7 @@ const VideoTestimonials: React.FC = () => {
                 title="TESTIMONIAL"
                 crumbs={[{ label: "Home", href: "/" }, { label: "Testimonial" }]}
             />
-            <section className="py-25 bg-[#15507c]  border-[15px] border-[#bed43b]"
+            <section className="py-15 md:py-25 bg-[#15507c]  border-[15px] border-[#bed43b]"
                 style={{
                     backgroundImage: `url(${bgUrl})`,
                     backgroundSize: "cover",
@@ -109,7 +109,7 @@ const VideoTestimonials: React.FC = () => {
                 }}>
                 <div className="max-w-6xl mx-auto px-3 md:px-0 text-center">
                     <h4 className="!text-white text-[14px] font-extrabold mb-1">FEEDBACK</h4>
-                    <h2 className="text-3xl md:text-[42px] !text-white font-light mb-[55px]">What Customer Saying About us</h2>
+                    <h2 className="text-[25px] md:text-[42px] !text-white font-light mb-[55px]">What Customer Saying About us</h2>
                     {loading ? (
                         <p className="text-white text-lg">Loading...</p>
                     ) : (

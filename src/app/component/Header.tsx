@@ -1,7 +1,7 @@
 
 "use client"
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaPhoneAlt, FaClock, FaMapMarkerAlt, FaPaperPlane, FaRegPaperPlane } from 'react-icons/fa';
-import logo from "../../asserts/logo.png"
+import logo from "../../asserts/logo.webp"
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -10,22 +10,15 @@ import { MdAccessTime } from 'react-icons/md';
 import axios from 'axios';
 import { apiUrl } from '@/config';
 import { usePathname } from "next/navigation";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+
 const Header: React.FC = () => {
     const pathname = usePathname();
     const [galleryOpen, setGalleryOpen] = useState(false);
     const [categories, setCategories] = useState<{ id: number; categoryName: string; slug: string }[]>([]);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
-
-
-    // const services = [
-    //     { name: "Root Canal Treatment", href: "/services/root-canal" },
-    //     { name: "Dental Implants", href: "/services/dental-implants" },
-    //     { name: "Teeth Whitening", href: "/services/teeth-whitening" },
-    //     { name: "Braces & Aligners", href: "/services/braces-aligners" },
-    //     { name: "Wisdom Tooth Removal", href: "/services/wisdom-tooth" },
-    // ];
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -136,15 +129,23 @@ const Header: React.FC = () => {
                             width={200}
                             height={100}
                             className="rounded-full"
+                            priority
                         />
                     </Link>
 
-
+                    {/* Hamburger (Mobile) */}
+                    <button
+                        className="md:hidden text-3xl text-[#005d98]"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {menuOpen ? <HiX /> : <HiMenuAlt3   />}
+                    </button>
 
                     {/* </div> */}
                     {/* Navigation */}
 
-                    <nav className="space-x-8 block font-semibold  !text-black">
+                    <nav className="hidden md:flex  space-x-8  font-semibold  !text-black">
                         <Link href="/" className={`${isActive("/")} hover:text-[#005d98]`}>HOME</Link>
                         <Link href="/about" className={`${isActive("/about")} hover:text-[#005d98]`}>ABOUT</Link>
                         <Link href="/branches" className={`${isActive("/branches")} hover:text-[#005d98]`}>OUR BRANCHES</Link>
@@ -281,6 +282,93 @@ const Header: React.FC = () => {
                         <Link href="/contact" className={`${isActive("/contact")} hover:text-[#005d98]`}>CONTACT</Link>
                     </nav>
                 </div>
+
+                {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden mx-5  bg-white shadow-lg px-4 py-4 max-h-[80vh] overflow-y-auto space-y-3 font-medium">
+            {[
+              { label: "HOME", href: "/" },
+              { label: "ABOUT", href: "/about" },
+              { label: "OUR BRANCHES", href: "/branches" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`block ${
+          pathname === link.href
+            ? "!text-[#005d98] font-semibold" // ✅ Active page color
+            : "text-gray-700 hover:text-[#005d98]"
+        } `}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <details>
+              <summary className="cursor-pointer text-black hover:text-[#005d98]">
+                OUR SERVICES
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                {categories.map((s) => (
+                  <Link
+                    key={s.id}
+                    href={`/services/${s.slug}`}
+                    onClick={() => setMenuOpen(false)}
+                    className={`block text-sm ${
+              pathname === `/services/${s.slug}`
+                ? "!text-[#005d98] font-semibold"
+                : "text-gray-600 hover:text-[#005d98]"
+            }`}
+                  >
+                    {s.categoryName}
+                  </Link>
+                ))}
+              </div>
+            </details>
+
+            <details>
+              <summary className="cursor-pointer text-black hover:text-[#005d98]">
+                GALLERY
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <Link href="/gallery" onClick={() => setMenuOpen(false)} className={`block ${
+            pathname === "/gallery"
+              ? "!text-[#005d98] font-semibold"
+              : "text-gray-600 hover:text-[#005d98]"
+          }`}>
+                  Gallery
+                </Link>
+                <Link href="/video-gallery" onClick={() => setMenuOpen(false)}  className={`block ${
+            pathname === "/video-gallery"
+              ? "!text-[#005d98] font-semibold"
+              : "text-gray-600 hover:text-[#005d98]"
+          }`}>
+                  Video Gallery
+                </Link>
+              </div>
+            </details>
+
+            {[
+      { label: "BLOG", href: "/blog" },
+      { label: "TESTIMONIAL", href: "/testimonial" },
+      { label: "CONTACT", href: "/contact" },
+    ].map((link) => (
+      <Link
+        key={link.href}
+        href={link.href}
+        className={`block ${
+          pathname === link.href
+            ? "!text-[#005d98] font-semibold"
+            : "text-gray-700 hover:text-[#005d98]"
+        }`}
+        onClick={() => setMenuOpen(false)}
+      >
+        {link.label}
+      </Link>
+    ))}
+          </div>
+        )}
             </div>
 
 

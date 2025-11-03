@@ -49,7 +49,7 @@ function BranchCard({ b }: { b: Branch }) {
         <div
             className=" relative bg-white border border-[#b0cb1f] shadow-[10px_10px_10px_#ccc] pl-5 pr-5 py-5"
         >
-            <h3 className="text-2xl  font-semibold text-[#1a3970]">
+            <h3 className="!text-[21px] md:text-2xl  font-semibold text-[#1a3970]">
                 {b.name}
             </h3>
 
