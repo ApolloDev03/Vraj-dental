@@ -4,10 +4,10 @@ import visionImg from "../../asserts/tooth-vision.webp"; // real path
 
 export default function AboutMissionVisionSection() {
     return (
-        <section className="max-w-6xl mx-auto px-4 py-16 text-black">
+        <section className="max-w-6xl mx-auto px-4 py-12 md:py-16 text-black">
             <div className="flex flex-col md:flex-row md:gap-10 items-center mb-16">
                 <div className="md:w-1/2 mb-8 md:mb-0">
-                    <div className="aspect-video relative rounded-lg overflow-hidden shadow">
+                    <div className="aspect-video relative md:rounded-lg overflow-hidden shadow">
                         <iframe
                             src="https://www.youtube.com/embed/PiWzaz1X7gQ?si=Ud9WBWGST4qtZNk8"
                             title="Clinic opening"
@@ -16,21 +16,21 @@ export default function AboutMissionVisionSection() {
                         />
                     </div>
                 </div>
-                <div className="md:w-1/2">
-                    <h2 className="text-sm font-bold mb-2" style={{ color: "#b6c651" }}>
+                <div className="md:w-1/2 text-center md:text-start">
+                    <h2 className="text-sm !font-bold mb-2" style={{ color: "#b6c651" }}>
                         ABOUT US
                     </h2>
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                    <h1 className="text-[24px] md:text-4xl font-normal md:font-bold mb-4">
                         Experienced & Specialized Dental Surgeon
                     </h1>
-                    <p className="text-base md:text-lg leading-relaxed" style={{ marginBottom: 0, color: "#000", lineHeight: 1.3, fontSize: " 16px", fontWeight: 400 }}>
+                    <p className="!text-[14px] md:text-lg leading-relaxed" style={{ marginBottom: 0, color: "#6D7A8C", lineHeight: 1.3, fontSize: " 16px", fontWeight: 400 }}>
                         Vraj Group of Dental Clinics (VGDC) was founded by Dr. Ujas Shah (MDS, Director of Vraj Dental Clinics Pvt. Ltd.), who began his practice in 2012. With over a decade of experience, he envisioned providing affordable dental services to society without compromising on quality. Through well-structured systems and processes, VGDC has grown into a successful chain of clinics, introducing the concept of “System-Based Dentistry” – ensuring standardized, reliable, and patient-centric care across all branches. Our team of expert dentists has been earning the trust of patients for more than 13 years.
                     </p>
                 </div>
             </div>
             <div className="grid md:grid-cols-1 gap-8">
                 {/* Mission Card */}
-                <div className="flex flex-col md:flex-row items-stretch bg-white rounded-[2.5rem] shadow-xl border-2 p-0 mb-8" style={{ borderColor: '#e1ed87', border: "1px solid #b3c83f", boxShadow: "5px 5px 10px #b3c83f" }}>
+                <div className="flex flex-col md:flex-row items-stretch bg-white rounded-[2.5rem] shadow-xl border-2 p-0 mb-2 md:mb-8" style={{ borderColor: '#e1ed87', border: "1px solid #b3c83f", boxShadow: "5px 5px 10px #b3c83f" }}>
                     <div className="md:w-1/3 flex items-stretch h-[220px]">
                         <Image
                             src={toothImg}
@@ -38,6 +38,7 @@ export default function AboutMissionVisionSection() {
                             className="rounded-[2.5rem] object-cover w-full h-full"
                             width={330}
                             height={220}
+                            priority
                         />
                     </div>
                     <div className="p-4 flex-1 flex flex-col justify-start items-start">
@@ -59,6 +60,7 @@ export default function AboutMissionVisionSection() {
                             className="rounded-[2.5rem] object-cover w-full h-full"
                             width={330}
                             height={220}
+                            priority
                         />
                     </div>
                     <div className="p-4 flex-1 flex flex-col justify-start items-start">

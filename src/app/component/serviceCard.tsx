@@ -1,9 +1,7 @@
 "use client";
-import { Service } from "@/types/type";
 import Link from "next/link";
 import { TbDental } from "react-icons/tb";
 import Image from "next/image";
-import { apiUrl } from "@/config";
 
 interface ServiceCardProps {
   service: {
@@ -29,6 +27,7 @@ export default function ServiceCard({ service }:ServiceCardProps) {
             width={40}
             height={40}
             className="object-contain"
+            priority
           />
         ) : (
           <TbDental className="h-8 w-8 transition-transform duration-200 group-hover:scale-105" />
@@ -36,7 +35,7 @@ export default function ServiceCard({ service }:ServiceCardProps) {
       </div>
 
       {/* card — reacts to the same group hover */}
-      <div className="rounded-2xl border border-[#3a4f9d] bg-white p-3 pt-8 pl-8 pr-8 text-center shadow-[0_1px_8px_rgba(2,6,23,0.05)] transition-all duration-200 group-hover:translate-y-[-10px] group-hover:shadow-[0_15px_35px_rgba(0,0,0,0.2)] group-hover:border-[#2f4290]" style={{marginBottom:"30px",height:"230px"}}>
+      <div className="rounded-2xl border border-[#3a4f9d] bg-white p-3  pt-8 pl-8 pr-8 text-center shadow-[0_1px_8px_rgba(2,6,23,0.05)] transition-all duration-200 group-hover:translate-y-[-10px] group-hover:shadow-[0_15px_35px_rgba(0,0,0,0.2)] group-hover:border-[#2f4290]" style={{marginBottom:"30px",height:"230px"}}>
         <div className="mt-4" />
         <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: "#130947" }}>
           {service.title}

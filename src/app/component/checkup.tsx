@@ -83,12 +83,12 @@ export default function AppointmentSection() {
     };
 
     return (
-        <div className="bg-[#ccc]  flex items-center justify-center py-14">
-            <section className="w-full max-w-4xl bg-white rounded-xl shadow-lg mx-auto p-10">
-                <div className="mb-2 text-sm font-semibold text-[#b6c651] uppercase tracking-wide">
+        <div className="bg-[#ccc] px-2  flex items-center justify-center py-14">
+            <section className="w-full max-w-4xl bg-white rounded-xl shadow-lg mx-auto p-5 md:p-10">
+                <div className="mb-2 text-[13px] text-center md:text-start md:text-sm font-semibold text-[#b6c651] uppercase tracking-wide">
                     FREE CHECKUP & CONSULTATION
                 </div>
-                <h2 className="mb-8 text-4xl font-medium text-[#005d98]">
+                <h2 className="mb-8 text-[24px] md:text-4xl text-center md:text-start font-light md:font-medium text-[#005d98]">
                     Schedule your free dental check-up now.
                 </h2>
                 <form
@@ -159,7 +159,7 @@ export default function AppointmentSection() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="flex items-center justify-center bg-[#0266b5] text-white px-10 py-4 rounded-full text-base font-medium shadow-lg hover:bg-[#023f6b] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0266b5]"
+                            className="flex items-center justify-center bg-[#0266b5] text-white md:px-10 px-5 py-4 rounded-full text-base font-medium shadow-lg hover:bg-[#023f6b] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0266b5]"
                         >
                             MAKE YOUR APPOINTMENT
                             <span className="ml-4 flex items-center justify-center w-7 h-7 rounded-full bg-white text-[#0266b5]">

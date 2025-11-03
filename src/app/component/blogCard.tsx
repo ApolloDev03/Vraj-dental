@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-// import CalendarIcon from './icons/Calendar';
 import { FaRegCalendarDays } from "react-icons/fa6";
 
 export type BlogCardProps = {
@@ -65,11 +64,11 @@ export default function BlogCard(props: BlogCardProps) {
           <span>Posted On {dateText}</span>
         </div> */}
 
-        <h3 className="text-[20px] font-semibold !text-black hover:cursor-pointer  hover:!text-[#005d98]" onClick={() => handleDetail(slug)}>
+        <h3 className="text-[17px] md:text-[20px] font-semibold !text-black hover:cursor-pointer  hover:!text-[#005d98]" onClick={() => handleDetail(slug)}>
           {title}
         </h3>
 
-        <p className="line-clamp-3 text-[16px] leading-7 text-slate-500">
+        <p className="line-clamp-3 !text-[14px] md:!text-[16px] leading-7 text-slate-500">
           {excerpt}
         </p>
 

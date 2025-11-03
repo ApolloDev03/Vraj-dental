@@ -17,16 +17,16 @@ export default function FounderSection() {
         backgroundPosition: "center",
       }}
     >
-      <div className="mx-auto max-w-6xl px-3 py-20">
+      <div className="mx-auto max-w-6xl px-3 py-15 pb-[30px] md:py-20 ">
         {/* Section heading */}
         <div className="text-center max-w-3xl mx-auto">
           <p className="text-[14px] font-black uppercase mb-0" style={{ color: "#b6c651" }}>
             OUR DOCTORS
           </p>
-          <h2 className=" text-[42px] font-normal tracking-tight" style={{ color: "#005d98" }}>
+          <h2 className="text-[25px] md:text-[42px] font-normal tracking-tight" style={{ color: "#005d98" }}>
             meet our Founder
           </h2>
-          <p className="mt-3 mx-auto text-[17px] leading-7 text-slate-600">
+          <p className="mt-3 mx-auto text-center  text-[17px] leading-7 text-slate-600">
             Qualified dental doctors are essential for maintaining and improving oral <br />
             health, which is a crucial component of overall well‑being.
           </p>
@@ -49,10 +49,10 @@ export default function FounderSection() {
 
           {/* Right text */}
           <div className="flex flex-col justify-center">
-            <h3 className="text-2xl md:text-[28px] font-semibold" style={{ color: "#005d98" }}>
+            <h3 className="text-[23px] md:text-[28px] font-semibold" style={{ color: "#005d98" }}>
               Dr Ujas Shah
             </h3>
-            <p className="mt-4 text-[16px] leading-8 text-slate-700">
+            <p className="mt-4 !text-[14px] md:!text-[16px] leading-8 text-slate-700">
               Dr. UJAS SHAH attended M.P dental College in Vadodara where he earned his Becholure degree
               in the field of dentistry. He then completed an extensive three year master degree program,
               where he was awarded specialty certificates in both Periodontics and implantology. While doing

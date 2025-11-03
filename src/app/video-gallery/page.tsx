@@ -93,8 +93,8 @@ export default function VideoGallery() {
             />
             <section className="mx-auto max-w-6xl px-4 py-12">
                 <div className="text-center mb-14">
-                    <p className="!mb-0 uppercase font-extrabold !text-[#b6c651] text-[14px]">Our Videos</p>
-                    <h2 className=" text-[42px] font-normal text-[#005d98]">Our Videos</h2>
+                    <p className="!mb-0 uppercase font-extrabold !text-[#b6c651] !text-[14px]">Our Videos</p>
+                    <h2 className="text-[25px] md:text-[42px] font-normal text-[#005d98]">Our Videos</h2>
                 </div>
 
                 {loading ? (

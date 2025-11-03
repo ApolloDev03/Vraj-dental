@@ -58,14 +58,14 @@ interface ServicesSectionProps {
 
 export default function ServicesSection({services}:ServicesSectionProps) {
   return (
-    <section className="relative mx-auto max-w-6xl px-4 py-5 sm:px-6 lg:px-8">
-      <p className="mx-auto mb-3 max-w-2xl text-center text-xs font-semibold uppercase tracking-wide " style={{color:"#0d6efd"}}>
+    <section className="relative mx-auto max-w-6xl px-4 py-6  lg:px-8">
+      <p className="mx-auto mb-3 max-w-2xl text-center !text-[14px] md:text-[16px] font-semibold uppercase tracking-wide " style={{color:"#0d6efd"}}>
         Our Services
       </p>
-      <h2 className="mx-auto  text-center text-3xl font-semibold leading-tight text-slate-800 sm:text-4xl">
+      <h2 className="mx-auto  text-center text-[25px] md:text-3xl font-normal md:font-semibold leading-tight text-slate-800 sm:text-4xl">
         Healthy Smiles with Advanced, Affordable Dentistry.
       </h2>
-      <p className="mx-auto mt-3  text-center text-base text-brand-gray">
+      <p className="mx-auto mt-3 !text-[14px] md:!text-[16px] text-center text-base text-brand-gray">
         We prioritize our patients’ well‑being and offer a wide range of dental services performed by a team of skilled specialists. Explore our services below.
       </p>
 

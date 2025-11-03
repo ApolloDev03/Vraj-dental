@@ -1,71 +1,14 @@
 "use client";
 
-// type Branch = {
-//     id: number;
-//     title: string;
-//     address: string;
-// };
-
-// const branches: Branch[] = [
-//     {
-//         id: 1,
-//         title: "VGDC : AJWA ROAD BRANCH",
-//         address:
-//             "21/FF, divya plaza complex, Besides Atul bakery, Ajwa Rd, above harsh super store, Kamla Nagar, Vadodara, Gujarat",
-//     },
-//     {
-//         id: 2,
-//         title: "VGDC : VADODARA-HARNI ROAD",
-//         address:
-//             "18/GF, Red Coral,Opp Gada Circle, Harni Road, Vadodara, Gujarat",
-//     },
-//     {
-//         id: 3,
-//         title: "VGDC : Dental IMPLANT CENTER RAOPURA",
-//         address:
-//             "1st Floor Ashok House 2, Inside Santhavasahat Gate, Raopura, Vadodara, Gujarat.",
-//     },
-//     {
-//         id: 4,
-//         title: "VGDC : VADODARA-SAMA-SAVLI",
-//         address:
-//             "14/1 Second floor Shukan hub Above JAGDIH FARSAN, Sama Savli Road .",
-//     },
-//     {
-//         id: 5,
-//         title: "VGDC : GOTRI SEVASI",
-//         address:
-//             "149, prince villa, Phase 2, Gotri - Sevasi Rd, behind SHIVAY HOSPITAL, behind collabera,Vadodara, Gujarat",
-//     },
-//     {
-//         id: 6,
-//         title: "VGDC : VASNA BHAYLI",
-//         address:
-//             "GF/6, AKSHAR pavilion Road 4, Vasna Bhayli Main Rd, opp. to Rosedale Heights, Vadodara, Gujarat",
-//     },
-//     {
-//         id: 7,
-//         title: "VGDC : SUN PHARMA ATLADARA",
-//         address:
-//             "SHOP NO -105 Tower -C/FF- Sunrise Heights ,near Sun pharma Atladara",
-//     },
-//     {
-//         id: 8,
-//         title: "VGDC : MANJALPUR",
-//         address:
-//             "2/2nd floor, Brookfieldz Vinaaya Hub, Near Tulsidham Char Rasta, Manjalpur, Vadodara, Gujarat",
-//     },
-// ];
-
 export default function Branches( { branches }:any) {
     return (
         <section className="bg-white">
-            <div className="mx-auto max-w-6xl px-4 pt-20">
-                <p className="text-center uppercase mb-2 text-[14px] font-black" style={{ color: "#b6c651" }}>
+            <div className="mx-auto max-w-6xl px-4 pt-15 md:pt-20">
+                <p className="text-center uppercase mb-2 !text-[14px] font-black" style={{ color: "#b6c651" }}>
                     OUR BRANCHES
                 </p>
 
-                <h2 className=" text-center text-[44px] leading-tight text-[#0b4773]">
+                <h2 className=" text-center text-[25px] md:text-[42px] leading-tight text-[#0b4773]">
                     Our Branches
                 </h2>
 

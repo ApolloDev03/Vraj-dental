@@ -10,14 +10,14 @@
 //   //     },
 //   //   ],
 //   // },
-  
+
 
 //   output: "export",
- 
+
 //   images: { unoptimized: true },
 //   eslint: { ignoreDuringBuilds: true },
 //   typescript: { ignoreBuildErrors: true },
-  
+
 // };
 
 // export default nextConfig;
@@ -25,11 +25,9 @@
 const nextConfig = {
   output: "export",           // <-- Required for static build in /out
   images: { unoptimized: true },
+  compress: true,
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  env: {
-    NEXT_PUBLIC_API_URL: "https://vrajadmin.vrajdentalclinic.com/api",
-  },
 };
 
 module.exports = nextConfig;

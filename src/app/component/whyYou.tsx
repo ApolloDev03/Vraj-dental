@@ -5,7 +5,6 @@ import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import {
   FaProjectDiagram,
   FaMapMarkerAlt,
@@ -96,11 +95,11 @@ export default function HeroWithWhyChoose() {
               }}
             />
             <div className="relative">
-              <p className="text-[12px] font-semibold uppercase tracking-[0.2em]" style={{ color: "white" }}>
+              <p className="!text-[12px] text-center md:text-start font-semibold uppercase tracking-[0.2em]" style={{ color: "white" }}>
                 Why you choose us
               </p>
               <h2
-                className="mt-3 text-4xl font-normal leading-tight md:text-[42px]"
+                className="mt-3 text-center md:text-start text-[25px] font-normal leading-tight md:text-[42px]"
                 style={{ color: "white" }}
               >
                 Perfect Smile,<br />Excellence Defined
@@ -159,6 +158,7 @@ export default function HeroWithWhyChoose() {
                     alt="Dental Treatment"
                     fill
                     className="object-cover"
+                    priority
                   />
                 </div>
               </SwiperSlide>
@@ -169,6 +169,7 @@ export default function HeroWithWhyChoose() {
                     alt="Dental Care"
                     fill
                     className="object-cover"
+                    priority
                   />
                 </div>
               </SwiperSlide>
@@ -179,6 +180,7 @@ export default function HeroWithWhyChoose() {
                     alt="Dental Service"
                     fill
                     className="object-cover"
+                    priority
                   />
                 </div>
               </SwiperSlide>

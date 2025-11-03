@@ -36,15 +36,15 @@ export default function FeedbackVideoSlider({ videos }: any) {
       }}
     >
       <div className="border-[15px]" style={{ borderColor: "#b5d535" }}>
-        <div className="mx-auto max-w-6xl px-4 py-[100px]">
+        <div className="mx-auto max-w-6xl px-4 py-[60px] md:py-[100px]">
           <p
-            className="text-center uppercase tracking-widest font-black text-[14px]"
+            className="text-center uppercase tracking-widest font-black !text-[14px]"
             style={{ color: "#ffffff" }}
           >
             Feedback
           </p>
           <h2
-            className="mt-2 text-center text-4xl md:text-[42px]"
+            className="mt-2 text-center text-[25px] md:text-[42px]"
             style={{ color: "#ffffff" }}
           >
             What Customers Are Saying About Us

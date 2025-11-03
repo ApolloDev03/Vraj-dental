@@ -1,6 +1,6 @@
 // "use client"
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Mulish, Quicksand } from "next/font/google";
 import "./globals.css";
 import "./style.css";
 import Header from "./component/Header";
@@ -14,6 +14,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const quicksand =  Quicksand({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+})
+
+const muli = Mulish({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["200", "400", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -37,7 +49,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${quicksand.className} ${muli.className}`}
       >
         <Header />
         {children}
