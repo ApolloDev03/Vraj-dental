@@ -20,6 +20,7 @@ import axios from "axios";
 import { apiUrl } from "@/config";
 import FeedbackVideoSlider from '../component/feedback';
 import Head from "next/head";
+import Branches from '../component/branch';
 
 interface Doctor {
     id: number;
@@ -47,7 +48,8 @@ type Blog = {
 
 type HomeData = {
     latest_blogs: Blog[];
-    testimonial_videos: TestimonialVideos[];
+    // testimonial_videos: TestimonialVideos[];
+    our_branches: Branch[];
 }
 
 type MetaData = {
@@ -55,6 +57,13 @@ type MetaData = {
     metaKeyword: string;
     metaDescription: string;
 }
+
+type Branch = {
+  name: string;
+  displayUrl: string;
+  address: string;
+  mapLink: string | null;
+};
 
 export default function AboutUsPage() {
     const [homeData, setHomeData] = useState<HomeData | null>(null);
@@ -358,7 +367,9 @@ export default function AboutUsPage() {
 
             {/* Your Latest Blog Component Here */}
 
-            {homeData?.testimonial_videos && <FeedbackVideoSlider videos={homeData.testimonial_videos} />}
+            {/* {homeData?.testimonial_videos && <FeedbackVideoSlider videos={homeData.testimonial_videos} />} */}
+
+            {homeData?.our_branches && <Branches branches={homeData.our_branches} />}
 
             {homeData?.latest_blogs && <BlogSection blogs={homeData.latest_blogs} />}
         </main>

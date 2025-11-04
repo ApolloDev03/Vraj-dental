@@ -24,7 +24,7 @@ interface AppointmentForm {
 }
 
 export default function AppointmentSection() {
-    const [branches, setBranches] = useState<Branch[]>([]);
+    const [branches, setBranches] = useState([]);
     const [form, setForm] = useState<AppointmentForm>({
         name: "",
         mobile: "",
@@ -33,13 +33,26 @@ export default function AppointmentSection() {
     const [loading, setLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
 
+    
+
     useEffect(() => {
         axios
-            .post(`${apiUrl}/our-branches`, {})
+            .post(`${apiUrl}/our-branches`)
             .then((res) => {
-                if (res.data.success) setBranches(res.data.data as Branch[]);
-            });
+                if (res.data.success && Array.isArray(res.data.data)) {
+                    setBranches(res.data.data);
+                    
+                } 
+                
+            })
+            .catch ((err) => console.error("Failed to fetch branches:",err)
+        )
     }, []);
+    
+    useEffect(() => {
+        // console.log(branches,"addddadadadadadadad");
+
+    },[branches])
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -146,9 +159,9 @@ export default function AppointmentSection() {
                             className="w-full py-4 text-lg bg-[#f4f4f4] uppercase placeholder-[#4c6689] rounded outline-none appearance-none"
                         >
                             <option value="" disabled>Select Your Branch</option>
-                            {branches.map((branch) => (
+                            {branches.map((branch:any) => (
                                 <option key={branch.name} value={branch.name}>
-                                    {branch.area}
+                                    {branch.name}
                                 </option>
                             ))}
                         </select>

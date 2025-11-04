@@ -99,42 +99,42 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
     // console.log(blog?.id,"blogidcomment");
 
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!blog) return;
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     if (!blog) return;
 
-        // console.log("Submitting comment for blog:", blog);
-
-
-        setSubmitting(true);
-        setMessage(null);
+    //     // console.log("Submitting comment for blog:", blog);
 
 
-        try {
-            const response = await axios.post(`${apiUrl}/blog/comment`, {
-                blogId: blog.id,
-                name: formData.name,
-                email: formData.email,
-                comment: formData.comment,
-            });
+    //     setSubmitting(true);
+    //     setMessage(null);
 
-            if (response.data?.success) {
-                setMessage("✅ Comment submitted successfully!");
-                setFormData({ name: "", email: "", comment: "" });
-            } else {
-                setMessage("❌ Failed to submit comment. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error submitting comment:", error);
-            setMessage("⚠️ Something went wrong. Please try again later.");
-        } finally {
-            setSubmitting(false);
 
-            setTimeout(() => {
-                setMessage(null);
-            }, 5000)
-        }
-    };
+    //     try {
+    //         const response = await axios.post(`${apiUrl}/blog/comment`, {
+    //             blogId: blog.id,
+    //             name: formData.name,
+    //             email: formData.email,
+    //             comment: formData.comment,
+    //         });
+
+    //         if (response.data?.success) {
+    //             setMessage("✅ Comment submitted successfully!");
+    //             setFormData({ name: "", email: "", comment: "" });
+    //         } else {
+    //             setMessage("❌ Failed to submit comment. Please try again.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error submitting comment:", error);
+    //         setMessage("⚠️ Something went wrong. Please try again later.");
+    //     } finally {
+    //         setSubmitting(false);
+
+    //         setTimeout(() => {
+    //             setMessage(null);
+    //         }, 5000)
+    //     }
+    // };
 
 
     if (loading) return <div className="text-center py-20">Loading...</div>;
@@ -169,7 +169,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
             </Head>
 
             <BreadcrumbHero
-                title="BLOD DETAILS"
+                title="BLOG DETAILS"
                 crumbs={[{ label: "Home", href: "/" }, { label: "Blog Details" }]}
             />
             <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12 ">
@@ -201,7 +201,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                     </div>
 
                     {/* Comment Section */}
-                    <div className="mt-12 bg-white shadow rounded-lg p-6">
+                    {/* <div className="mt-12 bg-white shadow rounded-lg p-6">
                         <h2 className="text-lg font-semibold border-l-4 border-[#005d98] pl-3 mb-4">
                             Leave a Comment
                         </h2>
@@ -254,7 +254,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
                                 </p>
                             )}
                         </form>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Sidebar */}

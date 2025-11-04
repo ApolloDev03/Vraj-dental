@@ -37,36 +37,28 @@ type ContactApiResponse = {
     meta_Data: MetaData;
 }
 
-const branches = [
-    {
-        title: 'VRAJ GROUP OF DENTAL CLINICS AJWA ROAD BRANCH',
-        address:
-            'FF, DIVYA plaza complex, Above Jigar provision store, Besides Atul bakery Vadodara Gujarat.',
-        phone: '+91 1234567890',
-        email: 'drujas88@gmail.com',
-    },
-    {
-        title: 'VRAJ DENTAL CLINIC IN VADODARA-HARNI ROAD',
-        address:
-            '18/GF, Red Coral,Opp Gada Circle, Harni Road, Vadodara, Gujarat',
-        phone: '+91 94277 84433',
-        email: 'drujas88@gmail.com',
-    },
-    {
-        title: 'VRAJ DENTAL CLINIC & IMPLANT CENTER RAOPURA',
-        address:
-            '1st Floor Ashok House 2, Inside Santhavasahat Gate, Raopura, Vadodara, Gujarat.',
-        phone: '+91 99049 63090',
-        email: 'drujas88@gmail.com',
-    },
-    {
-        title: 'VRAJ DENTAL CLINIC IN VADODARA-SAMA-SAVLI',
-        address:
-            '2nd Floor, Shukan Hub, Opp Shivam Party Plot, Sama – Savli Main Road, Vadodara Gujarat.',
-        phone: '+91 94277 84433',
-        email: 'drujas88@gmail.com',
-    },
-];
+// const branches = [
+//     {
+//         title: 'VRAJ GROUP OF DENTAL CLINICS AJWA ROAD BRANCH',
+//         address:
+//             'FF, DIVYA plaza complex, Above Jigar provision store, Besides Atul bakery Vadodara Gujarat.'
+//     },
+//     {
+//         title: 'VRAJ DENTAL CLINIC IN VADODARA-HARNI ROAD',
+//         address:
+//             '18/GF, Red Coral,Opp Gada Circle, Harni Road, Vadodara, Gujarat'
+//     },
+//     {
+//         title: 'VRAJ DENTAL CLINIC & IMPLANT CENTER RAOPURA',
+//         address:
+//             '1st Floor Ashok House 2, Inside Santhavasahat Gate, Raopura, Vadodara, Gujarat.'
+//     },
+//     {
+//         title: 'VRAJ DENTAL CLINIC IN VADODARA-SAMA-SAVLI',
+//         address:
+//             '2nd Floor, Shukan Hub, Opp Shivam Party Plot, Sama – Savli Main Road, Vadodara Gujarat.'
+//     },
+// ];
 
 export default function ContactPage() {
     const [form, setForm] = useState<FormValues>({
@@ -79,12 +71,37 @@ export default function ContactPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
     const [metaData, setMetaData] = useState<MetaData | null>(null);
+    const [branches, setBranches] = useState<{ name: string; address: string; mapLink: string }[]>([]);
+
+    useEffect(() => {
+        const fetchBranches = async () => {
+            try {
+                const response = await axios.post(`${apiUrl}/our-branches`);
+                if (response.data.success && Array.isArray(response.data.data)) {
+                    // Get first 4 branches only
+                    const firstFour = response.data.data.slice(0, 4);
+                    // Simplify data for rendering
+                    setBranches(
+                        firstFour.map((b: any) => ({
+                            name: b.name,
+                            address: b.address,
+                            mapLink: b.mapLink,
+                        }))
+                    );
+                }
+            } catch (error) {
+                console.error('Error fetching branches:', error);
+            }
+        };
+
+        fetchBranches();
+    }, []);
 
     useEffect(() => {
         const fetchContactData = async () => {
-            try{
+            try {
                 const response = await axios.post(`${apiUrl}/contact`);
-                if(response.data.success) {
+                if (response.data.success) {
                     setMetaData(response.data.meta_data);
                 }
             } catch (error) {
@@ -92,7 +109,7 @@ export default function ContactPage() {
             }
         }
         fetchContactData()
-    },[])
+    }, [])
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -103,18 +120,18 @@ export default function ContactPage() {
         setLoading(true);
         setMessage(null);
 
-        try{
-            const response = await axios.post(`${apiUrl}/visitor-inquiry-submit`,{
-                 name: form.name,
+        try {
+            const response = await axios.post(`${apiUrl}/visitor-inquiry-submit`, {
+                name: form.name,
                 mobile: form.mobile,
                 email: form.email,
                 strSubject: form.strSubject,
                 strMessage: form.strMessage
             })
 
-            if(response.data.success){
+            if (response.data.success) {
                 setMessage({ type: 'success', text: response.data.message });
-                 setForm({ name: '', email: '', mobile: '', strSubject: '', strMessage: '' });
+                setForm({ name: '', email: '', mobile: '', strSubject: '', strMessage: '' });
             } else {
                 setMessage({ type: 'error', text: 'Failed to submit inquiry. Please try again.' });
             }
@@ -143,7 +160,7 @@ export default function ContactPage() {
                     metaData?.metaKeyword && (
                         <meta
                             name="keywords"
-                            content={metaData?.metaKeyword }
+                            content={metaData?.metaKeyword}
                         />
                     )
                 }
@@ -258,7 +275,7 @@ export default function ContactPage() {
                                     disabled={loading}
                                     className="group inline-flex items-center gap-3 rounded-full bg-[#005d98] hover:bg-[#bace3d] px-4 py-3 text-white transition hover:opacity-90"
                                 >
-                                    {loading ? 'SENDING' :'SEND MESSAGE'}
+                                    {loading ? 'SENDING' : 'SEND MESSAGE'}
                                     <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#0f63a9] group-hover:text-[#130947] shadow-[0_3px_10px_rgba(0,0,0,0.15)]">
                                         <FaPaperPlane className="h-4 w-4 rotate-5 c z-100" />
                                     </span>
@@ -287,36 +304,23 @@ export default function ContactPage() {
             {/* Branch Grid */}
             <section className="mx-auto max-w-6xl px-4 pb-10">
                 <div className="grid  md:grid-cols-2">
-                    {branches.map((b) => (
+                    {branches.map((b: any) => (
                         <div
-                            key={b.title}
+                            key={b.name}
                             className=" border border-[#b0cb1f] bg-white p-5 shadow-[10px_10px_10px_#ccc]"
                         >
                             <h4 className="!text-[21px] md:!text-2xl font-semibold tracking-wide text-[#005d98] mb-2">
-                                {b.title}
+                                {b.name}
                             </h4>
-                            <p className="!text-[14px] md:!text-[16px] leading-6 text-[#4a5a6b]">{b.address}</p>
+                            <a
+                                href={b.mapLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-2 inline-block text-[16px] !text-[#6b727f] hover:!underline"
+                            >
+                                {b.address}
+                            </a>
 
-                            <div className="mt-3 space-y-2 text-[15px] text-[#4a5a6b]">
-                                <div className="flex items-center gap-2">
-                                    <FaPhoneVolume className="h-4 w-4 text-[#6d7a8c]" />
-                                    {/* <span>{b.phone}</span> */}
-                                    <Link
-                                     href={`tel:${b.phone.replace(/[^+\d]/g, '')}`}
-                                     className='!text-[14px] md:!text-[16px]'
-                                     >{b.phone}</Link>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <FaRegEnvelope className="h-4 w-4 text-[#6d7a8c]" />
-                                    {/* <span>{b.email}</span> */}
-                                    <Link 
-                                        href={`mailto:${b.email}`}
-                                        className='!text-[14px] md:!text-[16px] font-normal' 
-                                        >
-                                            {b.email}
-                                        </Link>
-                                </div>
-                            </div>
                         </div>
                     ))}
                 </div>

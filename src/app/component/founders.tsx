@@ -52,14 +52,25 @@ export default function FounderSection() {
             <h3 className="text-[23px] md:text-[28px] font-semibold" style={{ color: "#005d98" }}>
               Dr Ujas Shah
             </h3>
-            <p className="mt-4 !text-[14px] md:!text-[16px] leading-8 text-slate-700">
-              Dr. UJAS SHAH attended M.P dental College in Vadodara where he earned his Becholure degree
-              in the field of dentistry. He then completed an extensive three year master degree program,
-              where he was awarded specialty certificates in both Periodontics and implantology. While doing
-              master degree course he also completed his research on bone graft material which were used to
-              increase the bone height and width for future implant placement and earned his Master’s degree
-              in the field of periodontics and implantology. Dr Ujas Became Dentist in Vadodara
+            <p className="mt-4 !mb-0 !text-[14px] md:!text-[16px] leading-8 text-slate-700">
+              Dr. Ujas Shah is one of Vadodara’s most trusted and experienced implant dentists, with 5000+ successful dental implant placements.
+              With 14+ years of clinical expertise, he is well-known for his gentle approach, honest guidance, and dedication to giving every patient a confident, natural, and long-lasting smile.
             </p>
+            <p className="mt-1 !text-[14px] md:!text-[16px] leading-8 text-slate-700">
+              He has completed his Post-Graduation in Implantology from Vadodara and holds a Fellowship in Implant Dentistry from Germany, ensuring that every treatment he provides meets global standards of precision and safety.
+
+              As the Director of Vraj Group of Dental Clinics, Dr. Ujas Shah leads and manages 8 clinics across Vadodara, supported by a team of expert doctors.
+              Under his leadership, VGDC has grown into a multi-branch dental network where patients can easily access the nearest clinic with consistent, high-quality care.
+            </p>
+            <p className="mt-1 !text-[14px] md:!text-[16px] leading-8 text-slate-700">
+              His mission is to make advanced, high-quality, and affordable dental treatment accessible to every family in our city.
+
+              Patients appreciate VGDC for:            </p>
+              <ul className="list-disc pl-5">
+                <li>Transparent and clear treatment planning</li>
+                <li>Neat, precise, and painless work</li>
+                <li>Genuine care for their comfort at every step</li>
+              </ul>
           </div>
         </div>
 

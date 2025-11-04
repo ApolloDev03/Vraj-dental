@@ -82,9 +82,9 @@ export default function Footer() {
                     <div className="single-footer-widget">
                         <h3>Contact Info</h3>
                         <ul className="footer-contact-info">
-                            <li>
+                            {/* <li>
                                 <span>Location:</span> 18/GF, Red Coral, Opp Gada Circle, Harni Road, Vadodara, Gujarat
-                            </li>
+                            </li> */}
                             <li>
                                 <span>Email:</span>{" "}
                                 <a href="mailto:vrajgroupofdental@gmail.com">
@@ -93,13 +93,13 @@ export default function Footer() {
                             </li>
                             <li>
                                 <span>Phone:</span>{" "}
-                                <a href="tel:+919427784433">+91 94277 84433</a>
+                                <a href="tel:+91 63547 34441">+91 6354 734 441</a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href="https://maps.app.goo.gl/9wGzVZ5bjnvWerUu8" target="_blank" rel="noopener noreferrer">
                                     View Location on GoogleMap
                                 </a>
-                            </li>
+                            </li> */}
 
                         </ul>
                     </div>
