@@ -18,7 +18,7 @@ export default function BreadcrumbHero({
 }: Props) {
   return (
     <section
-      className="relative w-full !h-[400px] md:h-[500px] py-0 overflow-hidden text-white"
+      className="relative w-full !h-[400px] md:!h-[500px] py-0 overflow-hidden text-white"
       style={{
         height: 500,
         backgroundImage: `url(${innerBg.src})`,
@@ -50,7 +50,7 @@ export default function BreadcrumbHero({
         }}
       />
 
-      <div className="relative z-[1] mx-auto max-w-6xl h-full px-4 flex flex-col !mt-[80px] md:mt-[100px] justify-center">
+      <div className="relative z-[1] mx-auto max-w-6xl h-full px-4 flex flex-col !mt-[80px] md:!mt-[100px] justify-center">
         <h1 className="text-3xl md:text-[42px] font-semibold " style={{color:"#ffffff"}}>
           {title}
         </h1>
