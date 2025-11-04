@@ -166,7 +166,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
                     gallery?.length > 0 && (
                         <section className="mt-16">
                             <h2 className="text-2xl md:text-[42px] font-normal text-[#005d98] mb-6 text-center">
-                                Root Canal Treatment Gallery
+                                {h1Text} Gallery
                             </h2>
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                                 {gallery.map((g: any, i: number) => (
@@ -217,7 +217,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
                 {latest_blogs?.length > 0 && (
                     <section className="mt-16">
                         <h2 className="text-2xl md:text-[42px] font-normal text-[#005d98] mb-10 text-center">
-                            Latest Blogs
+                            Latest Blogs of {h1Text}
                         </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

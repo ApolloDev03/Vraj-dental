@@ -30,7 +30,7 @@ type ApiResponse = {
   meta_data: MetaData
 }
 
-const PAGE_SIZE = 27;
+const PAGE_SIZE = 28;
 
 export default function GalleryClient() {
   const searchParams = useSearchParams();
@@ -108,11 +108,11 @@ export default function GalleryClient() {
         </div>
 
         <section aria-label="Dental gallery" className="mb-10">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {paginatedItems.map((item) => (
               <li key={item.id} className="group border border-[#005d98] overflow-hidden bg-white">
                 <figure>
-                  <div className="relative w-full h-[280px]">
+                  <div className="relative w-full h-[220px]">
                     <Image
                       src={item.image}
                       alt={item.imageAlt || item.imageTitle || item.title || "Gallery image"}

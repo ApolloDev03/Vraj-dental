@@ -22,7 +22,7 @@ export default function BlogSection({blogs}:any) {
             <BlogCard
               key={index}
               slug={blog.urlParameter}
-              href={`/blog/${blog.urlParameter}`}
+              href={`/blogdetail/${blog.urlParameter}`}
               imageSrc={imageUrl}
               imageAlt={blog.blogTitle}
               dateText={new Date(blog.created_at).toDateString()}
