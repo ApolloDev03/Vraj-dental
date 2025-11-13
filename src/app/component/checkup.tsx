@@ -41,6 +41,7 @@ export default function AppointmentSection() {
             .then((res) => {
                 if (res.data.success && Array.isArray(res.data.data)) {
                     setBranches(res.data.data);
+                    console.log(res.data.data,"dataaaaaa");
                     
                 } 
                 
@@ -160,8 +161,8 @@ export default function AppointmentSection() {
                         >
                             <option value="" disabled>Select Your Branch</option>
                             {branches.map((branch:any) => (
-                                <option key={branch.name} value={branch.name}>
-                                    {branch.name}
+                                <option key={branch.shortName} value={branch.shortName}>
+                                    {branch.shortName}
                                 </option>
                             ))}
                         </select>
