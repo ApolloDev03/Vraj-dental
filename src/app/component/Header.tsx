@@ -60,7 +60,7 @@ const Header: React.FC = () => {
                     <div className="flex items-center space-x-4  ">
                         <div className="overflow-hidden whitespace-nowrap min-w-0 ">
                             <div className="animate-marquee text-[15px] font-medium truncate  ">
-                                Most Reviewed Dental Clinic in Vadodara, 1000 + 5* Rating
+                                Book your free dental check up appointment today.
                             </div>
                         </div>
                     </div>
