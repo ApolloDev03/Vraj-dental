@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import bg from "../../asserts/bg-white.jpg"; // keep your folder
-import ujas from '../../asserts/ujas.webp'
+import ujas from '../../asserts/founder-photo.webp'
 
 export default function FounderSection() {
   const bgUrl = typeof bg === "string" ? bg : (bg as { src: string }).src;
