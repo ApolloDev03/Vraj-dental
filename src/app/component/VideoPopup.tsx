@@ -12,18 +12,13 @@ const VideoPopup = () => {
     useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await axios.get(`${apiUrl}/popupvideo`);
-        if (res.data && res.data.success && res.data.video_url) {
-          // Convert YouTube short link to embeddable format if needed
-          const youtubeUrl = res.data.video_url;
-          console.log(youtubeUrl,"yottttttt");
-          
-          let embedUrl = youtubeUrl;
+        const res = await axios.post(`${apiUrl}/popupvideo`);
 
-          if (youtubeUrl.includes("youtu.be")) {
-            const videoId = youtubeUrl.split("youtu.be/")[1];
-            embedUrl = `https://www.youtube.com/embed/${videoId}`;
-          }
+        if (res.data?.success && res.data?.video_url) {
+          let embedUrl = res.data.video_url;
+
+          // FIX: convert "&amp;" → "&"
+          embedUrl = embedUrl.replace(/&amp;/g, "&");
 
           setVideoUrl(embedUrl);
           setOpen(true);
@@ -85,7 +80,7 @@ const VideoPopup = () => {
           <iframe
             width="100%"
             height="230"
-            src={`${videoUrl}?modestbranding=1&showinfo=0&rel=0`}
+            src={videoUrl}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
