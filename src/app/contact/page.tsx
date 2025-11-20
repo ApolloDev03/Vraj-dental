@@ -21,7 +21,7 @@ type FormValues = {
     name: string;
     email: string;
     mobile: string;
-    strSubject: string;
+    clinic: string;
     strMessage: string;
 };
 
@@ -65,13 +65,13 @@ export default function ContactPage() {
         name: '',
         email: '',
         mobile: '',
-        strSubject: '',
+        clinic: '',
         strMessage: '',
     });
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
     const [metaData, setMetaData] = useState<MetaData | null>(null);
-    const [branches, setBranches] = useState<{ name: string; address: string; mapLink: string }[]>([]);
+    const [branches, setBranches] = useState<{ name: string; address: string; mapLink: string; shortName: string; }[]>([]);
 
     useEffect(() => {
         const fetchBranches = async () => {
@@ -98,6 +98,21 @@ export default function ContactPage() {
     }, []);
 
     useEffect(() => {
+        const fetchBranches = async () => {
+            try {
+                const response = await axios.post(`${apiUrl}/our-branches`);
+                if (response.data.success) {
+                    setBranches(response.data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching branches:", error);
+            }
+        };
+
+        fetchBranches();
+    }, []);
+
+    useEffect(() => {
         const fetchContactData = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/contact`);
@@ -112,9 +127,13 @@ export default function ContactPage() {
     }, [])
 
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
-
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        setForm(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -125,13 +144,13 @@ export default function ContactPage() {
                 name: form.name,
                 mobile: form.mobile,
                 email: form.email,
-                strSubject: form.strSubject,
+                clinic: form.clinic,
                 strMessage: form.strMessage
             })
 
             if (response.data.success) {
                 setMessage({ type: 'success', text: response.data.message });
-                setForm({ name: '', email: '', mobile: '', strSubject: '', strMessage: '' });
+                setForm({ name: '', email: '', mobile: '', clinic: '', strMessage: '' });
             } else {
                 setMessage({ type: 'error', text: 'Failed to submit inquiry. Please try again.' });
             }
@@ -235,21 +254,43 @@ export default function ContactPage() {
                                     required
                                 />
                                 <InputWithIcon
+                                    type='text'
                                     name="mobile"
                                     value={form.mobile}
                                     onChange={handleChange}
+                                    maxLength={10}
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
                                     placeholder="YOUR PHONE"
                                     icon={<FaPhoneAlt className="h-4 w-4" />}
                                     required
+                                    onKeyDown={(e) => {
+                                        if (!/[0-9]/.test(e.key) && e.key !== "Backspace" && e.key !== "Tab") {
+                                            e.preventDefault();
+                                        }
+                                    }}
                                 />
-                                <InputWithIcon
-                                    name="strSubject"
-                                    value={form.strSubject}
-                                    onChange={handleChange}
-                                    placeholder="YOUR SUBJECT"
-                                    icon={<FaScrewdriverWrench className="h-4 w-4" />}
-                                    required
-                                />
+                                {/* 🔥 UPDATED: DROPDOWN HERE */}
+                                <div className="flex items-center rounded border border-gray-200">
+                                    <div className="flex h-12 w-12 items-center justify-center text-[#0e5aa7]">
+                                        <FaScrewdriverWrench className="h-4 w-4" />
+                                    </div>
+
+                                    <select
+                                        name="clinic"
+                                        value={form.clinic}
+                                        onChange={handleChange}
+                                        required
+                                        className="h-12 w-full border-0 pr-3 outline-none bg-white text-gray-700"
+                                    >
+                                        <option value="">Select Clinic</option>
+                                        {branches.map((branch, i) => (
+                                            <option key={i} value={branch.shortName}>
+                                                {branch.shortName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
 
                             <div>
