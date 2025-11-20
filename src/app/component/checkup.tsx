@@ -33,7 +33,7 @@ export default function AppointmentSection() {
     const [loading, setLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
 
-    
+
 
     useEffect(() => {
         axios
@@ -41,19 +41,19 @@ export default function AppointmentSection() {
             .then((res) => {
                 if (res.data.success && Array.isArray(res.data.data)) {
                     setBranches(res.data.data);
-                    console.log(res.data.data,"dataaaaaa");
-                    
-                } 
-                
+                    console.log(res.data.data, "dataaaaaa");
+
+                }
+
             })
-            .catch ((err) => console.error("Failed to fetch branches:",err)
-        )
+            .catch((err) => console.error("Failed to fetch branches:", err)
+            )
     }, []);
-    
+
     useEffect(() => {
         // console.log(branches,"addddadadadadadadad");
 
-    },[branches])
+    }, [branches])
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -80,18 +80,18 @@ export default function AppointmentSection() {
                 setMessage("Inquiry submitted successfully!");
                 setTimeout(() => {
                     setMessage("");
-                },4000)
+                }, 4000)
             } else {
                 setMessage("Submission failed, please try again.");
                 setTimeout(() => {
                     setMessage("");
-                },4000)
+                }, 4000)
             }
         } catch {
             setMessage("Network error, please try again.");
             setTimeout(() => {
-                    setMessage("");
-                },4000)
+                setMessage("");
+            }, 4000)
         }
         setLoading(false);
     };
@@ -134,13 +134,21 @@ export default function AppointmentSection() {
                         </label>
 
                         <input
-                            type="tel"
+                            type="text"
                             name="mobile"
                             placeholder="YOUR PHONE"
                             value={form.mobile}
                             required
                             onChange={handleChange}
+                            maxLength={10}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             className="w-full py-4 text-lg bg-[#f4f4f4] placeholder-[#4c6689] rounded outline-none"
+                            onKeyDown={(e) => {
+                                if (!/[0-9]/.test(e.key) && e.key !== "Backspace" && e.key !== "Tab") {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
 
                     </div>
@@ -160,7 +168,7 @@ export default function AppointmentSection() {
                             className="w-full py-4 text-lg bg-[#f4f4f4] uppercase placeholder-[#4c6689] rounded outline-none appearance-none"
                         >
                             <option value="" disabled>Select Your Branch</option>
-                            {branches.map((branch:any) => (
+                            {branches.map((branch: any) => (
                                 <option key={branch.shortName} value={branch.shortName}>
                                     {branch.shortName}
                                 </option>
