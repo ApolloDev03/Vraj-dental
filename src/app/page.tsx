@@ -17,6 +17,7 @@ import axios from "axios";
 import { apiUrl } from "@/config";
 import Head from "next/head";
 import { log } from "console";
+import "./style.css";
 import VideoPopup from "./component/VideoPopup";
 
 type OurFact = {
@@ -113,7 +114,7 @@ export default function Home() {
         
       </Head>
 
-      <VideoPopup />
+      {/* <VideoPopup /> */}
       <HeroSection />
       <AppointmentSection />
       <AboutMissionVisionSection />
