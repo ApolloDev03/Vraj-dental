@@ -41,7 +41,7 @@ export default function AppointmentSection() {
             .then((res) => {
                 if (res.data.success && Array.isArray(res.data.data)) {
                     setBranches(res.data.data);
-                    console.log(res.data.data, "dataaaaaa");
+                    // console.log(res.data.data, "dataaaaaa");
 
                 }
 
