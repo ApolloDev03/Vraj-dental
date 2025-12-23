@@ -32,6 +32,8 @@ export default function AppointmentSection() {
     });
     const [loading, setLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
+    const [showPopup, setShowPopup] = useState(false);
+
 
 
 
@@ -77,10 +79,11 @@ export default function AppointmentSection() {
             );
             if (response.data.success) {
                 setForm({ name: "", mobile: "", clinic: "" });
-                setMessage("Inquiry submitted successfully!");
+                setShowPopup(true);
                 setTimeout(() => {
-                    setMessage("");
-                }, 4000)
+                    setShowPopup(false);
+                }, 10000);
+
             } else {
                 setMessage("Submission failed, please try again.");
                 setTimeout(() => {
@@ -192,11 +195,35 @@ export default function AppointmentSection() {
                             </span>
                         </button>
                     </div>
-                    {message && (
+                    {/* {message && (
                         <div className="col-span-2 text-center text-green-600 font-semibold mt-2">
                             {message}
                         </div>
+                    )} */}
+
+                    {showPopup && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                            <div className="bg-white rounded-2xl shadow-xl w-[90%] max-w-md p-6 text-center relative animate-fadeIn">
+
+                                <h3 className="text-xl font-semibold text-[#0266b5] mb-3">
+                                    Thank you for contacting VGDC.
+                                </h3>
+
+                                <p className="text-gray-600 leading-relaxed">
+                                    We’ll get in touch with you shortly to confirm your appointment.
+                                </p>
+
+                                <button
+                                    onClick={() => setShowPopup(false)}
+                                    className="mt-6 px-6 py-2 bg-[#0266b5] text-white rounded-full hover:bg-[#023f6b] transition"
+                                >
+                                    OK
+                                </button>
+
+                            </div>
+                        </div>
                     )}
+
                 </form>
             </section>
         </div >

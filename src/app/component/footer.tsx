@@ -22,8 +22,8 @@ export default function Footer() {
                                 />
                             </a>
                             <p>
-                                Our patients leave our clinic feeling happy and satisfied with the
-                                treatment and service we provide.
+                                We ensure every patient receives high-quality treatment and compassionate care.
+Your comfort, trust, and satisfaction are our top priorities.
                             </p>
                         </div>
                         <ul className="flex space-x-4 mt-3">

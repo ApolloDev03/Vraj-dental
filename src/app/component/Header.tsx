@@ -390,7 +390,7 @@ const Header: React.FC = () => {
                                     <a href="https://maps.app.goo.gl/opR9qxFhpDNVic6t5" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Gotri Sevasi Rd</a> {" "} |{" "}
                                     <a href="https://maps.app.goo.gl/X3v3CbcV8zcK8bme7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Vasna Bhayli</a> {" "} |{" "}
                                     <a href="https://maps.app.goo.gl/JYWAxzG1r3ZrtVgP9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Manjalpur</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/ie3GdXirj3gN7PE87" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Atladara</a>
+                                    <a href="https://maps.app.goo.gl/eRQE3m4Wekn4W4Eb9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Sunpharma Road</a>
                                 </span>
                             </div>
                         </div>

@@ -25,30 +25,34 @@ const heroSlides = [
 ];
 
 export default function HeroSection() {
-    const prevRef = useRef<HTMLButtonElement>(null);
-    const nextRef = useRef<HTMLButtonElement>(null);
+    // const prevRef = useRef<HTMLButtonElement>(null);
+    // const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
         <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[0px] overflow-hidden group">
-            
+
             <Swiper
                 modules={[Navigation, Autoplay]} // ← Removed Pagination module
                 autoplay={{ delay: 5000 }}
                 loop={true}
-                
-                onBeforeInit={(swiper) => {
-                    if (
-                        swiper.params.navigation &&
-                        typeof swiper.params.navigation === "object"
-                    ) {
-                        swiper.params.navigation.prevEl = prevRef.current;
-                        swiper.params.navigation.nextEl = nextRef.current;
-                    }
-                }}
                 navigation={{
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
+                    prevEl: ".hero-prev",
+                    nextEl: ".hero-next",
                 }}
+
+                // onBeforeInit={(swiper) => {
+                //     if (
+                //         swiper.params.navigation &&
+                //         typeof swiper.params.navigation === "object"
+                //     ) {
+                //         swiper.params.navigation.prevEl = prevRef.current;
+                //         swiper.params.navigation.nextEl = nextRef.current;
+                //     }
+                // }}
+                // navigation={{
+                //     prevEl: prevRef.current,
+                //     nextEl: nextRef.current,
+                // }}
                 className="w-full h-[160px] md:h-[570px]"
 
             >
@@ -68,24 +72,23 @@ export default function HeroSection() {
 
             {/* Custom Arrows */}
             <button
-                ref={prevRef}
-                className="cursor-pointer custom-prev absolute top-1/2 left-5 z-10 transform -translate-y-1/2
+                className="hero-prev cursor-pointer absolute top-1/2 left-5 z-10 transform -translate-y-1/2
     bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
-    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+    hover:text-white hover:scale-110 transition-all"
                 aria-label="Previous"
             >
                 <BsChevronLeft className="text-2xl" />
             </button>
 
             <button
-                ref={nextRef}
-                className="cursor-pointer custom-next absolute top-1/2 right-5 z-10 transform -translate-y-1/2
+                className="hero-next cursor-pointer absolute top-1/2 right-5 z-10 transform -translate-y-1/2
     bg-white text-[#130947] hover:bg-[#005d98] p-4 rounded shadow-md opacity-0 group-hover:opacity-100 duration-700
-    hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg transition-all"
+    hover:text-white hover:scale-110 transition-all"
                 aria-label="Next"
             >
                 <BsChevronRight className="text-2xl" />
             </button>
+
         </section>
     );
 }

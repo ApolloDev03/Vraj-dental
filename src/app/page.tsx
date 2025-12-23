@@ -114,7 +114,7 @@ export default function Home() {
         
       </Head>
 
-      {/* <VideoPopup /> */}
+       <VideoPopup /> 
       <HeroSection />
       <AppointmentSection />
       <AboutMissionVisionSection />
