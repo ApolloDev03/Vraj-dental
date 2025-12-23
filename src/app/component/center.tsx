@@ -27,7 +27,7 @@ export default function EmpanelledCentres() {
 
       <div className="mx-auto max-w-6xl py-12 md:py-16  mt-12" >
         <h2 className="text-center font-bold text-[28px] md:text-[28px] leading-tight" style={{color:"#ffffff"}}>
-          Empanelled Centres For
+          Authorized Empanelled Centres
         </h2>
 
         {/* small white divider */}

@@ -24,7 +24,7 @@ export default function FounderSection() {
             OUR DOCTORS
           </p>
           <h2 className="text-[25px] md:text-[42px] font-normal tracking-tight" style={{ color: "#005d98" }}>
-            meet our Founder
+            Meet Our Founder
           </h2>
           <p className="mt-3 mx-auto text-center  text-[17px] leading-7 text-slate-600">
             Qualified dental doctors are essential for maintaining and improving oral <br />
