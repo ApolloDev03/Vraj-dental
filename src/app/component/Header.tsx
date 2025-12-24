@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                     {/* Social Icons */}
                     <div className="flex space-x-4">
                         <Link
-                            href="https://www.facebook.com/login/"
+                            href="https://www.facebook.com/vrajgroupofdental/"
                             aria-label="Facebook"
                             className='bg-[#FFFFFF33] p-2 rounded-full transition-all hover:bg-transparent hover:-translate-y-1 duration-500'
                             style={{ display: 'inline-flex', alignItems: 'center', color: 'white' }}
