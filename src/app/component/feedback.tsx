@@ -47,7 +47,7 @@ export default function FeedbackVideoSlider({ videos }: any) {
             className="mt-2 text-center text-[25px] md:text-[42px]"
             style={{ color: "#ffffff" }}
           >
-            Parents Are Saying About Us
+           What Parents Are Saying About Us
           </h2>
 
           <div className="feedback-swiper mt-12 w-full max-w-[720px] mx-auto border border-white pt-3">

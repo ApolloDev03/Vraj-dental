@@ -28,7 +28,7 @@ Your comfort, trust, and satisfaction are our top priorities.
                         </div>
                         <ul className="flex space-x-4 mt-3">
                             {[
-                                { icon: <FaFacebookF />, link: 'https://www.facebook.com/login/' },
+                                { icon: <FaFacebookF />, link: 'https://www.facebook.com/vrajgroupofdental/' },
                                 { icon: <FaTwitter />, link: 'https://x.com/i/flow/login' },
                                 { icon: <FaLinkedinIn />, link: 'https://www.linkedin.com/login' },
                                 { icon: <FaInstagram />, link: 'https://www.instagram.com/accounts/login/' },
