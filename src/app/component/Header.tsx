@@ -5,7 +5,7 @@ import logo from "../../asserts/logo.webp"
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaLocationCrosshairs } from 'react-icons/fa6';
+import { FaLocationDot } from 'react-icons/fa6';
 import { MdAccessTime } from 'react-icons/md';
 import axios from 'axios';
 import { apiUrl } from '@/config';
@@ -379,7 +379,7 @@ const Header: React.FC = () => {
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4">
                     {/* Location */}
                     <div className="flex items-start px-4 py-3 border-r border-b md:border-b-0 border-white md:border-r md:border-white">
-                        <FaLocationCrosshairs className="text-3xl flex-shrink-0 text-white" />
+                        <FaLocationDot className="text-3xl flex-shrink-0 text-white" />
                         <div className="ml-3 flex-1 min-w-0">
                             <div className="font-medium whitespace-normal break-words">
                                 <span className='text-white'>

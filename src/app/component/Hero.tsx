@@ -53,7 +53,7 @@ export default function HeroSection() {
                 //     prevEl: prevRef.current,
                 //     nextEl: nextRef.current,
                 // }}
-                className="w-full h-[160px] md:h-[570px]"
+                className="w-full h-[160px] md:h-[100vh]"
 
             >
                 {heroSlides.map((slide, index) => (
