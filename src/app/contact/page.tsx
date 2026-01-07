@@ -198,8 +198,9 @@ export default function ContactPage() {
                             icon={<FaMapMarkerAlt className="h-6 w-6 " />}
                             title="Location"
                             lines={[
-                                '18/GF, Red Coral,Opp Gada Circle,',
-                                'Harni Road, Vadodara, Gujarat',
+                                'Ajwa Rd | Harni Rd | Raopura | ',
+                                'Sama Savli Rd | Gotri Sevasi Rd |',
+                                ' Vasna Bhayli | Manjalpur | Sunpharma Road'
                             ]}
                         />
                         <InfoItem

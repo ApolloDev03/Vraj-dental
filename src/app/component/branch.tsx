@@ -4,9 +4,9 @@ export default function Branches( { branches }:any) {
     return (
         <section className="bg-white">
             <div className="mx-auto max-w-6xl px-4 pt-15 md:pt-20">
-                <p className="text-center uppercase mb-2 !text-[14px] font-black" style={{ color: "#b6c651" }}>
+                {/* <p className="text-center uppercase mb-2 !text-[14px] font-black" style={{ color: "#b6c651" }}>
                     OUR BRANCHES
-                </p>
+                </p> */}
 
                 <h2 className=" text-center text-[25px] md:text-[42px] leading-tight text-[#0b4773]">
                     Our Branches
