@@ -206,13 +206,13 @@ export default function ContactPage() {
                         <InfoItem
                             icon={<FaPhoneAlt className="h-6 w-6" />}
                             title="Phone Number"
-                            lines={['+91 94277 84433']}
+                            lines={['+91 6354 734 441']}
 
                         />
                         <InfoItem
                             icon={<FaEnvelope className="h-6 w-6" />}
                             title="Email Address"
-                            lines={['vrajgroupofdental@gmail.com', 'drujas88@gmail.com']}
+                            lines={['vrajgroupofdental@gmail.com']}
                         />
                     </div>
                 </div>
