@@ -383,14 +383,14 @@ const Header: React.FC = () => {
                         <div className="ml-3 flex-1 min-w-0">
                             <div className="font-medium whitespace-normal break-words">
                                 <span className='text-white'>
-                                    <a href="https://maps.app.goo.gl/L3TQPr5FdWmKFdrt6" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Ajwa Rd</a>{" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/vJ63vDw7ChJJ79jR6" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Harni Rd</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/YmYjGJJyNwaMvQGB7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Raopura</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/x97hmZgRqdPAo91i6" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Sama Savli Rd</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/opR9qxFhpDNVic6t5" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Gotri Sevasi Rd</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/X3v3CbcV8zcK8bme7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Vasna Bhayli</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/JYWAxzG1r3ZrtVgP9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Manjalpur</a> {" "} |{" "}
-                                    <a href="https://maps.app.goo.gl/eRQE3m4Wekn4W4Eb9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Sunpharma Road</a>
+                                    <a href="https://maps.app.goo.gl/Jm9DCyf7SaZ49Tzf7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Ajwa Rd</a>{" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/XjCCzYJuh7Lp1PpW8" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Harni Rd</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/ezJLZzwMgxwdvzxM9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Raopura</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/8fPbhhmK7YPtY4NG9" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Sama Savli Rd</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/2baBBthJxnsDFHK19" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Gotri Sevasi Rd</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/2rYhDrgxhePWAMEH8" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Vasna Bhayli</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/qAGyjXP3hMZ8W47S7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Manjalpur</a> {" "} |{" "}
+                                    <a href="https://maps.app.goo.gl/VzYmZkkZvZQT8ZSd7" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>Sunpharma Road</a>
                                 </span>
                             </div>
                         </div>
