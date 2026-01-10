@@ -28,7 +28,7 @@ export default function Branches( { branches }:any) {
                                 ].join(" ")}
                             >
                                 <h3 className="text-[24px] leading-snug text-[#0b4773] font-semibold">
-                                    {branch.name}
+                                    {branch.shortName}
                                 </h3>
                                 <p className="mt-3 text-[16px] leading-7 " style={{ color: "#6d7a8c" }}>
                                     {branch.mapLink ? (
