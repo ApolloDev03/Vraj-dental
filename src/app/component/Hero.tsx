@@ -9,22 +9,28 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-const heroSlides = [
-    {
-        src: require("../../asserts/hero1.webp"),
-        alt: "Hero Slide 1",
-    },
-    {
-        src: require("../../asserts/hero2.webp"),
-        alt: "Hero Slide 2",
-    },
-    {
-        src: require("../../asserts/hero3.webp"),
-        alt: "Hero Slide 3",
-    },
-];
+type Banner = {
+    banner_id: number;
+    sequence_no: number;
+    image: string;
+};
 
-export default function HeroSection() {
+// const heroSlides = [
+//     {
+//         src: require("../../asserts/hero1.webp"),
+//         alt: "Hero Slide 1",
+//     },
+//     {
+//         src: require("../../asserts/hero2.webp"),
+//         alt: "Hero Slide 2",
+//     },
+//     {
+//         src: require("../../asserts/hero3.webp"),
+//         alt: "Hero Slide 3",
+//     },
+// ];
+
+export default function HeroSection({ banners }: { banners: Banner[] }) {
     // const prevRef = useRef<HTMLButtonElement>(null);
     // const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -56,18 +62,19 @@ export default function HeroSection() {
                 className="w-full h-[160px] md:h-[100vh]"
 
             >
-                {heroSlides.map((slide, index) => (
-                    <SwiperSlide key={index}>
-                        <Image
-                            src={slide.src}
-                            alt={slide.alt}
-                            className="object-cover w-full h-full"
-                            priority
-                            width={0}
-                            height={0}
-                        />
-                    </SwiperSlide>
-                ))}
+                {banners
+                    ?.sort((a, b) => a.sequence_no - b.sequence_no)
+                    .map((slide, index) => (
+                        <SwiperSlide key={slide.banner_id}>
+                            <Image
+                                src={slide.image}
+                                alt={`Hero Slide ${index + 1}`}
+                                className="object-cover w-full h-full"
+                                priority={index === 0}
+                                fill
+                            />
+                        </SwiperSlide>
+                    ))}
             </Swiper>
 
             {/* Custom Arrows */}

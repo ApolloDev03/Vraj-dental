@@ -198,21 +198,32 @@ export default function ContactPage() {
                             icon={<FaMapMarkerAlt className="h-6 w-6 " />}
                             title="Location"
                             lines={[
-                                'Ajwa Rd | Harni Rd | Raopura | ',
-                                'Sama Savli Rd | Gotri Sevasi Rd |',
-                                ' Vasna Bhayli | Manjalpur | Sunpharma Road'
+                                <>
+                                    <Link  href="https://maps.app.goo.gl/kXc7LRGvAcNN52M56" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Ajwa Rd</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/4KwGFz2GgmAFFSU17" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Harni Rd</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/9XK2Eef7uAxLfVCT6" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Raopura</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/wBv8sSKQnBkis2bD8" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Sama Savli Rd</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/5WMyyqZdwdC3pyhU8" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Gotri Sevasi Rd</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/z6uhPLNa48Tf43ER9" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Vasna Bhayli</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/xfg3eCxPEVi7xizEA" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Manjalpur</Link> {" | "}
+                                    <Link href="https://maps.app.goo.gl/hcmLFoTwD6bzuvU69" target="_blank" className='!text-white hover:!text-white  hover:!underline'>Sunpharma Road</Link>
+                                </>
                             ]}
                         />
                         <InfoItem
                             icon={<FaPhoneAlt className="h-6 w-6" />}
                             title="Phone Number"
-                            lines={['+91 6354 734 441']}
+                            lines={[<Link className='!text-white hover:!text-white  hover:!underline' key="phone" href="tel:+916354734441">
+                        +91 6354 734 441
+                    </Link>,]}
 
                         />
                         <InfoItem
                             icon={<FaEnvelope className="h-6 w-6" />}
                             title="Email Address"
-                            lines={['vrajgroupofdental@gmail.com']}
+                            lines={[<Link className='!text-white hover:!text-white  hover:!underline' key="email" href="mailto:vrajgroupofdental@gmail.com">
+                        vrajgroupofdental@gmail.com
+                    </Link>,]}
                         />
                     </div>
                 </div>
@@ -378,7 +389,7 @@ function InfoItem({
 }: {
     icon: React.ReactNode;
     title: string;
-    lines: string[];
+    lines: React.ReactNode[];
 }) {
     return (
         <div className="flex items-start gap-3">

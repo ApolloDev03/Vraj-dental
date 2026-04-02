@@ -184,7 +184,7 @@ const Header: React.FC = () => {
       ${isServicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
     `}
                                     >
-                                        <div className="py-2">
+                                        <div className="py-2 max-h-[400px] overflow-y-scroll">
                                             {categories.length > 0 ? (
                                                 categories.map((service: any) => (
                                                     <Link

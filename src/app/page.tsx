@@ -60,6 +60,18 @@ type MetaData = {
   metaDescription: string;
 }
 
+type Banner = {
+  banner_id: number;
+  sequence_no: number;
+  image: string;
+};
+
+type AuthorizedLogo = {
+  id: number;
+  name: string;
+  image: string;
+};
+
 type HomeData = {
   our_facts: OurFact[];
   testimonial_videos: TestimonialVideos[];
@@ -67,6 +79,8 @@ type HomeData = {
   latest_blogs: Blog[];
   our_services: Service[];
   meta_data: MetaData;
+  banners: Banner[];
+  authorized_logos: AuthorizedLogo[];
 }
 
 export default function Home() {
@@ -115,7 +129,7 @@ export default function Home() {
       </Head>
 
        <VideoPopup /> 
-      <HeroSection />
+      <HeroSection banners={homeData?.banners || []} />
       <AppointmentSection />
       <AboutMissionVisionSection />
       {homeData?.our_facts && <ClinicFacts facts={homeData.our_facts} />}
@@ -124,7 +138,7 @@ export default function Home() {
       <FounderSection />
       {homeData?.testimonial_videos && <FeedbackVideoSlider videos={homeData.testimonial_videos} />}
       {homeData?.our_branches && <Branches branches={homeData.our_branches} />}
-      <EmpanelledCentres />
+      <EmpanelledCentres logos={homeData?.authorized_logos || []} />
       {homeData?.latest_blogs && <BlogSection blogs = {homeData.latest_blogs} />}
 
     </div>
