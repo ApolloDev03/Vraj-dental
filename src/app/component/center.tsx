@@ -7,13 +7,33 @@ import Image from "next/image";
 
 type Centre = { id: number; img: string; alt: string };
 
+type AuthorizedLogo = {
+  id: number;
+  name: string;
+  image: string;
+};
+
+type Props = {
+  logos?: AuthorizedLogo[];
+};
+
 const centres: Centre[] = [
   { id: 1, img: vmc.src, alt: "Vadodara Municipal Corporation" },
   { id: 2, img: hwb.src, alt: "HWB" },
   { id: 3, img: cghs.src, alt: "CGHS" },
 ];
 
-export default function EmpanelledCentres() {
+
+
+export default function EmpanelledCentres({ logos = [] }: Props) {
+  const dynamicCentres: Centre[] =
+  logos.length > 0
+    ? logos.map((l): Centre => ({
+        id: l.id,
+        img: l.image,
+        alt: l.name,
+      }))
+    : centres;
   return (
     <section
       className="relative"
@@ -35,7 +55,7 @@ export default function EmpanelledCentres() {
 
         {/* cards row */}
         <div className="mt-6 flex flex-wrap justify-center items-center gap-5">
-          {centres.map((c) => (
+          {dynamicCentres.map((c) => (
             <div
               key={c.id}
               className="h-[140px] w-[140px] md:h-[132px] md:w-[132px] p-4 rounded-xl bg-white

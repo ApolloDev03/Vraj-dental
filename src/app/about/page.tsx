@@ -183,7 +183,7 @@ export default function AboutUsPage() {
                                 />
                                 <div className="absolute top-[45%] -right-3 bg-[#005d98] text-white border-8 border-[#ffffff] rounded-full w-[150px] h-[150px] flex flex-col items-center justify-center">
                                     <p className='text-center uppercase font-semibold !text-white !leading-5'>
-                                        <span className="text-[30px] font-bold">10 </span>Years Experience
+                                        <span className="text-[30px] font-bold">14 </span>Years Experience
                                     </p>
                                     {/* <span className="text-xs">Experience</span> */}
                                 </div>
