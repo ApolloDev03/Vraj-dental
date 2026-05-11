@@ -7,7 +7,7 @@ import BreadcrumbHero from "../component/breadcrumb";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import { useEffect, useState } from "react";
-import Head from "next/head";
+
 
 type GalleryItem = {
   id: number;
@@ -78,7 +78,7 @@ export default function GalleryClient() {
 
   return (
     <div>
-      <Head>
+      {/* <Head>
         <title>{metaData?.metaTitle || null}</title>
         {
           metaData?.metaDescription && (
@@ -98,7 +98,7 @@ export default function GalleryClient() {
           )
         }
 
-      </Head>
+      </Head> */}
 
       <BreadcrumbHero title="GALLERY" crumbs={[{ label: "Home", href: "/" }, { label: "Gallery" }]} />
       <main className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8 py-10">
