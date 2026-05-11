@@ -1,126 +1,77 @@
-"use client"
+import { Metadata } from "next";
+import VideoGalleryClient from "./VideoGalleryClient";
+import { apiUrl } from "@/config";
 
-import { useEffect, useState } from "react"
-import BreadcrumbHero from "../component/breadcrumb"
-import axios from "axios"
-import { apiUrl } from "@/config"
-import Head from "next/head";
+async function getSeoData() {
+  try {
+    const res = await fetch(`${apiUrl}/video-gallery`, {
+      method: "POST",
+      next: {
+        revalidate: 3600,
+      },
+    });
 
-// app/components/VideoGallery.tsx
-type Video = {
-    id: number
-    videoUrl: string
-    videoTitle: string | null
+    const data = await res.json();
+
+    if (data.status) {
+      return data.meta_data;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Video Gallery SEO Error:", error);
+    return null;
+  }
 }
 
-type MetaData = {
-    metaTitle: string,
-    metaKeyword: string;
-    metaDescription: string;
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getSeoData();
+
+  return {
+    title:
+      meta?.metaTitle || "Video Gallery | Vraj Dental Clinic",
+
+    description:
+      meta?.metaDescription || "",
+
+    keywords:
+      meta?.metaKeyword || "",
+
+    openGraph: {
+      title:
+        meta?.metaTitle || "Video Gallery | Vraj Dental Clinic",
+
+      description:
+        meta?.metaDescription || "",
+
+      url:
+        "https://vrajdentalclinic.com/video-gallery",
+
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title:
+        meta?.metaTitle || "Video Gallery | Vraj Dental Clinic",
+
+      description:
+        meta?.metaDescription || "",
+    },
+
+    alternates: {
+      canonical:
+        "https://vrajdentalclinic.com/video-gallery",
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
-type ApiResponse = {
-    status: boolean,
-    message: string,
-    data: Video[],
-    meta_data: MetaData
-}
-
-// const videosRow: Video[] = [
-//     { id: "j3b93qcissA" }, 
-//     { id: "dQw4w9WgXcQ" },
-//     { id: "ObIWst9oMWA" },
-// ]
-
-export default function VideoGallery() {
-    // two identical rows
-    // const rows: Video[][] = [videosRow, videosRow]
-
-    const [videos, setVideos] = useState<Video[]>([])
-    const [loading, SetLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-    const [metaData, setMetaData] = useState<MetaData | null>(null)
-
-    useEffect(() => {
-        const fetchVideos = async () => {
-            try {
-                const response = await axios.post<ApiResponse>(`${apiUrl}/video-gallery`)
-                if (response.data.status && response.data.data) {
-                    setVideos(response.data.data);
-                    setMetaData(response.data.meta_data);
-                    
-                } else {
-                    setError("No videos found")
-                }
-            } catch (err) {
-                console.error(err)
-                setError("Failed to load video gallery")
-            } finally {
-                SetLoading(false)
-            }
-        }
-        fetchVideos()
-    }, [])
-    
-
-    return (
-        <div>
-                <Head>
-                    <title>{metaData?.metaTitle || null}</title>
-                    {
-                        metaData?.metaDescription && (
-                            <meta
-                                name="description"
-                                content={metaData?.metaDescription}
-                            />
-                        )
-                    }
-
-                    {
-                        metaData?.metaKeyword && (
-                            <meta
-                                name="keywords"
-                                content={metaData?.metaKeyword }
-                            />
-                        )
-                    }
-
-                </Head>
-
-            <BreadcrumbHero
-                title="OUR VIDEOS "
-                crumbs={[{ label: "Home", href: "/" }, { label: "Our Videos" }]}
-            />
-            <section className="mx-auto max-w-6xl px-4 py-12">
-                <div className="text-center mb-14">
-                    <p className="!mb-0 uppercase font-extrabold !text-[#b6c651] !text-[14px]">Our Videos</p>
-                    <h2 className="text-[25px] md:text-[42px] font-normal text-[#005d98]">Our Videos</h2>
-                </div>
-
-                {loading ? (
-                    <p className="text-center text-gray-600">Loading videos...</p>
-                ) : error ? (
-                    <p className="text-center text-red-500">{error}</p>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {videos.map((video) => (
-                            <div key={video.id} className="w-full">
-                                <div className="w-full aspect-video overflow-hidden shadow-lg ">
-                                    <iframe
-                                        className="h-full w-full"
-                                        src={video.videoUrl.replace("&amp;", "&")}
-                                        title={video.videoTitle || `Video ${video.id}`}
-                                        loading="lazy"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerPolicy="strict-origin-when-cross-origin"
-                                        allowFullScreen
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </section>
-        </div>
-    )
+export default function Page() {
+  return <VideoGalleryClient />;
 }

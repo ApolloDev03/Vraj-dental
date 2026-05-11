@@ -10,7 +10,7 @@ import img1 from '@/asserts/1680696890.png'
 import Link from "next/link";
 import { apiUrl } from "@/config";
 import axios from "axios";
-import Head from "next/head";
+
 
 
 type BlogDetail = {
@@ -20,9 +20,7 @@ type BlogDetail = {
     blogImage: string;
     publishDate: string;
     tags: string;
-    metaTitle?: string;
-    metaKeyword?: string;
-    metaDescription?: string;
+    
 };
 
 type LatestPost = {
@@ -147,30 +145,11 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
     return (
         <section>
-            <Head>
-                <title>{blog.metaTitle || null}</title>
-                {
-                    blog.metaDescription && (
-                        <meta
-                            name="description"
-                            content={blog.metaDescription}
-                        />
-                    )
-                }
-                
-                {
-                    blog.metaKeyword && (
-                        <meta
-                    name="keywords"
-                    content={blog.metaKeyword}
-                />
-                    )
-                }
-            </Head>
+            
 
             <BreadcrumbHero
                 title="BLOG DETAILS"
-                crumbs={[{ label: "Home", href: "/" }, { label: "Blog Details" }]}
+                crumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: "Blog Details" }]}
             />
             <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12 ">
                 {/* Left Content */}

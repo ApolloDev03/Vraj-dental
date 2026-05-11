@@ -1,23 +1,173 @@
+import { Metadata } from "next";
+
 import ServiceDetailPage from "./ServiceDetailPage";
-import axios from "axios";
-import { apiUrl } from "@/config"; // adjust if your config path is different
 
-// ✅ This runs **at build time** to tell Next.js which service pages to pre-render
-export async function generateStaticParams() {
+import { apiUrl } from "@/config";
+
+type Params = {
+  slug: string;
+};
+
+async function getServiceDetail(slug: string) {
   try {
-    const res = await axios.post(`${apiUrl}/categories`); // API to get all services
-    const services = res.data?.data || [];
+    const res = await fetch(
+      `${apiUrl}/category/${slug}`,
+      {
+        method: "POST",
 
-    // Each item must return `{ slug: 'something' }`
-    return services.map((service: any) => ({
-      slug: service.slug, // depends on your API response key
-    }));
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          slug,
+        }),
+
+        next: {
+          revalidate: 3600,
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      return data;
+    }
+
+    return null;
   } catch (error) {
-    console.error("Error fetching services for static params:", error);
-    return []; // prevent build crash
+    console.error(
+      "Service Detail Error:",
+      error
+    );
+
+    return null;
   }
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  return <ServiceDetailPage slug={params.slug} />;
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(
+      `${apiUrl}/categories`,
+      {
+        method: "POST",
+
+        next: {
+          revalidate: 3600,
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    const services = data?.data || [];
+
+    return services.map((service: any) => ({
+      slug: service.slug,
+    }));
+  } catch (error) {
+    console.error(
+      "Error generating static params:",
+      error
+    );
+
+    return [];
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const service = await getServiceDetail(slug);
+
+  return {
+    title:
+      service?.metaTitle ||
+      service?.categoryName ||
+      "Service Detail",
+
+    description:
+      service?.metaDescription ||
+      service?.briefDescription ||
+      "",
+
+    keywords:
+      service?.metaKeyword || "",
+
+    openGraph: {
+      title:
+        service?.metaTitle ||
+        service?.categoryName ||
+        "Service Detail",
+
+      description:
+        service?.metaDescription ||
+        service?.briefDescription ||
+        "",
+
+      url: `https://vrajdentalclinic.com/services/${slug}`,
+
+      images: service?.categoryImage
+        ? [
+          {
+            url: service.categoryImage,
+
+            width: 1200,
+
+            height: 630,
+
+            alt:
+              service?.categoryName ||
+              "Service Image",
+          },
+        ]
+        : [],
+
+      type: "article",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title:
+        service?.metaTitle ||
+        service?.categoryName ||
+        "Service Detail",
+
+      description:
+        service?.metaDescription ||
+        service?.briefDescription ||
+        "",
+
+      images: service?.categoryImage
+        ? [service.categoryImage]
+        : [],
+    },
+
+    alternates: {
+      canonical: `https://vrajdentalclinic.com/services/${slug}`,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+
+  return (
+    <ServiceDetailPage slug={slug} />
+  );
 }
