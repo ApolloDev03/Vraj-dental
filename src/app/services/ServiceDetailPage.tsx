@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import rootCanalImg from "@/asserts/1602311948.jpg";
-import BreadcrumbHero from "../../component/breadcrumb";
-import { useParams } from "next/navigation";
+import BreadcrumbHero from "../component/breadcrumb";
+import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import Link from "next/link";
 
-export default function ServiceDetailPage({ slug }: { slug: string }) {
+export default function ServiceDetailPage() {
+    const searchParams = useSearchParams();
+    const slugname = searchParams.get("slugname");
     const [activeIndex, setActiveIndex] = useState<number | null>(0);
     const [loading, setLoading] = useState(true);
     const [serviceData, setServiceData] = useState<any>(null);
@@ -44,11 +46,11 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
     //     { question: "IS ROOT CANAL TREATMENT PAINFUL?", answer: <p>Modern techniques make RCT almost painless.</p> },
     // ];
     useEffect(() => {
-        if (!slug) return;
+        if (!slugname) return;
 
         const fetchServiceData = async () => {
             try {
-                const res = await axios.post(`${apiUrl}/category/${slug}`);
+                const res = await axios.post(`${apiUrl}/category/${slugname}`);
                 if (res.data.success) {
                     setServiceData(res.data)
                 }
@@ -60,7 +62,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
         };
 
         fetchServiceData();
-    }, [slug])
+    }, [slugname])
 
     if (loading) {
         return (
@@ -273,7 +275,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
                                         </h3>
 
                                         {/* Description */}
-                                        
+
 
                                         {/* Read More */}
                                         <span className="inline-flex items-center text-[#005d98] font-medium text-sm group-hover:gap-2 transition-all">

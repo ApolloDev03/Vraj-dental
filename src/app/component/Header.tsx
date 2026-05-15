@@ -139,7 +139,7 @@ const Header: React.FC = () => {
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-label="Toggle menu"
                     >
-                        {menuOpen ? <HiX /> : <HiMenuAlt3   />}
+                        {menuOpen ? <HiX /> : <HiMenuAlt3 />}
                     </button>
 
                     {/* </div> */}
@@ -189,7 +189,7 @@ const Header: React.FC = () => {
                                                 categories.map((service: any) => (
                                                     <Link
                                                         key={service.id}
-                                                        href={`/services/${service.slug}`}
+                                                        href={`/services?slugname=${service.slug}`}
                                                         className={`block px-4 py-2 text-[16px] !text-[#130947] font-semibold hover:bg-[#005d98] hover:!text-[#fff]  border-b border-dashed border-[#e5e5e5] ${pathname === `/services/${service.slug}`
                                                             ? "text-[#005d98] font-semibold"
                                                             : "text-gray-700"
@@ -284,91 +284,86 @@ const Header: React.FC = () => {
                 </div>
 
                 {/* Mobile Menu */}
-        {menuOpen && (
-          <div className="md:hidden mx-5  bg-white shadow-lg px-4 py-4 max-h-[80vh] overflow-y-auto space-y-3 font-medium">
-            {[
-              { label: "HOME", href: "/" },
-              { label: "ABOUT", href: "/about" },
-              { label: "OUR BRANCHES", href: "/branches" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`block ${
-          pathname === link.href
-            ? "!text-[#005d98] font-semibold" // ✅ Active page color
-            : "text-gray-700 hover:text-[#005d98]"
-        } `}
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+                {menuOpen && (
+                    <div className="md:hidden mx-5  bg-white shadow-lg px-4 py-4 max-h-[80vh] overflow-y-auto space-y-3 font-medium">
+                        {[
+                            { label: "HOME", href: "/" },
+                            { label: "ABOUT", href: "/about" },
+                            { label: "OUR BRANCHES", href: "/branches" },
+                        ].map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`block ${pathname === link.href
+                                        ? "!text-[#005d98] font-semibold" // ✅ Active page color
+                                        : "text-gray-700 hover:text-[#005d98]"
+                                    } `}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
 
-            <details>
-              <summary className="cursor-pointer text-black hover:text-[#005d98]">
-                OUR SERVICES
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                {categories.map((s) => (
-                  <Link
-                    key={s.id}
-                    href={`/services/${s.slug}`}
-                    onClick={() => setMenuOpen(false)}
-                    className={`block text-sm ${
-              pathname === `/services/${s.slug}`
-                ? "!text-[#005d98] font-semibold"
-                : "text-gray-600 hover:text-[#005d98]"
-            }`}
-                  >
-                    {s.categoryName}
-                  </Link>
-                ))}
-              </div>
-            </details>
+                        <details>
+                            <summary className="cursor-pointer text-black hover:text-[#005d98]">
+                                OUR SERVICES
+                            </summary>
+                            <div className="pl-4 mt-2 space-y-2">
+                                {categories.map((s) => (
+                                    <Link
+                                        key={s.id}
+                                        href={`/services/${s.slug}`}
+                                        onClick={() => setMenuOpen(false)}
+                                        className={`block text-sm ${pathname === `/services/${s.slug}`
+                                                ? "!text-[#005d98] font-semibold"
+                                                : "text-gray-600 hover:text-[#005d98]"
+                                            }`}
+                                    >
+                                        {s.categoryName}
+                                    </Link>
+                                ))}
+                            </div>
+                        </details>
 
-            <details>
-              <summary className="cursor-pointer text-black hover:text-[#005d98]">
-                GALLERY
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <Link href="/gallery" onClick={() => setMenuOpen(false)} className={`block ${
-            pathname === "/gallery"
-              ? "!text-[#005d98] font-semibold"
-              : "text-gray-600 hover:text-[#005d98]"
-          }`}>
-                  Gallery
-                </Link>
-                <Link href="/video-gallery" onClick={() => setMenuOpen(false)}  className={`block ${
-            pathname === "/video-gallery"
-              ? "!text-[#005d98] font-semibold"
-              : "text-gray-600 hover:text-[#005d98]"
-          }`}>
-                  Video Gallery
-                </Link>
-              </div>
-            </details>
+                        <details>
+                            <summary className="cursor-pointer text-black hover:text-[#005d98]">
+                                GALLERY
+                            </summary>
+                            <div className="pl-4 mt-2 space-y-2">
+                                <Link href="/gallery" onClick={() => setMenuOpen(false)} className={`block ${pathname === "/gallery"
+                                        ? "!text-[#005d98] font-semibold"
+                                        : "text-gray-600 hover:text-[#005d98]"
+                                    }`}>
+                                    Gallery
+                                </Link>
+                                <Link href="/video-gallery" onClick={() => setMenuOpen(false)} className={`block ${pathname === "/video-gallery"
+                                        ? "!text-[#005d98] font-semibold"
+                                        : "text-gray-600 hover:text-[#005d98]"
+                                    }`}>
+                                    Video Gallery
+                                </Link>
+                            </div>
+                        </details>
 
-            {[
-      { label: "BLOG", href: "/blog" },
-      { label: "TESTIMONIAL", href: "/testimonial" },
-      { label: "CONTACT", href: "/contact" },
-    ].map((link) => (
-      <Link
-        key={link.href}
-        href={link.href}
-        className={`block ${
-          pathname === link.href
-            ? "!text-[#005d98] font-semibold"
-            : "text-gray-700 hover:text-[#005d98]"
-        }`}
-        onClick={() => setMenuOpen(false)}
-      >
-        {link.label}
-      </Link>
-    ))}
-          </div>
-        )}
+                        {[
+                            { label: "BLOG", href: "/blog" },
+                            { label: "TESTIMONIAL", href: "/testimonial" },
+                            { label: "CONTACT", href: "/contact" },
+                        ].map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`block ${pathname === link.href
+                                        ? "!text-[#005d98] font-semibold"
+                                        : "text-gray-700 hover:text-[#005d98]"
+                                    }`}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                )}
             </div>
 
 

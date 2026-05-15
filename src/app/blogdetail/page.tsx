@@ -46,6 +46,7 @@ import axios from "axios";
 import { Metadata } from "next";
 import BlogDetailClient from "./BlogDetailClient";
 import { apiUrl } from "@/config";
+import { Suspense } from "react";
 
 type Params = {
   slug: string;
@@ -83,32 +84,6 @@ async function getBlogDetail(slug: string) {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${apiUrl}/blogs`, {
-      method: "POST",
-
-      next: {
-        revalidate: 3600,
-      },
-    });
-
-    const data = await res.json();
-
-    const blogs = data?.data || [];
-
-    return blogs.map((blog: any) => ({
-      slug: blog.urlParameter,
-    }));
-  } catch (error) {
-    console.error(
-      "Error generating static params:",
-      error
-    );
-
-    return [];
-  }
-}
 
 export async function generateMetadata({
   params,
@@ -146,15 +121,15 @@ export async function generateMetadata({
 
       images: blog?.blogImage
         ? [
-            {
-              url: blog.blogImage,
-              width: 1200,
-              height: 630,
-              alt:
-                blog?.imageAlt ||
-                blog?.blogTitle,
-            },
-          ]
+          {
+            url: blog.blogImage,
+            width: 1200,
+            height: 630,
+            alt:
+              blog?.imageAlt ||
+              blog?.blogTitle,
+          },
+        ]
         : [],
 
       type: "article",
@@ -195,5 +170,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  return <BlogDetailClient slug={slug} />;
+  return <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+    <BlogDetailClient />
+  </Suspense>
 }

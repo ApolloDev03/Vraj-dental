@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import BreadcrumbHero from "../../component/breadcrumb";
+import BreadcrumbHero from "../component/breadcrumb";
 // import { Calendar } from "lucide-react";
 import { FaRegClock } from "react-icons/fa";
 import img1 from '@/asserts/1680696890.png'
@@ -20,7 +20,7 @@ type BlogDetail = {
     blogImage: string;
     publishDate: string;
     tags: string;
-    
+
 };
 
 type LatestPost = {
@@ -46,8 +46,9 @@ type ApiResponse = {
     };
 };
 
-export default function BlogDetailPage({ slug }: { slug: string }) {
-
+export default function BlogDetailPage() {
+    const searchParams = useSearchParams();
+    const slugname = searchParams.get("slugname");
     const [blog, setBlog] = useState<BlogDetail | null>(null);
     const [latest, setLatest] = useState<LatestPost[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
@@ -65,12 +66,12 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
     // console.log(slug, "sluggggg");
 
     useEffect(() => {
-        if (!slug) return;
+        if (!slugname) return;
 
         const fetchBlog = async () => {
             try {
                 const { data } = await axios.post<ApiResponse>(
-                    `${apiUrl}/blog/${slug}`
+                    `${apiUrl}/blog/${slugname}`
                 );
 
                 if (data.success) {
@@ -88,7 +89,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
         };
 
         fetchBlog();
-    }, [slug]);
+    }, [slugname]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -140,12 +141,12 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
     const tags = blog.tags ? blog.tags.split(",") : [];
 
-    
-    
+
+
 
     return (
         <section>
-            
+
 
             <BreadcrumbHero
                 title="BLOG DETAILS"

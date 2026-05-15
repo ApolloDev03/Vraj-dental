@@ -36,7 +36,7 @@ export default function BlogSection() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, SetLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-   
+
 
   // ✅ Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,9 +48,9 @@ export default function BlogSection() {
         const response = await axios.post(`${apiUrl}/blogs`);
         if (response.data?.success === true && Array.isArray(response.data.data)) {
           setBlogs(response.data.data);
-          
+
           // console.log(response.data.meta_data,"metadataaaaaaaa");
-          
+
         } else {
           setError("No Blog Found.");
         }
@@ -80,7 +80,7 @@ export default function BlogSection() {
 
   return (
     <div>
-      
+
 
       <BreadcrumbHero
         title="BLOG"
@@ -110,7 +110,7 @@ export default function BlogSection() {
               {currentBlogs.map((blog) => (
                 <BlogCard
                   key={blog.id}
-                  href={`/blogdetail/${blog.urlParameter}`}
+                  href={`/blogdetail?slugname=${blog.urlParameter}`}
                   imageSrc={blog.blogImage || "/images/default.jpg"}
                   imageAlt={blog.imageAlt || blog.imageTitle || blog.blogTitle}
                   dateText={blog.publishDate ? blog.publishDate.split(" ")[0] : "N/A"}
