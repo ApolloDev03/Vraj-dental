@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import ServiceDetailPage from "./ServiceDetailPage";
 
 import { apiUrl } from "@/config";
+import { Suspense } from "react";
 
 type Params = {
   slug: string;
@@ -46,35 +47,7 @@ async function getServiceDetail(slug: string) {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(
-      `${apiUrl}/categories`,
-      {
-        method: "POST",
 
-        next: {
-          revalidate: 3600,
-        },
-      }
-    );
-
-    const data = await res.json();
-
-    const services = data?.data || [];
-
-    return services.map((service: any) => ({
-      slug: service.slug,
-    }));
-  } catch (error) {
-    console.error(
-      "Error generating static params:",
-      error
-    );
-
-    return [];
-  }
-}
 
 export async function generateMetadata({
   params,
@@ -168,6 +141,8 @@ export default async function Page({
   const { slug } = await params;
 
   return (
-    <ServiceDetailPage slug={slug} />
+    <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+      <ServiceDetailPage />
+    </Suspense>
   );
 }
