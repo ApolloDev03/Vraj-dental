@@ -35,7 +35,7 @@ export default function HeroSection({ banners }: { banners: Banner[] }) {
     // const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[0px] overflow-hidden group">
+        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[118px] overflow-hidden group">
 
             <Swiper
                 modules={[Navigation, Autoplay]} // ← Removed Pagination module
@@ -59,7 +59,7 @@ export default function HeroSection({ banners }: { banners: Banner[] }) {
                 //     prevEl: prevRef.current,
                 //     nextEl: nextRef.current,
                 // }}
-                className="w-full h-[160px] md:h-[100vh]"
+                className="w-full aspect-[7/3]"
 
             >
                 {banners
@@ -69,7 +69,7 @@ export default function HeroSection({ banners }: { banners: Banner[] }) {
                             <Image
                                 src={slide.image}
                                 alt={`Hero Slide ${index + 1}`}
-                                className="object-cover w-full h-full"
+                                className="object-fill w-full h-full"
                                 priority={index === 0}
                                 fill
                             />
