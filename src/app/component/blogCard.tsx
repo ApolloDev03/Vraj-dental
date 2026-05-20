@@ -19,7 +19,7 @@ export default function BlogCard(props: BlogCardProps) {
   const { href, imageSrc, imageAlt, dateText, title, excerpt, slug } = props;
   const route = useRouter()
   const  handleDetail = (slug:any) => {
-    route.push(`/blogdetail/${slug}`)
+    route.push(`/blogdetail?slugname=${slug}`)
   }
 
   return (

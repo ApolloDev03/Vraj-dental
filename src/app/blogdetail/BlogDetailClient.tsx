@@ -46,7 +46,15 @@ type ApiResponse = {
     };
 };
 
-export default function BlogDetailPage() {
+type BlogDetailClientProps = {
+  slug: string;
+};
+
+export default function BlogDetailPage({
+  slug,
+}: BlogDetailClientProps) {
+
+    console.log(slug,"slugggggg");
     const searchParams = useSearchParams();
     const slugname = searchParams.get("slugname");
     const [blog, setBlog] = useState<BlogDetail | null>(null);
