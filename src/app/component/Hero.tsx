@@ -35,7 +35,7 @@ export default function HeroSection({ banners }: { banners: Banner[] }) {
     // const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[118px] overflow-hidden group">
+        <section className=" relative z-[1]  bg-center bg-cover bg-no-repeat md:mt-[118envpx] overflow-hidden group">
 
             <Swiper
                 modules={[Navigation, Autoplay]} // ← Removed Pagination module
