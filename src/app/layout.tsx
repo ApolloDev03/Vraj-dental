@@ -174,8 +174,8 @@ export default function RootLayout({
       >
         <Header />
         {children}
-        <ChatBotWidget />
-        <WhatsAppButton />
+        {/* <ChatBotWidget /> */}
+        {/* <WhatsAppButton /> */}
         <Footer />
       </body>
     </html>

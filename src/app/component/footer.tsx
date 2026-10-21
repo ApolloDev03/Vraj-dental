@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import vrajLogo from "../../asserts/logo.webp"; // Adjust path
 import Link from "next/link";
+import Script from "next/script";
 
 export default function Footer() {
     return (
@@ -23,7 +24,7 @@ export default function Footer() {
                             </a>
                             <p>
                                 We ensure every patient receives high-quality treatment and compassionate care.
-Your comfort, trust, and satisfaction are our top priorities.
+                                Your comfort, trust, and satisfaction are our top priorities.
                             </p>
                         </div>
                         <ul className="flex space-x-4 mt-3">
@@ -120,6 +121,31 @@ Your comfort, trust, and satisfaction are our top priorities.
                     </ul>
                 </div>
             </div>
+
+
+            {/* WebChat Widget */}
+            <Script
+                id="web-chat-widget"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+            (function (w, d, s, id) {
+              w.WebChatSettings = {
+                widgetId: '55f4f02f35500ac7099d84a0',
+                apiUrl: 'https://webchat.1automations.com/widget',
+                socketUrl: 'https://webchat.1automations.com',
+              };
+
+              var js = d.createElement(s);
+              js.id = id;
+              js.async = true;
+              js.src = 'https://webchat.1automations.com/widget.js';
+              d.head.appendChild(js);
+            })(window, document, 'script', 'web-chat-widget');
+          `,
+                }}
+            />
+
         </footer>
     );
 }
