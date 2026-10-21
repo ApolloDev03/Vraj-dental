@@ -54,7 +54,7 @@ export default function BlogDetailPage({
   slug,
 }: BlogDetailClientProps) {
 
-    console.log(slug,"slugggggg");
+    // console.log(slug,"slugggggg");
     const searchParams = useSearchParams();
     const slugname = searchParams.get("slugname");
     const [blog, setBlog] = useState<BlogDetail | null>(null);
@@ -254,7 +254,7 @@ export default function BlogDetailPage({
                             {latest.map((post) => (
                                 <li key={post.id} className="flex gap-3 items-start">
                                     <Link
-                                        href={`${post.urlParameter}`}
+                                        href={`/blogdetail?slugname=${post.urlParameter}`}
                                         className="flex gap-3 items-start">
                                         <div className="relative w-16 h-16 flex-shrink-0">
                                             <Image
